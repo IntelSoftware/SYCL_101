@@ -1,0 +1,68 @@
+/*Begin support for tiles*/
+.tiles {
+  margin: auto;
+  /*for sphinx_rtd_theme only*/
+  /*width: 80%;*/
+  text-align: center;
+  background: #edf0f2;
+  margin-bottom: 10px;
+}
+
+.tiles-title {
+  font-family: var(--pst-font-family-heading);
+  font-size: var(--pst-font-size-h2);
+  font-weight: 400;
+  line-height: 1.15;
+  padding-top: 15px;
+}
+
+.tile {
+  width: 200px;
+  height: 250px;
+  margin: 10px;
+  border: 10px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.colh3 {
+  font-size: 125%;
+  font-weight: 700;
+  font-family: "Roboto Slab","ff-tisa-web-pro","Georgia",Arial,sans-serif;
+}
+
+.colh2 {
+  font-size: 150%;
+  font-weight: 700;
+  font-family: "Roboto Slab","ff-tisa-web-pro","Georgia",Arial,sans-serif;
+}
+
+
+figure.tile-fig {
+  background: lightgray;
+  height: 180px;
+  width: 200px;
+  padding: 20px 10px 10px;
+  border-radius: 30px;
+  margin-bottom: 10px;
+}
+
+.tile-fig .caption-text {
+  font-weight: 700;
+  font-style: normal !important;
+  font-size: 18px;
+}
+
+.tile-fig img{
+  max-width: 100px;
+  min-width: 100px;
+}
+
+.tile p {
+  font-size: 85%;
+  line-height: 1.2;
+}
+
+figure.tile-fig > figcaption > p > a.headerlink {
+  display: none;
+}

@@ -1,0 +1,5 @@
+Why SYCL?
+#########
+
+.. toctree::
+   :hidden:
