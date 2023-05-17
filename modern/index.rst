@@ -1,5 +1,14 @@
 Modern C++
 ##########
 
+
 .. toctree::
    :maxdepth: 1
+
+   1_uniform_initialization
+   2_multithreading
+   3_smart_pointers
+   4_hash_tables
+   5_array
+   6_move
+   7_lambdas
