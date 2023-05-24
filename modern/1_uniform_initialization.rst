@@ -229,5 +229,5 @@ from `int` and `double` to `bool`.
 
 
 Summary
-=======
+*******
 
