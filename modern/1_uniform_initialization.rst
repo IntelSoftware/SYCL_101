@@ -113,7 +113,7 @@ any type - it will be not possible with () initialization.
 
    int i{1};
    foo f{13, 2.7};
-   std::vector<int> v{1, 2, 3, 4, 5};
+   std::vector<int> v{0, 1, 2, 3, 4};
    std::unordered_set<int> s{13, 17, 8};
    std::unordered_map<int, std::string> {{1, "one"}, {2, "two"}};
 
@@ -187,9 +187,45 @@ And the last solution is to use copy-initialization:
 Common problems with uniform initialization 
 *******************************************
 
-#.	variable declared with auto uses brace initialization, its type could be deduced to std::initializer_list
-#.	std::vector initialization (difference between std::vector x(10,1); and std::vector x{10,1};)
-#.	strongly prefer std::initializer_list constructors
+Even, when the uniform initialization helps with a lot of problems in C++, there are also some problems related to usage of it.
+The first of them is about using `auto` for variable declaration. Deduced type for the variable can be `std::initializer_list` 
+instead of the type programmer would expect. This happens mostly when we combine auto variable declaration with equal sign, 
+or if it has multiple elements, like in the code shown below:
+
+.. code-block:: cpp
+
+   auto variable{13};       // variable is type of int
+   auto variable = {13};    // variable is of type std::initializer_list<int>
+
+   auto variable{13, 17, 8};    // compilation error variable contains multiple expressions
+   auto variable = {13, 17, 8}; // variable is of type std::initializer_list<int>
+
+Another problem can happened with the vector initialization. It can be tricky especially at the beginning when learning C++.
+See the difference between declarations below:
+
+.. code-block:: cpp
+
+   std::vector<int> v(3,0); // vector contains tree zeros {0, 0, 0}
+   std::vector<int> v{3,0}; // vector contains three and zero {3, 0}
+
+The last problem can be called "strongly prefer `std::initializer_list` constructors". 
+It means that when calling the constructor using the uniform initialization syntax,
+there will be overload to the constructor declaring its parameter of type `std::initializer_list` (when exists).
+The example below demonstrates example of this situation:
+
+.. code-block:: cpp
+
+   class foo {
+   public:
+      foo(int i, float f) { ... }
+      foo(std::initializer_list<bool> list) { ... }
+   };
+
+   foo object{13, 2.7}; // compilation error
+
+The error occurs because instead of using first constructor (with `int` and `float`) there is the constructor overload
+to the "strongly preferred" one with `std::initializer_list` as a parameter. So the problem is because of  narrowing conversions 
+from `int` and `double` to `bool`. 
 
 
 Summary
