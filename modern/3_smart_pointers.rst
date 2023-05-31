@@ -240,11 +240,79 @@ Usage
 
 But why we would like to even use it? 
 
+General use case is when you do want to refer to your object from multiple places - and do not want your object to 
+be de-allocated until all these references are themselves gone.
+
 Sometimes an object has to store a way to access the shared_ptr's underlying object 
 without increasing the reference count. Often, this problem occurs when shared_ptr objects have cyclic references.
+Let's see the example.
 
-Other general use case is when you do want to refer to your object from multiple places - and do not want your object to 
-be de-allocated until all these references are themselves gone.
+.. code-block:: cpp
+   
+   struct A;
+
+   struct B {
+      std::shared_ptr<A> A_ptr;
+      ~B() { std::cout << "~B()"; }
+   };
+
+   struct A {
+      std::shared_ptr<B> B_ptr;
+      ~A() { std::cout << "~A()"; }
+   };
+
+   int main() {
+      auto BB = std::make_shared<B>();
+      auto AA = std::make_shared<A>();
+
+      AA->B_ptr = BB;
+      BB->A_ptr = AA;
+
+      return 0;
+   }
+
+Problem with the code above is that destructors will not be called and 
+there is a memory leak. Having in mind that the managed object of shared pointer
+is deleted when the reference count reaches zero, let's analyze the situation.
+
+When `BB` goes out of scope, it will be not deleted since it still manages object 
+pointed by `AA.B_ptr`. Similar situation is with the `AA` - if it goes out of scope, 
+its managed object is not deleted either because it is pointed by `BB.A_ptr`.
+
+This problem can be solved with weak pointer.
+
+
+.. code-block:: cpp
+   
+   struct A;
+
+   struct B {
+      std::shared_ptr<A> A_ptr;
+      ~B() { std::cout << "~B()"; }
+   };
+
+   struct A {
+      std::weak_ptr<B> B_ptr; // using weak_ptr instead of shared_ptr
+      ~A() { std::cout << "~A()"; }
+   };
+
+   int main() {
+      auto BB = std::make_shared<B>();
+      auto AA = std::make_shared<A>();
+
+      AA->B_ptr = BB;
+      BB->A_ptr = AA;
+
+      return 0;
+   }
+
+Now, both destructors are called when `BB` goes out of scope. It can be destructed
+as it is pointed by a weak pointer and later, `AA` can be destructed 
+as it is pointing to nothing.
+
+It doesn't matter whether `AA` or `BB` goes out of scope first. When `BB` goes out of scope 
+it calls the destructors of all managed object like `A_ptr`. 
+So even if `AA` first went out of scope and was not destroyed, it will be destroyed together with `BB`.
 
 Summary
 *******
