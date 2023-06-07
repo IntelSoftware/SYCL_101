@@ -134,7 +134,7 @@ The same with bracket initialization will not work and it forces user to type-ca
 
 .. code-block:: cpp
 
-   int i{d} // compilation error
+   int i{d}; // compilation error
 
    int i{static_cast<int>(d)}; // modern C++ cast - best practice
    int i{(int)d};              // C-style type-cast
