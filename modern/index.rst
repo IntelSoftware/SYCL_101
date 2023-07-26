@@ -6,7 +6,7 @@ Modern C++
 
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    1_uniform_initialization
    2_multithreading
