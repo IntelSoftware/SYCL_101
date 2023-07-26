@@ -107,7 +107,7 @@ To show it in example, we already know that there is a lot of different way how 
 
 For simple type initialization it is not the problem to use the historically the most common way but when we are using different more complicated custom types 
 the consistent syntax can really change the experience with code. This can be especially important if you consider generic code that should be able to initialize 
-any type - it will be not possible with () initialization.
+any type - it will be not possible with :code:`()` initialization.
 
 .. code-block:: cpp
 
@@ -147,7 +147,7 @@ Fixes most vexing parse
 The most vexing parse comes from a rule in C++ that says that anything that could be considered as a function declaration, 
 should be parsed by the compiler as a function declaration.
 
-Let us see the example when we want to initialize the vector being private member fo the foo class with three zeros {0, 0, 0}.
+Let us see the example when we want to initialize the vector being private member fo the foo class with three zeros :code:`{0, 0, 0}`.
 
 .. code-block:: cpp
 
@@ -188,7 +188,7 @@ Common problems with uniform initialization
 *******************************************
 
 Even, when the uniform initialization helps with a lot of problems in C++, there are also some problems related to usage of it.
-The first of them is about using `auto` for variable declaration. Deduced type for the variable can be `std::initializer_list` 
+The first of them is about using :code:`auto` for variable declaration. Deduced type for the variable can be :code:`std::initializer_list` 
 instead of the type programmer would expect. This happens mostly when we combine auto variable declaration with equal sign, 
 or if it has multiple elements, like in the code shown below:
 
@@ -208,9 +208,9 @@ See the difference between declarations below:
    std::vector<int> v(3,0); // vector contains tree zeros {0, 0, 0}
    std::vector<int> v{3,0}; // vector contains three and zero {3, 0}
 
-The last problem can be called "strongly prefer `std::initializer_list` constructors". 
+The last problem can be called "strongly prefer :code:`std::initializer_list` constructors". 
 It means that when calling the constructor using the uniform initialization syntax,
-there will be overload to the constructor declaring its parameter of type `std::initializer_list` (when exists).
+there will be overload to the constructor declaring its parameter of type :code:`std::initializer_list` (when exists).
 The example below demonstrates example of this situation:
 
 .. code-block:: cpp
@@ -223,9 +223,9 @@ The example below demonstrates example of this situation:
 
    foo object{13, 2.7}; // compilation error
 
-The error occurs because instead of using first constructor (with `int` and `float`) there is the constructor overload
-to the "strongly preferred" one with `std::initializer_list` as a parameter. So the problem is because of  narrowing conversions 
-from `int` and `double` to `bool`. 
+The error occurs because instead of using first constructor (with :code:`int` and :code:`float`) there is the constructor overload
+to the "strongly preferred" one with :code:`std::initializer_list` as a parameter. So the problem is because of  narrowing conversions 
+from :code:`int` and :code:`double` to :code:`bool`. 
 
 
 Summary

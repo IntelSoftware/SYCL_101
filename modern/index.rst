@@ -1,6 +1,9 @@
 Modern C++
 ##########
 
+.. role:: cpp(code)
+   :language: cpp
+
 
 .. toctree::
    :maxdepth: 1

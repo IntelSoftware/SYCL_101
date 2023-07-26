@@ -13,7 +13,7 @@ What are the smart pointers and when to use them?
 
 Let's start with some definition of smart pointers. In simple words it's type with values that may be used like pointers,
 but with the added benefit of automated memory management. 
-We have 3 types of smart pointers declared in `<memory>` STD library: 
+We have 3 types of smart pointers declared in :code:`<memory>` STD library: 
 
 * std::unique_ptr, 
 * std::shared_ptr,
@@ -33,7 +33,7 @@ std::unique_ptr
 
 According to C++ Reference:
 
-    `std::unique_ptr` is a smart pointer that owns and manages another object through a pointer and disposes 
+    :code:`std::unique_ptr` is a smart pointer that owns and manages another object through a pointer and disposes 
     of that object when the unique_ptr goes out of scope.
 
 In other words it is a smart pointer with **unique object ownership** semantics. It is a 1-to-1 relationship between a pointer 
@@ -64,8 +64,8 @@ they were declared in. Remember, that the object it points will be also destruct
 Usage
 =====
 
-General usage of std::unique_ptr is when you want your object to last only as long as a single owning reference to it does.
-Let's take a look into some practical example demonstrate std::unique_ptr usage and some of its functions.
+General usage of :code:`std::unique_ptr` is when you want your object to last only as long as a single owning reference to it does.
+Let's take a look into some practical example demonstrate :code:`std::unique_ptr` usage and some of its functions.
 
 .. code-block:: cpp
    
@@ -77,7 +77,7 @@ Let's take a look into some practical example demonstrate std::unique_ptr usage 
 
    void processFoo(const foo& object) { ... }
 
-First, we will create the smart unique pointer. Remember to not use `new` operator on unique pointer directly.
+First, we will create the smart unique pointer. Remember to not use :code:`new` operator on unique pointer directly.
 
 .. code-block:: cpp
    
@@ -89,14 +89,14 @@ We can call the method on the object using `->` operator:
    
    foo_ptr->bar();
 
-And pass the foo object reference to the function using `*` operator. Please remember that unique pointer 
+And pass the foo object reference to the function using :code:`*` operator. Please remember that unique pointer 
 cannot be copied or passed by value.
 
 .. code-block:: cpp
    
    processFoo(*foo_ptr);
 
-There is a possibility to access raw pointer using `get()` method. It's especially helpful if you want to use 
+There is a possibility to access raw pointer using :code:`get()` method. It's especially helpful if you want to use 
 the smart pointer to manage memory while still passing the raw pointer to code that doesn't 
 support smart pointers.
 
@@ -104,7 +104,7 @@ support smart pointers.
    
    foo_ptr.get();
 
-We can also free memory before exiting code block with unique pointer declaration using `reset()` method:
+We can also free memory before exiting code block with unique pointer declaration using :code:`reset()` method:
 
 .. code-block:: cpp
    
@@ -113,23 +113,23 @@ We can also free memory before exiting code block with unique pointer declaratio
 std::make_unique
 ================
 
-To make creation of unique pointers easier and safer, there `was std::make_unique` function introduced.
-It constructs an object of given type and wraps it in a `std::unique_ptr`. See code below:
+To make creation of unique pointers easier and safer, there :code:`was std::make_unique` function introduced.
+It constructs an object of given type and wraps it in a :code:`std::unique_ptr`. See code below:
 
 .. code-block:: cpp
    
    auto ptr = std::make_unique<int>(13);
 
-This is also the preferable way of creating unique pointers (over using `new` operator). The only exception is
+This is also the preferable way of creating unique pointers (over using :code:`new` operator). The only exception is
 if you need a custom way to delete the object or are adopting a raw pointer from elsewhere - in that case do 
-not use `std::make_unique`.
+not use :code:`std::make_unique`.
 
 std::shared_ptr 
 ***************
 
-Similarly like with std::unique_ptr we will start with C++ Reference definition of std::shared_ptr:
+Similarly like with std::unique_ptr we will start with C++ Reference definition of :code:`std::shared_ptr`:
 
-    `std::shared_ptr` is a smart pointer that retains shared ownership of an object through a pointer. 
+    :code:`std::shared_ptr` is a smart pointer that retains shared ownership of an object through a pointer. 
     Several shared_ptr objects may own the same object.
 
 It means that std::shared_ptr is smart pointer with **shared object ownership** semantics.
@@ -145,7 +145,7 @@ The shared pointer is declared as in the code below:
    
    std::shared_ptr<int> ptr(new int); // allocation of new int on heap
 
-The allocated int (or any other object within std:shared_ptr) is called **managed object**.
+The allocated int (or any other object within :code:`std:shared_ptr`) is called **managed object**.
 In contrast to unique pointer, object managed by shared pointer can be shared with as many shared pointers as we like.
 
 .. code-block:: cpp
@@ -159,9 +159,9 @@ Usage
 Usually you will use std::shared_ptr when you do want to have numerous references to your object 
 and you don't want it to be de-allocated until all of these references have been removed.
 
-The methods showed for `std::unique_ptr` are the same for `std::shared_ptr`, like creation, calling object methods,
+The methods showed for :code:`std::unique_ptr` are the same for :code:`std::shared_ptr`, like creation, calling object methods,
 dereferencing, accessing raw pointer and resetting it. So in this part we will focus only on those functionalities 
-specific for `std::shared_ptr`.
+specific for :code:`std::shared_ptr`.
 
 Let's start with copy-initialization and via assignment.
 
@@ -171,7 +171,7 @@ Let's start with copy-initialization and via assignment.
    std::shared_ptr<int> ptr3 = ptr;
 
 
-There is also possibility to check how many instances of std::shared_ptr manages the same object 
+There is also possibility to check how many instances of :code:`std::shared_ptr` manages the same object 
 and if the current object is unique (no other shared pointer doesn't manage this object):
 
 .. code-block:: cpp
@@ -196,15 +196,15 @@ And the last functionality is the comparison operation. Two unrelated shared poi
 std::make_shared
 ================
 
-As in std::unique_ptr case, for std::shared_ptr there is a dedicated (and preferred) method for creating pointers
-called std::make_shared(). It constructs an object of given type and wraps it in a std::shared_ptr. See code below:
+As in :code:`std::unique_ptr` case, for :code:`std::shared_ptr` there is a dedicated (and preferred) method for creating pointers
+called :code:`std::make_shared()` It constructs an object of given type and wraps it in a :code:`std::shared_ptr`. See code below:
 
 .. code-block:: cpp
    
    auto ptr = std::make_shared<int>(13);
 
 Please be aware that there is no way to release the memory for the control block and the managed object separately 
-when using std::make_shared. It creates a single heap-allocation for both the control block and the managed object so 
+when using :code:`std::make_shared`. It creates a single heap-allocation for both the control block and the managed object so 
 we have to wait until we can release both the managed object and the control block.
 
 std::weak_ptr 
@@ -212,8 +212,8 @@ std::weak_ptr
 
 As C++ Reference defines:
 
-    std::weak_ptr is a smart pointer that holds a non-owning ("weak") reference to an object that is managed 
-    by std::shared_ptr. It must be converted to std::shared_ptr in order to access the referenced object.
+    :code:`std::weak_ptr` is a smart pointer that holds a non-owning ("weak") reference to an object that is managed 
+    by :code:`std::shared_ptr`. It must be converted to :code:`std::shared_ptr` in order to access the referenced object.
 
 Syntax
 ======
@@ -275,9 +275,9 @@ Problem with the code above is that destructors will not be called and
 there is a memory leak. Having in mind that the managed object of shared pointer
 is deleted when the reference count reaches zero, let's analyze the situation.
 
-When `BB` goes out of scope, it will be not deleted since it still manages object 
-pointed by `AA.B_ptr`. Similar situation is with the `AA` - if it goes out of scope, 
-its managed object is not deleted either because it is pointed by `BB.A_ptr`.
+When :code:`BB` goes out of scope, it will be not deleted since it still manages object 
+pointed by :code:`AA.B_ptr`. Similar situation is with the :code:`AA` - if it goes out of scope, 
+its managed object is not deleted either because it is pointed by :code:`BB.A_ptr`.
 
 This problem can be solved with weak pointer.
 
@@ -306,13 +306,13 @@ This problem can be solved with weak pointer.
       return 0;
    }
 
-Now, both destructors are called when `BB` goes out of scope. It can be destructed
-as it is pointed by a weak pointer and later, `AA` can be destructed 
+Now, both destructors are called when :code:`BB` goes out of scope. It can be destructed
+as it is pointed by a weak pointer and later, :code:`AA` can be destructed 
 as it is pointing to nothing.
 
-It doesn't matter whether `AA` or `BB` goes out of scope first. When `BB` goes out of scope 
-it calls the destructors of all managed object like `A_ptr`. 
-So even if `AA` first went out of scope and was not destroyed, it will be destroyed together with `BB`.
+It doesn't matter whether :code:`AA` or :code:`BB` goes out of scope first. When :code:`BB` goes out of scope 
+it calls the destructors of all managed object like :code:`A_ptr`. 
+So even if :code:`AA` first went out of scope and was not destroyed, it will be destroyed together with :code:`BB`.
 
 Summary
 *******

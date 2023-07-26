@@ -28,7 +28,7 @@ is called hashing and the function performing this operation is called **hashing
 Let's understand it better with example.
 
 Please consider hashing function as operation modulo 10 and set of key-value pairs 
-to insert to hash table {{15, 25}, {23, 63}, {12, 22}, {48, 78}, {30, 0}}.
+to insert to hash table :code:`{{15, 25}, {23, 63}, {12, 22}, {48, 78}, {30, 0}}`.
 
 .. list-table:: 
    :widths: 25 50 25
@@ -104,20 +104,20 @@ Set
 
 Let's start with **std::unordered_set**. According to C++ reference:
 
-    std::unordered_set is an associative container that contains 
+    :code:`std::unordered_set` is an associative container that contains 
     a set of unique objects of type Key. Search, insertion, and 
     removal have average constant-time complexity.
 
 So the mos important information about std::unordered_set is that it contains 
 **unique objects**, they are type of **key** and average access time is **constant**.
 
-Example std::unordered_set declaration is shown in code below:
+Example :code:`std::unordered_set` declaration is shown in code below:
 
 .. code-block:: cpp
    
    std::unordered_set<int> n;
 
-To initialize an std::unordered_set we can simply assign values to it at the time of declaration.
+To initialize an :code:`std::unordered_set` we can simply assign values to it at the time of declaration.
 Please remember that given values have to be unique.
 
 .. code-block:: cpp
@@ -133,23 +133,23 @@ As in other standard containers we can conduct on it operations like:
 * find(...),
 * iteration over elements.
 
-Very similar to std::unordered_set is **std::unordered_multiset**. 
+Very similar to :code:`std::unordered_set` is **std::unordered_multiset**. 
 Let's start with definition:
 
-    std::unordered_multiset is an associative container that contains set 
+    :code:`std::unordered_multiset` is an associative container that contains set 
     of possibly non-unique objects of type Key. Search, insertion, and 
     removal have average constant-time complexity.
 
-It means that the only different between std::unordered_set and std::unordered_multiset is
+It means that the only different between :code:`std::unordered_set` and :code:`std::unordered_multiset` is
 that the second one allows to store multiple the same keys.
 
-Example std::unordered_multiset declaration is shown in code below:
+Example :code:`std::unordered_multiset` declaration is shown in code below:
 
 .. code-block:: cpp
    
    std::unordered_multiset<int> n;
 
-To initialize an std::unordered_multiset we can simply assign values to it at the time of declaration.
+To initialize an :code:`std::unordered_multiset` we can simply assign values to it at the time of declaration.
 This time the values may be repeated.
 
 .. code-block:: cpp
@@ -162,20 +162,20 @@ Map
 Now, we will move to the map containers, starting with **std::unordered_map**. 
 According to C++ reference:
 
-    std:unordered_map is an associative container that contains key-value pairs with unique keys. 
+    :code:`std:unordered_map` is an associative container that contains key-value pairs with unique keys. 
     Search, insertion, and removal of elements have average constant-time complexity.
 
-It means that the most important information about std::unordered_map is that is stores **key-value pairs**,
+It means that the most important information about :code:`std::unordered_map` is that is stores **key-value pairs**,
 where **key is unique** and the average access time is **constant**.
 
-Example std::unordered_map declaration where key is type of int and value is type of std::string 
+Example :code:`std::unordered_map` declaration where key is type of int and value is type of std::string 
 is shown in code below:
 
 .. code-block:: cpp
    
    std::unordered_map<int, std::string> m;
 
-To initialize an std::unordered_map we can simply assign values to it at the time of declaration.
+To initialize an :code:`std::unordered_map` we can simply assign values to it at the time of declaration.
 Please remember that the key value have to be unique.
 
 .. code-block:: cpp
@@ -184,23 +184,23 @@ Please remember that the key value have to be unique.
                                            {1, "one"}, 
                                            {2, "two"}};
 
-Similarly, as with set container, **std::unordered_multimap** and std::unordered_map have a lot in common.
+Similarly, as with set container, **std::unordered_multimap** and :code:`std::unordered_map` have a lot in common.
 Starting with C++ reference definition:
 
-    std::unordered_multimap is an unordered associative container that supports equivalent keys 
+    :code:`std::unordered_multimap` is an unordered associative container that supports equivalent keys 
     (an unordered_multimap may contain multiple copies of each key value) and that associates values 
     of another type with the keys. (...) Search, insertion, and removal have average constant-time complexity.
 
-The only difference is that std::unordered_multimap allow for keys to be repeated.
+The only difference is that :code:`std::unordered_multimap` allow for keys to be repeated.
 
-Example std::unordered_multimap declaration where key is type of int and value is type of std::string 
+Example :code:`std::unordered_multimap` declaration where key is type of int and value is type of std::string 
 is shown in code below:
 
 .. code-block:: cpp
    
    std::unordered_multimap<int, std::string> m;
 
-To initialize an std::unordered_multimap, as before we can assign values to it at the time of declaration.
+To initialize an :code:`std::unordered_multimap`, as before we can assign values to it at the time of declaration.
 This time the keys don't need to be unique.
 
 .. code-block:: cpp
