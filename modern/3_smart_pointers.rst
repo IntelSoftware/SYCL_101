@@ -313,6 +313,3 @@ as it is pointing to nothing.
 It doesn't matter whether :code:`AA` or :code:`BB` goes out of scope first. When :code:`BB` goes out of scope 
 it calls the destructors of all managed object like :code:`A_ptr`. 
 So even if :code:`AA` first went out of scope and was not destroyed, it will be destroyed together with :code:`BB`.
-
-Summary
-*******

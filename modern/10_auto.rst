@@ -1,0 +1,5 @@
+Auto and decltype
+#############################
+
+Introduction
+************

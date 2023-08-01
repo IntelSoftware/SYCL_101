@@ -226,6 +226,3 @@ Let's show it in the example. Imagine class called :code:`MoveClass` with privat
          return *this;
       }
    };
-
-Summary
-*******

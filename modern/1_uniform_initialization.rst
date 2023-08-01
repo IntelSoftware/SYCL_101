@@ -226,8 +226,3 @@ The example below demonstrates example of this situation:
 The error occurs because instead of using first constructor (with :code:`int` and :code:`float`) there is the constructor overload
 to the "strongly preferred" one with :code:`std::initializer_list` as a parameter. So the problem is because of  narrowing conversions 
 from :code:`int` and :code:`double` to :code:`bool`. 
-
-
-Summary
-*******
-

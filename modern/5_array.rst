@@ -110,6 +110,3 @@ It means that as a datatype for the outer array we are using other array.
     dedicated structure containing arrays. It will allow for better memory optimization
     when storing the elements but also when accessing them. What is more, it will be 
     more readable for other developers.
-
-Summary
-*******
