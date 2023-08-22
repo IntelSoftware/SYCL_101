@@ -105,9 +105,10 @@ To show it in example, we already know that there is a lot of different way how 
    int i = {1}; // copy-list initialization
    auto i{1};   // direct initialization of type deduced to int 
 
-For simple type initialization it is not the problem to use the historically the most common way but when we are using different more complicated custom types 
-the consistent syntax can really change the experience with code. This can be especially important if you consider generic code that should be able to initialize 
-any type - it will be not possible with :code:`()` initialization.
+For simple type initialization it is not the problem to use the historically the most common way but
+when we are using different more complicated custom types the consistent syntax can really change 
+the experience with code. This can be especially important if you consider generic code that should 
+be able to initialize any type - it will be not possible with :code:`()` initialization.
 
 .. code-block:: cpp
 
@@ -123,7 +124,8 @@ Narrowing conversions are not allowed
 
 The second benefit is that uniform initialization **does not allow narrowing conversions**.
 
-Before uniform initialization, with C-style C++ the code below will be fine, and double will just convert to int.
+Before uniform initialization, with C-style C++ the code below will be fine, and double will just 
+convert to int.
 
 .. code-block:: cpp
 
@@ -144,10 +146,11 @@ The same with bracket initialization will not work and it forces user to type-ca
 Fixes most vexing parse
 =======================
 
-The most vexing parse comes from a rule in C++ that says that anything that could be considered as a function declaration, 
-should be parsed by the compiler as a function declaration.
+The most vexing parse comes from a rule in C++ that says that anything that could be considered as a
+ function declaration, should be parsed by the compiler as a function declaration.
 
-Let us see the example when we want to initialize the vector being private member fo the foo class with three zeros :code:`{0, 0, 0}`.
+Let us see the example when we want to initialize the vector being private member fo the foo class 
+with three zeros :code:`{0, 0, 0}`.
 
 .. code-block:: cpp
 
@@ -159,8 +162,8 @@ Let us see the example when we want to initialize the vector being private membe
       std::vector<int> v(3, 0); 
    };
 
-This code will not compile because the vector initialization was interpreted be the compiler as a function declaration.
-We have three possible solution for this problem. 
+This code will not compile because the vector initialization was interpreted be the compiler as a 
+function declaration. We have three possible solution for this problem. 
 
 The first is the most obvious - we can just use uniform initialization for the vector:
 
@@ -168,7 +171,8 @@ The first is the most obvious - we can just use uniform initialization for the v
 
    std::vector<int> v{0, 0, 0};
 
-This is not always te best solution, especially when we need to initialize the long vector and typing every element is not un option.
+This is not always te best solution, especially when we need to initialize the long vector and 
+typing every element is not un option.
 
 The second solution is to move the initialization to the constructor.
 
@@ -187,10 +191,11 @@ And the last solution is to use copy-initialization:
 Common problems with uniform initialization 
 *******************************************
 
-Even, when the uniform initialization helps with a lot of problems in C++, there are also some problems related to usage of it.
-The first of them is about using :code:`auto` for variable declaration. Deduced type for the variable can be :code:`std::initializer_list` 
-instead of the type programmer would expect. This happens mostly when we combine auto variable declaration with equal sign, 
-or if it has multiple elements, like in the code shown below:
+Even, when the uniform initialization helps with a lot of problems in C++, there are also some 
+problems related to usage of it. The first of them is about using :code:`auto` for variable 
+declaration. Deduced type for the variable can be :code:`std::initializer_list` instead of the type 
+programmer would expect. This happens mostly when we combine auto variable declaration with equal 
+sign, or if it has multiple elements, like in the code shown below:
 
 .. code-block:: cpp
 
@@ -200,8 +205,8 @@ or if it has multiple elements, like in the code shown below:
    auto variable{13, 17, 8};    // compilation error variable contains multiple expressions
    auto variable = {13, 17, 8}; // variable is of type std::initializer_list<int>
 
-Another problem can happened with the vector initialization. It can be tricky especially at the beginning when learning C++.
-See the difference between declarations below:
+Another problem can happened with the vector initialization. It can be tricky especially at the 
+beginning when learning C++. See the difference between declarations below:
 
 .. code-block:: cpp
 
@@ -223,6 +228,7 @@ The example below demonstrates example of this situation:
 
    foo object{13, 2.7}; // compilation error
 
-The error occurs because instead of using first constructor (with :code:`int` and :code:`float`) there is the constructor overload
-to the "strongly preferred" one with :code:`std::initializer_list` as a parameter. So the problem is because of  narrowing conversions 
-from :code:`int` and :code:`double` to :code:`bool`. 
+The error occurs because instead of using first constructor (with :code:`int` and :code:`float`) 
+there is the constructor overload to the "strongly preferred" one with :code:`std::initializer_list` 
+as a parameter. So the problem is because of  narrowing conversions from :code:`int` and :code:`double` 
+to :code:`bool`. 

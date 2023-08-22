@@ -14,9 +14,9 @@ in a programming language. Since C++11 in language specification many keywords w
 included which allows to leave the type deduction to the compailer. Before C++11 
 it was impossible and each data type needed to be *explicitly declared* at compile time. 
 
-Now, using type inference capabilities, we can avoid waisting time writing out things that compailer knows.
-As all the types are deduced in the compiler phase only, the time for compilation increases slightly 
-at the same time it doesn't affect the run time of the created program.
+Now, using type inference capabilities, we can avoid waisting time writing out things that compailer 
+knows. As all the types are deduced in the compiler phase only, the time for compilation increases 
+slightly at the same time it doesn't affect the run time of the created program.
 
 In C++ we have two keywords introduced as a type inference:
 
@@ -37,7 +37,8 @@ at the declaration time. Otherwise the compilation error occurs.
 
 For better understanding, let us see the example of :code:`auto` usage.
 
-    NOTE: In shown examples we are using :code:`typeid` to get the type of the variables.
+.. note:: 
+   In shown examples we are using :code:`typeid` to get the type of the variables.
 
 .. code-block:: cpp
    
@@ -62,9 +63,11 @@ The output of the code above is:
    i
    d
 
-and it means that variable :code:`x` is type od :code:`int`, when variable :code:`y` is type od :code:`double`
+and it means that variable :code:`x` is type od :code:`int`, when variable :code:`y` is type of 
+:code:`double`
 
-:code:`auto` can be easily used to avoid long initializations, e.g. when creating iterators for containers.
+:code:`auto` can be easily used to avoid long initializations, e.g. when creating iterators for 
+containers.
 
 :code:`decltype` type specifier
 ********************************
@@ -130,7 +133,8 @@ Now, let's see the example when we are using both :code:`auto` and :code:`declty
 In this example we are using :code:`auto` and :code:`decltype` for the same 
 purpose - deduction of the iterator type.
 
-    NOTE: The type denoted by decltype can be different from the type deduced by auto.
+.. note::
+   The type denoted by decltype can be different from the type deduced by auto.
 
 Summary
 *********

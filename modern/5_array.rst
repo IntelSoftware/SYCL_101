@@ -66,7 +66,8 @@ We can use std::array in every situation when we are using C-style array. Just m
 
 To access the element at specific position we can use C-style brackets :code:`[ ]` (because the 
 std::array elements are placed side by side in the memory) or :code:`at()` method. 
-The only difference between them is that :code:`at()` checks bound, when using brackets doesn't perform it.
+The only difference between them is that :code:`at()` checks bound, when using brackets doesn't 
+perform it.
 
 .. code-block:: cpp
    

@@ -94,9 +94,9 @@ See the code below:
 Parameter list
 ==============
 
-Lambdas can both capture variables and accept *input parameters*. A **parameter list** is optional and in 
-most aspects resembles the parameter list for a function. Let's see the same simple code in a form of 
-function and lambda expression.
+Lambdas can both capture variables and accept *input parameters*. A **parameter list** is optional 
+and in most aspects resembles the parameter list for a function. Let's see the same simple code in 
+a form of function and lambda expression.
 
 .. code-block:: cpp
    
@@ -106,8 +106,8 @@ function and lambda expression.
 
    auto lambdaAdd = [](int x, int y) { return x + y; };
 
-In lambdas there is also possibility to use :code:`auto` keyword as the type specifier in a parameter list it 
-it the type is generic. It can also take another lambda expression as an argument.
+In lambdas there is also possibility to use :code:`auto` keyword as the type specifier in a 
+parameter list it it the type is generic. It can also take another lambda expression as an argument.
 
 .. code-block:: cpp
    
@@ -116,10 +116,10 @@ it the type is generic. It can also take another lambda expression as an argumen
 Mutable specification
 ======================
 
-By default, value-captures cannot be modified inside the lambda because the compiler-generated method is 
-marked as :code:`const`, but use of the :code:`mutable` keyword cancels this out. Which means that the 
-**mutable specification** enables the body of a lambda expression to modify variables that are captured by 
-value.
+By default, value-captures cannot be modified inside the lambda because the compiler-generated 
+method is marked as :code:`const`, but use of the :code:`mutable` keyword cancels this out. Which 
+means that the **mutable specification** enables the body of a lambda expression to modify variables 
+that are captured by value.
 
 .. code-block:: cpp
    
@@ -137,29 +137,29 @@ value.
 Exception specification
 =======================
 
-You can specify that the lambda will not throw any exception using :code:`noexcept` keyword. You can see what 
-will happen if you will run the code below.
+You can specify that the lambda will not throw any exception using :code:`noexcept` keyword. You 
+can see what will happen if you will run the code below.
 
 .. code-block:: cpp
    
    []() noexcept { throw 13; } ;
 
-Most of the C++ compilers should show the warning during compilation, but other than that the code will not 
-throw the exception.
+Most of the C++ compilers should show the warning during compilation, but other than that the code
+will not throw the exception.
 
 Return type
 ===========
 
-In general, the returned type of the lambda expression is automatically deducted ant there is no need of 
-using :code:`auto` keyword for that, like shown below:
+In general, the returned type of the lambda expression is automatically deducted ant there is no 
+need of using :code:`auto` keyword for that, like shown below:
 
 .. code-block:: cpp
    
    []() { std::cout << "Sample output.\n"; }; // deduced type of the lambda is void
 
-You can specify **trailing-return-type** that resembles the return-type part  of standard function. But 
-please remember that it must follow the parameter list (even if it is empty) and you must use :code:`->` 
-keyword before the return type.
+You can specify **trailing-return-type** that resembles the return-type part  of standard function. 
+But please remember that it must follow the parameter list (even if it is empty) and you must use 
+:code:`->` keyword before the return type.
 
 .. code-block:: cpp
    
@@ -177,8 +177,8 @@ statement. Or, if the expression doesn't return a value.
 Lambda body
 ===========
 
-As the lambda expression is the same as the ordinary function, its body can contain anything that's allowed 
-in function body. It means that lambda body, similarly as function body, can access:
+As the lambda expression is the same as the ordinary function, its body can contain anything that's 
+allowed in function body. It means that lambda body, similarly as function body, can access:
 
 * captured variables from the enclosing scope,
 * parameter,
@@ -186,8 +186,8 @@ in function body. It means that lambda body, similarly as function body, can acc
 * class data members (when lambda is declared inside a class and :code:`this` is captured),
 * variables with static storage duration (like global variables).
 
-Let's take a look at the code example. We would like to print the elements of declared vector together with 
-information if the number is even or odd. The vector declaration is as followed:
+Let's take a look at the code example. We would like to print the elements of declared vector 
+together with information if the number is even or odd. The vector declaration is as followed:
 
 .. code-block:: cpp
    
@@ -208,7 +208,8 @@ And now, we can prepare the function printing number and information :code:`is e
       }
    }
 
-To use this function on the vector elements we are using :code:`for_each` function form algorithms library.
+To use this function on the vector elements we are using :code:`for_each` function form algorithms 
+library.
 
 .. code-block:: cpp
    

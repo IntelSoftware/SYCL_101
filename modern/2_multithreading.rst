@@ -32,7 +32,8 @@ separately as well as together, depending on the context.
 C++ multithrading syntax
 *************************
 
-Now, get back to the multithreading itself. C++ multithreading involves creating and using thread objects, seen as :code:`std::thread` in code, to carry out delegated sub-tasks independently.
+Now, get back to the multithreading itself. C++ multithreading involves creating and using thread 
+objects, seen as :code:`std::thread` in code, to carry out delegated sub-tasks independently.
 
 Single thread execution
 ========================
@@ -62,10 +63,16 @@ Creating and launching a thread is really simple. Let's take a look at the simpl
 
 Let's analyze step by step this code. 
 
-#. The first step was to import necessary library form STL - it contains all the classes and functions related to the C++ multithreading like :code:`std::thread` class.
-#. The next step was to declare function called from thread - all threads must be given a function to complete at their creation.
-#. The next step is to initialize a thread and have it execute prepared function - we are using default executor.
-#. At the end we are using :code:`join()` multithreading command - its task is to pause the main pausing the main function's thread until the specified thread. Without :code:`join()` here, the main thread would finish its task before :code:`t` would complete :code:`callFromThread`, resulting in an error.
+#. The first step was to import necessary library form STL - it contains all the classes and functions 
+   related to the C++ multithreading like :code:`std::thread` class.
+#. The next step was to declare function called from thread - all threads must be given a function 
+   to complete at their creation.
+#. The next step is to initialize a thread and have it execute prepared function - we are using 
+   default executor.
+#. At the end we are using :code:`join()` multithreading command - its task is to pause the main 
+   pausing the main function's thread until the specified thread. Without :code:`join()` here, the 
+   main thread would finish its task before :code:`t` would complete :code:`callFromThread`, 
+   resulting in an error.
 
 Multiple threads execution
 ===========================
@@ -102,3 +109,10 @@ Multiple threads execution
      return 0;
    }
 
+
+Detaching
+=========
+
+
+Shared resources
+================

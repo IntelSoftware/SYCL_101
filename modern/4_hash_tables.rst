@@ -162,14 +162,14 @@ Map
 Now, we will move to the map containers, starting with **std::unordered_map**. 
 According to C++ reference:
 
-    :code:`std:unordered_map` is an associative container that contains key-value pairs with unique keys. 
-    Search, insertion, and removal of elements have average constant-time complexity.
+    :code:`std:unordered_map` is an associative container that contains key-value pairs with unique 
+    keys. Search, insertion, and removal of elements have average constant-time complexity.
 
-It means that the most important information about :code:`std::unordered_map` is that is stores **key-value pairs**,
-where **key is unique** and the average access time is **constant**.
+It means that the most important information about :code:`std::unordered_map` is that is stores 
+**key-value pairs**, where **key is unique** and the average access time is **constant**.
 
-Example :code:`std::unordered_map` declaration where key is type of int and value is type of std::string 
-is shown in code below:
+Example :code:`std::unordered_map` declaration where key is type of int and value is type of 
+:code:`std::string` is shown in code below:
 
 .. code-block:: cpp
    
@@ -184,24 +184,25 @@ Please remember that the key value have to be unique.
                                            {1, "one"}, 
                                            {2, "two"}};
 
-Similarly, as with set container, **std::unordered_multimap** and :code:`std::unordered_map` have a lot in common.
-Starting with C++ reference definition:
+Similarly, as with set container, **std::unordered_multimap** and :code:`std::unordered_map` have 
+a lot in common. Starting with C++ reference definition:
 
     :code:`std::unordered_multimap` is an unordered associative container that supports equivalent keys 
     (an unordered_multimap may contain multiple copies of each key value) and that associates values 
-    of another type with the keys. (...) Search, insertion, and removal have average constant-time complexity.
+    of another type with the keys. (...) Search, insertion, and removal have average constant-time 
+    complexity.
 
 The only difference is that :code:`std::unordered_multimap` allow for keys to be repeated.
 
-Example :code:`std::unordered_multimap` declaration where key is type of int and value is type of std::string 
-is shown in code below:
+Example :code:`std::unordered_multimap` declaration where key is type of int and value is type of 
+:code:`std::string` is shown in code below:
 
 .. code-block:: cpp
    
    std::unordered_multimap<int, std::string> m;
 
-To initialize an :code:`std::unordered_multimap`, as before we can assign values to it at the time of declaration.
-This time the keys don't need to be unique.
+To initialize an :code:`std::unordered_multimap`, as before we can assign values to it at the time 
+of declaration. This time the keys don't need to be unique.
 
 .. code-block:: cpp
    
