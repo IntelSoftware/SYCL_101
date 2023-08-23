@@ -43,7 +43,18 @@ Introduction to SYCL
 
          Learn basics of modern C++ needed to start working with SYCL.
 
+   .. container:: tile
 
+      .. rst-class:: tile-fig
+
+         .. figure:: _images/pdf.png
+            :alt: PDF icon
+            :target: 04_SYCL_Conv_USM/index.rst
+
+            SYCL: Conventional vs. USM
+
+
+      SYCL: Conventional vs. USM
 
 
 .. toctree::
@@ -51,6 +62,7 @@ Introduction to SYCL
 
    
    heterogeneous/index.rst
-   why_sycl/index.rst
+   02_why_sycl/index.rst
    modern/index.rst
+   04_SYCL_Conv_USM/index.rst
    faq.rst
