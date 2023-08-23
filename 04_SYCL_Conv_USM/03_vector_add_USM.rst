@@ -31,7 +31,7 @@ to allocate and manage memory access:
 
 .. vector_add in words
 
-.. code-block:: cpp
+.. code-block:: c++
 
    //==============================================================
    // Copyright © Intel Corporation
