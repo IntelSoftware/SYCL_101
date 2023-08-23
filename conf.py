@@ -26,8 +26,12 @@ author = 'various'
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
-# ones.
-extensions = ['myst_parser','sphinx_md']
+# ones.]
+
+extensions = ['myst_parser','sphinx_md', 'rst2pdf.pdfbuilder']
+
+pdf_documents = [('index', u'rst2pdf', u'Sample rst2pdf doc', u'Intel Corporation'),]
+
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

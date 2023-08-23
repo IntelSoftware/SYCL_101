@@ -13,7 +13,7 @@ Introduction to SYCL
 
          .. figure:: _images/cogs.png
             :alt: GitHub Logo
-            :target: heterogeneous/index.rst
+            :target: 01_Heterogeneous/index.rst
 
             Why heterogeneous?
 
@@ -25,7 +25,7 @@ Introduction to SYCL
 
          .. figure:: _images/pdf.png
             :alt: PDF icon
-            :target: why_sycl/index.rst
+            :target: 02_Why_sycl/index.rst
 
             Why SYCL?
 
@@ -37,7 +37,7 @@ Introduction to SYCL
 
          .. figure:: _images/writing.png
             :alt: Pen icon
-            :target: modern/index.rst
+            :target: 03_Modern/index.rst
 
             Modern c++ Primer
 
