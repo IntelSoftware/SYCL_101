@@ -13,7 +13,7 @@ Heterogeneous Compute
 
 Heterogeneous computing is preferred when the workload consists of tasks that can benefit from different types of processing units. For example, GPUs excel at parallelizing graphics and general-purpose computing tasks, while FPGAs offer highly customizable and efficient processing for specific algorithms. By utilizing specialized accelerators, heterogeneous computing systems can achieve higher performance and energy efficiency for certain workloads.
 
-Advantages of accelerators in heterogeneous computing include:
+Advantages of accelerators in heterogeneous computing include
 =================================================================
 
 1. Enhanced performance: Accelerators are specifically designed to excel at certain types of computations. By offloading specific tasks to accelerators, overall performance can be significantly improved.
@@ -22,7 +22,7 @@ Advantages of accelerators in heterogeneous computing include:
 
 3. Ability to further optimize ones code: With accelerators, developers can tailor the hardware and software for specific algorithms or applications, enabling higher performance and efficiency.
 
-Challenges using accelerators in a heterogeneous computing environment:
+Challenges using accelerators in a heterogeneous computing environment
 =========================================================================
 
 1. Programming complexity: Unlike homogeneous systems, heterogeneous computing requires different programming models and languages for various processing units. This complexity increases the development effort.
@@ -31,7 +31,7 @@ Challenges using accelerators in a heterogeneous computing environment:
 
 3. Load balancing: In a heterogeneous system, workload distribution and load balancing become more complex due to the diverse capabilities of different processing units. Proper load balancing is essential to fully utilize the system's resources.
 
-Software Development Techniques:
+Software Development Techniques
 =================================
 
 The software development techniques for homogeneous and heterogeneous computing have typically required different approaches in the past.
