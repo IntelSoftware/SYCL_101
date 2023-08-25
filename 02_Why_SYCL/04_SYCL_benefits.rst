@@ -14,7 +14,7 @@ Here are some of the vital advantages of SYCL:
 
 - **Performance portability**: SYCL provides a performance-portable programming model. The code you write in SYCL can be compiled and optimized for different devices and take advantage of their specific architectural features and capabilities. This enables you to achieve high-performance execution on a variety of hardware platforms without significant code modifications.
 
-- **Memory management abstraction**: SYCL abstracts away the complexities of memory management in heterogeneous systems. It provides constructs like buffers and accessors that can transparently transfer data between the host and the device to simplifying memory allocation, data movement, and synchronization.
+- **Memory management abstraction**: SYCL abstracts away the complexities of memory management in heterogeneous systems. It provides constructs like buffers and accessors that can transparently transfer data between the host and the device to simplify memory allocation, data movement, and synchronization.
 
 - **Integration with existing codebases**: SYCL can be integrated into existing C++ codebases seamlessly. You can gradually introduce SYCL features into your codebase to accelerate performance-critical sections or specific algorithms, leveraging the benefits of parallelism without requiring a complete rewrite.
 
