@@ -1,4 +1,4 @@
-Why heterogeneous?
+Why Heterogeneous [[[add "compute"?]]]?
 ##################
 
 .. toctree::
