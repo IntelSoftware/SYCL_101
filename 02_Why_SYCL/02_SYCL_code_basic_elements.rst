@@ -2,7 +2,7 @@ SYCL Code Basic Elements
 ========================
 
 SYCL offers a broad range of advantages to developers, including improved productivity, 
-better performance, and enhanced code maintainability.  In this lesson, students 
+better performance, and enhanced code maintainability. In this lesson, students 
 will gain an overall understanding of basic SYCL features and concepts. 
 
 Most featured SYCL offerings
