@@ -1,5 +1,5 @@
-vector_add in SYCL: Using USM
-=============================
+SYCL-USM: vector_add
+====================
 
 In this section we explore vector addition using USM within the SYCL 
 framework. USM enables memory regions that are accessible from 

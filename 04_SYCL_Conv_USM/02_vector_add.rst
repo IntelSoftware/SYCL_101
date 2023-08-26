@@ -1,5 +1,5 @@
-vector_add in SYCL: Conventional
-================================
+SYCL-Conventional: vector_add
+=============================
 
 
 .. Introduction to codes:

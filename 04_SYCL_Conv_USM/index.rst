@@ -7,4 +7,5 @@ SYCL: Conventional vs. USM
    01_Introduction
    02_vector_add
    03_vector_add_USM
-   04_Conclusion
+   04_matrix_multiplication_USM.rst
+   05_Conclusion

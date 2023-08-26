@@ -53,9 +53,19 @@ Introduction to SYCL
 
             SYCL: Conventional vs. USM
 
-
       SYCL: Conventional vs. USM
 
+   .. container:: tile
+
+      .. rst-class:: tile-fig
+
+         .. figure:: _images/pdf.png
+            :alt: PDF icon
+            :target: 05_Next_step/index.rst
+
+            Next step
+
+      Recommended next step
 
 .. toctree::
    :hidden:
@@ -65,4 +75,5 @@ Introduction to SYCL
    02_Why_SYCL/index.rst
    03_Modern/index.rst
    04_SYCL_Conv_USM/index.rst
+   05_Next_step/index.rst
    faq.rst
