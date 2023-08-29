@@ -4,41 +4,40 @@ Type Inference in C++ (auto and decltype)
 This chapter talks about type inference. You will learn:
 
 #. What is type reference in C++?
-#. How to use :code:`auto` and :code:`decltype` keywords?
+#. How should the keywords :code:`auto` and :code:`decltype` be used?
 #. What are the differences between :code:`auto` and :code:`decltype`? 
 
 Introduction
 ************
-**Type Inference** refers to automatic deduction of the data type of an expression 
-in a programming language. Since C++11 in language specification many keywords were 
-included which allows to leave the type deduction to the compailer. Before C++11 
+**Type inference** refers to the automatic deduction of the data type of an expression 
+in a programming language. Since C++11 in language specification, many keywords were 
+included that allow [[[allow what to leave?]]] to leave the type deduction to the compiler. Before C++11, 
 it was impossible and each data type needed to be *explicitly declared* at compile time. 
 
-Now, using type inference capabilities, we can avoid waisting time writing out things that compailer 
-knows. As all the types are deduced in the compiler phase only, the time for compilation increases 
-slightly at the same time it doesn't affect the run time of the created program.
+Now, using type inference capabilities, we can avoid wasting time writing out things that the compiler 
+knows. As all the types are deduced in the compiler phase only, the compilation time increases 
+slightly; at the same time, it doesn't affect the runtime of the created program.
 
-In C++ we have two keywords introduced as a type inference:
+In C++, two keywords are introduced as a type inference, which we will cover below:
 
 * :code:`auto` keyword
 * :code:`decltype` type specifier
 
-and we will discuss them one by one.
 
 :code:`auto` keyword
 *********************
 
-:code:`auto` keyword indicates that the type of declared variable to be deduced automatically 
-from its initializer. If the return type of a function is :code:`auto` it will be evaluated 
+The :code:`auto` keyword indicates the type of declared variable to be deduced automatically 
+from its initializer. If the return type of a function is :code:`auto`, it will be evaluated 
 at runtime by the returned type expression.
 
-What is important, the variable declared with :code:`auto` keyword needs to be initialized 
-at the declaration time. Otherwise the compilation error occurs.
+It's important to note that the variable declared with the :code:`auto` keyword needs to be initialized 
+at declaration time. Otherwise, a compilation error occurs.
 
-For better understanding, let us see the example of :code:`auto` usage.
+For better understanding, let's see the example of :code:`auto` usage.
 
-.. note:: 
-   In shown examples we are using :code:`typeid` to get the type of the variables.
+.. note:: [[[seems like "Note" should be bold to stand out.]]]
+   In these examples, we are using :code:`typeid` to get the type of the variables.
 
 .. code-block:: cpp
    
@@ -63,23 +62,23 @@ The output of the code above is:
    i
    d
 
-and it means that variable :code:`x` is type od :code:`int`, when variable :code:`y` is type of 
-:code:`double`
+and it means that variable :code:`x` is type of :code:`int` when variable :code:`y` is type of
+:code:`double`[[[should :code:`auto` be moved up with :code:`double?]]]`
 
-:code:`auto` can be easily used to avoid long initializations, e.g. when creating iterators for 
-containers.
+:code:`auto` and it can be easily used to avoid long initializations (e.g., when creating iterators for 
+containers).
 
 :code:`decltype` type specifier
 ********************************
 
-:code:`decltype` type specifier inspects the declared type of an entity or the type of 
-an expression. We can say that :code:`decltype` is more like a operator that evaluates 
+The :code:`decltype` type specifier inspects the declared type of an entity or the type of 
+an expression. We can say that :code:`decltype` is more like an operator that evaluates 
 the type of passed expression. 
 
-When you use :code:`auto` you declare a variable with a particular type, byt when using 
-:code:`decltype` you extract the type from the variable.
+When you use :code:`auto`, you declare a variable with a particular type; but, when using 
+:code:`decltype`, you extract the type from the variable.
 
-For better understanding, let us see the example of :code:`decltype` usage.
+For better understanding, let's see the example of :code:`decltype` usage.
 
 .. code-block:: cpp
    
@@ -89,7 +88,7 @@ For better understanding, let us see the example of :code:`decltype` usage.
    int foo() { return 13; }
 
    int main(){
-      // x has the sam type as a type returned by foo function
+      // x has the sam [[[same?]]]type as a type returned by foo function
       decltype(foo()) x;
 
       // checking type of x
@@ -130,19 +129,19 @@ Now, let's see the example when we are using both :code:`auto` and :code:`declty
       return 0;
    } 
 
-In this example we are using :code:`auto` and :code:`decltype` for the same 
-purpose - deduction of the iterator type.
+In this example, we are using :code:`auto` and :code:`decltype` for the same 
+purpose — deduction of the iterator type.
 
-.. note::
-   The type denoted by decltype can be different from the type deduced by auto.
+.. note:: [[[seems like "Note" should be bold to stand out.]]]
+   The type denoted by :code:`decltype`  can be different from the type deduced by :code:`auto`.
 
 Summary
 *********
 
-As a summary, let's make sure that we understand that :code:`auto` and :code:`decltype` 
-serve different purposes so they don't map one-to-one.
+In summary, it's important to understand that :code:`auto` and :code:`decltype` 
+serve different purposes, so they don't map one-to-one.[[[I understand what they mean, but I'm stuck trying to find a better expression that "one-to-one"]]]
 
-:code:`auto` is a keyword that is used for automatic type deduction, when :code:`decltype` 
-type specifier yields the type of a specified expression. Unlike auto that deduces types 
-based on values being assigned to the variable, decltype deduces the type from an expression 
+:code:`auto` is a keyword that is used for automatic type deduction when the :code:`decltype` 
+type specifier yields the type of a specified expression. Unlike :code:`auto`, which deduces types 
+based on values being assigned to the variable, :code:`decltype` deduces the type from an expression 
 passed to it. 
