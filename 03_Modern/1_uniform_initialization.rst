@@ -30,8 +30,7 @@ The code below shows both direct and copy initialization:
 Brace-initialization
 ====================
 
-To uniformly initialize objects of any type, **brace-initialization form {}** may be used for both direct and copy initialization. When used with brace-initialization, 
-we call them[[[to clarify, is "them" = objects?]]] direct-list and copy-list initialization. 
+To uniformly initialize objects of any type, **brace-initialization form {}** may be used for both direct and copy initialization. When used with brace-initialization, we call initializations, direct-list and copy-list. 
 
 The code below shows both direct-list and copy-list initialization:
 
@@ -86,7 +85,7 @@ Let's look at uniform initialization on different build-in and custom types:
       foo f2{13, 2.7};
 
 Why should uniform initialization be used?
-*****************************************
+*******************************************
 
 Within the uniform initialization, we can list several advantages. 
 
@@ -124,7 +123,7 @@ Narrowing conversions are not allowed
 The second benefit is that uniform initialization **does not allow narrowing conversions**.
 
 Before uniform initialization, with C-style C++, the code below will work, and :code:`double` will just 
-convert to :code:`int`.[[[I added :code: to double and int. ok?]]]
+convert to :code:`int`.
 
 .. code-block:: cpp
 
