@@ -1,0 +1,20 @@
+Module 2: DPCPP Program Structure
+#################################
+
+This module demonstrates basic **SYCL code anatomy** and 
+program structure. You will learn about important **SYCL classes**, 
+different types of kernels. You will also learn about 
+**Buffer Accessor memory model** and synchronizations when using buffers.
+
+Learning Objectives: 
+********************
+
+* Explain the SYCL fundamental classes.
+
+* Use device selection to offload kernel workloads.
+
+* Decide when to use basic parallel kernels and ND Range Kernels.
+
+* Create a host Accessor.
+
+* Build a sample SYCL application through hands-on lab exercises.
