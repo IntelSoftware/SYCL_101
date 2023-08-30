@@ -1,29 +1,28 @@
-Nested Namespaces with inlined variables explanation 
+Nested Namespaces with Inlined?????? Variables Explanation [[[I think you could do without "Explanation"]]]
 ##################################################################
 
-This chapter talks about C++ namespaces. You will learn:
+This chapter talks about C++ namespaces. You will learn the following:
 
-#. What is namespace?
-#. How to declare your own namespace?
-#. How nested namespaces work in C++?
+#. What is a namespace?
+#. How can you declare your own namespace?
+#. How do nested namespaces work in C++?
 
 Introduction
 ************
 
-The **namespace** is a declarative region providing a scope to the identifiers like names of types, 
-functions, variables, etc. Namespaces are usually used to organize the code into logical groups and,
-also, to avoid name collisions. It can be especially important, when you're using different 
+The **namespace** is a declarative region that provides scope to the identifiers like names of types, 
+functions, and variables. Namespaces are usually used to organize the code into logical groups and to avoid name collisions. It can be especially important when you're using different 
 libraries.
 
-One of the example of namespace scope is the C++ standard library (std) where all the classes, 
-methods and templates are declared. You can find in the code :code:`std::` before multiple class or 
-functions declarations form STL in C++. Sometimes you can also find directive
+One of the examples of the namespace scope is the C++ Standard Template Library (STL)[[[as used in article 12]]], where all the classes, 
+methods, and templates are declared. You can find it in the code[[[I added "it" to this phrase, but what is "it"? The namespace?]]] :code:`std::` before multiple class or 
+function declarations form[[[from?]]] STL in C++. Sometimes you can also find the directive
 :code:`using namespace std;`.
 
 Defining a namespace
 =====================
 
-To define a namespace you have to start with :code:`namespace` keyword followed by the name, as 
+To define a namespace, you have to start with the :code:`namespace` keyword followed by the name, as 
 below:
 
 .. code-block:: cpp
@@ -34,8 +33,8 @@ below:
       // ...
    }
 
-Note that there i no semicolon :code:`;` after the closing bracket. 
-To call the function or variable declared within the namespace, prepend the namespace name as below:
+Note that there is no semicolon :code:`;` after the closing bracket. 
+To call the function or variable declared within the namespace, prepend the namespace name as shown below:
 
 .. code-block:: cpp
    
@@ -46,8 +45,8 @@ To call the function or variable declared within the namespace, prepend the name
 Nested namespaces
 ******************
 
-In C++, namespaces can be nested, where there is a possibility to define one namespace inside 
-another one. The resolution of namespace variables is hierarchical. The syntax looks as below:
+In C++, namespaces can be nested, which makes it possible to define one namespace inside 
+another one. The resolution of namespace variables is hierarchical. The syntax is shown below:
 
 .. code-block:: cpp
    
@@ -64,9 +63,9 @@ another one. The resolution of namespace variables is hierarchical. The syntax l
       }
    }
 
-As you can see, hose declaration take a lot of space and sometimes it can be difficult to track all 
-of the levels of namespaces declared. But in modern C++ nested namespaces can be also write simpler,
-as below:
+As you can see, those declarations take a lot of space and sometimes it's difficult to track all 
+of the levels of the namespaces declared. But in modern C++, nested namespaces can be also write simpler,[[[does this work? "...writing nested namespaces can be simplified."]]]
+as shown below:
 
 .. code-block:: cpp
    
@@ -75,18 +74,18 @@ as below:
          // declarations
    }
 
-It is really useful when you want to declare functions, variables etc. just in the deepest 
-namespace. It also allows you to easy track the namespace in which yore writing your declarations.
+It is useful when you want to declare functions and variables in the deepest 
+namespace. It also allows you to easily track the namespace in which you're writing your declarations.
 
-Similarly as with single namespace, to call the function or variable declared within the nested 
-namespace you need to write all levels of the namespaces, like below:
+Similarly, as with a single namespace, to call the function or variable declared within the nested 
+namespace, you need to write all levels of the namespaces, like below:
 
 .. code-block:: cpp
    
    A::B::C::function_name(/*..*/);
    A::B::C::variable_name;
 
-Now, let's see it on the real example:
+Now, let's see it in the real example:
 
 .. code-block:: cpp
    
@@ -114,7 +113,7 @@ Now, let's see it on the real example:
       return 0;
    }
    
-Output of the following code will be:
+The output of the code will look like this:
 
 .. code-block:: 
    
@@ -122,7 +121,7 @@ Output of the following code will be:
    Outer foo() function call. 
 
 
-It means, that first inner foo function was called, then the outer foo function.
+This means that the inner foo function was called first, followed by the outer foo function.
 
 
 
