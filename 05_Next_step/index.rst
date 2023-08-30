@@ -1,11 +1,10 @@
 Next step: SYCL Essentials
 ##########################
 
-Next step: SYCL Essentials bla bla
-
 .. toctree::
    :maxdepth: 2
 
+   01_Next_step.rst
    Module_01.rst
    Module_02.rst
    Module_03.rst

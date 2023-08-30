@@ -63,9 +63,9 @@ Introduction to SYCL
             :alt: PDF icon
             :target: 05_Next_step/index.rst
 
-            Next step
+            Next step: SYCL Essentials
 
-      Recommended next step
+      Introduction to SYCL Essentials
 
 .. toctree::
    :hidden:
