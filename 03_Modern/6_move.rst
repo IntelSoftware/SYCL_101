@@ -7,7 +7,7 @@ This chapter talks about move semantics. You will learn the following:
 #. What are the different value categories and when should they be used?
 #. What is universal reference T&&?
 #. How and why should std::move be used?
-#. How is a move constructor created? (Rule of Five)[[[based on later uses I changed to "Rule of Five" here. Also made it a proper noun because it looks cool.]]]
+#. How is a move constructor created? (Rule of Five)
 
 Introduction
 ************
@@ -21,7 +21,7 @@ Value categories (glvalue and rvalue)
 In C++, every expression has a type and belongs to a specific **value category**. These are the basic 
 rules for a compiler to follow when creating, copying, and moving objects during expression evaluation.
 
-Here are some C++ expression value categories:[[[below, I made all "values" singular and adjusted the verbs.]]]
+Here are some C++ expression value categories:
    
 * **glvalue** — Expression that has an identity; it's possible to determine if two expressions refer 
   to the same entity.
@@ -69,7 +69,7 @@ we will try to assign the value to it, as shown below:
    returnValue() = 17; // error
 
 We will receive an error: :code:`lvalue required as left operand of assignment`. That's because we 
-are trying to use the left operand of the assignment[[[edit accurate?]]] on prvalue. 
+are trying to use the left operand of the assignment on prvalue. 
 
 But when we change the :code:`returnValue()` function to return a reference to an already existing memory 
 location, everything will work fine. See the code below:
@@ -111,7 +111,7 @@ Universal references (&&)
 *************************
 
 One of the main features related to the rvalues introduced in C++11 was rvalue reference. Usually, 
-the :code:`&&` notation is known as a sytnax for it.[[[syntax for what? rvalue reference?]]] But it is not always true. 
+the :code:`&&` notation is known as a sytnax for rvalue reference. But it is not always true. 
 
 :code:`T&&` can hold both lvalue and rvalue references, which is called a **universal reference**.
 But remember that :code:`&&` only means a universal reference when type deduction is involved. In 
@@ -131,7 +131,7 @@ Now, let's move on to an rvalue reference, as there is no type deduction.
    void foo(std::string&& param);
 
 Finally, the last thing is to show the concept of prefect forwarding, which is when a universal reference can be 
-propagated, preserving the l-r 'valueness.' 
+propagated, preserving the l-r 'valueness'. 
 
 .. code-block:: cpp
    
@@ -187,17 +187,22 @@ After those operations, the declared element :code:`element` is nullptr, as it w
 Move constructor and Rule of Five 
 *********************************
 
-:code:`std::move` is actually just a request to move. If the type of the object does not have[[[I guessed here, please confirm accuracy]]] 
-a move constructor/assign-operator defined, the move operation will fall back to a copy. 
+:code:`std::move` is actually just a request to move. If the type of the object does not have a move constructor/assign-operator defined, the move operation will fall back to a copy. 
 In that case, we will not experience any benefits of using the move operation.
 
 That is why it is important to know how to create a move constructor. At the same time, 
-in C++ we have something called **Rule of Five**, which is as follows:[[[I don't get the Rule of 5. there are 4 bullets, and 1&2 are 1 sentence, and 3&4 are another sentence. what are the numbered 1-4? I guess it is what it is.]]]
+in C++ we have something called **Rule of Five**, which is as follows:
 
-#. If a class requires a user-defined destructor, a user-defined copy constructor, or a user-defined 
-#. copy assignment operator, it almost certainly requires all three.
-#. Any class for which move semantics are desirable, it also needs to declare the move constructor and 
-#. the move assignment operator.
+#. If a class requires a user-defined destructor, a user-defined copy constructor, or a user-defined copy assignment operator, it almost certainly requires all three.
+#. Any class for which move semantics are desirable, it also needs to declare the move constructor and the move assignment operator.
+
+Those result in creating five elements:
+
+#. user-defined destructor
+#. user-defined copy constructor
+#. user-defined copy assignment operator
+#. user-defined move constructor
+#. user-defined move assignment operator
 
 Let's show it in the example. Imagine a class called :code:`MoveClass` with a private member called 
 :code:`str_ptr` being :code:`char*`. To show the Rule of Five, we need to declare the following:

@@ -9,7 +9,7 @@ This chapter talks about smart pointers. You will learn about the following:
 
 
 What are the smart pointers and when should they be used?
-****************************************************
+**********************************************************
 
 Let's start with the definition of smart pointers. In simple words, it's a type with values that may 
 be used like pointers, but with the added benefit of automated memory management. 
@@ -49,9 +49,9 @@ The unique pointer is declared as in the code below:
    
    std::unique_ptr<int> ptr(new int); // allocation of new int on heap
 
-As it was mentioned, the smart pointer that has automated memory management will be destroyed 
+As it was mentioned, the smart pointer has automated memory management. It will be destroyed 
 at the end of the code-block in which it was declared in. Remember, the object it points to will 
-be also destructed.[[[this paragraph was difficult to edit. Please check edits for accuracy]]]
+be also destructed.
 
 .. code-block:: cpp
    
@@ -66,8 +66,7 @@ Usage
 =====
 
 Generally, :code:`std::unique_ptr` is used when you want your object to last only as long as a 
-single owning reference to it does. Let's look at some practical example demonstrate[[[is there more than one example or just one? is it "some practical examples to demonstrate..." or "a practical example to demonstrate..."?]]]
-:code:`std::unique_ptr` usage and some of its functions.
+single owning reference to it does. Let's look at a practical example demonstrate :code:`std::unique_ptr` usage and some of its functions.
 
 .. code-block:: cpp
    
@@ -117,8 +116,7 @@ method:
 std::make_unique
 ================
 
-To make the creation of unique pointers easier and safer, the :code:`was std::make_unique` function constructs an object of a given type and wraps it in :code:`std::unique_ptr`. See 
-the code below:
+To make the creation of unique pointers easier and safer, the :code:`std::make_unique` function constructs an object of a given type and wraps it in :code:`std::unique_ptr`. See the code below:
 
 .. code-block:: cpp
    
@@ -246,15 +244,12 @@ remains active until the weak counter reaches zero as well.
 Usage
 =====
 
-Why would we even use it? [[[it = smart pointer? should it say "Why would we even use a smart pointer"?]]] 
+Why would we even use a weak pointer?
 
+Generally, weak pointers are used when you do want to refer to your object from multiple places, and also do not want your object to be de-allocated until all these references are themselves gone.
 
-Generally, smart pointers are used[[[is this accurate?]]] when you do want to refer to your object from multiple places, and also do not want 
-your object to be de-allocated until all these references are themselves gone.
-
-Sometimes, an object has to store a way to access[[[not clear on what "store a way to access" means. Can it be "...an object needs to access the shared_ptr's underlying object..."?]]] the shared_ptr's underlying object without 
-increasing the reference count. Often, this problem[[[not sure what the "problem" is. Is it "increasing the reference count"? If it is, suggest making it clear in the first sentence that the action causes a problem and possibly why. Or just change "problem" to "issue."]]] occurs when shared_ptr objects have cyclic 
-references. Let's see the example.
+Sometimes, you has to store the shared_ptr's underlying object without increasing the reference count. 
+Often, this issue occurs when shared_ptr objects have cyclic references. Let's see the example.
 
 .. code-block:: cpp
    
@@ -284,9 +279,7 @@ The problem with the code above is that destructors will not be called and
 there is a memory leak. Keep in mind that the managed object of the shared pointer
 is deleted when the reference count reaches zero — let's analyze the situation.
 
-When :code:`BB` goes out of scope, it will be not be deleted since it still manages the object 
-pointed by[[[is "by" the right/best word? Should it be "at"?]]] :code:`AA.B_ptr`. A similar situation is with the :code:`AA` — if it goes out of scope, 
-its managed object is not deleted either because it is pointed by[[[is "by" the right/best word?]]] :code:`BB.A_ptr`.
+When :code:`BB` goes out of scope, it will be not be deleted since it still manages the object to which :code:`AA.B_ptr` points. A similar situation is with the :code:`AA` — if it goes out of scope, its managed object is not deleted either because :code:`BB.A_ptr` points to it.
 
 This problem can be solved with a weak pointer.
 
@@ -316,8 +309,7 @@ This problem can be solved with a weak pointer.
    }
 
 Now, both destructors are called when :code:`BB` goes out of scope. It can be destructed
-as it is pointed by[[[is "by" the right/best word? Should it be "at" or "to"?]]] a weak pointer and later, :code:`AA` can be destructed 
-as it is pointing to nothing.
+as a weak pointer pointed to it and later, :code:`AA` can be destructed as it is pointing to nothing.
 
 It doesn't matter whether :code:`AA` or :code:`BB` goes out of scope first. When :code:`BB` goes out 
 of scope, it calls for the destruction of all managed objects, like :code:`A_ptr`. 

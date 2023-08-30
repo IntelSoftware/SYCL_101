@@ -22,12 +22,12 @@ Hashing function
 ================
 
 As stated previously, in a hash table, a new index is processed using the key 
-and the corresponding[[[the corresponding what?]]] to this key value is stored in the index. This process 
+and the corresponding value to this key is stored in the index. This process 
 is called hashing and the function performing this operation is called **hashing function**.
 
 Here's an example.
 
-Please consider a hashing function as operation modulo[[[module?]]] 10 and a set of key-value pairs 
+Please consider a hashing function as operation mod 10 and a set of key-value pairs 
 to insert into hash table :code:`{{15, 25}, {23, 63}, {12, 22}, {48, 78}, {30, 0}}`.
 
 .. list-table:: 
@@ -82,7 +82,7 @@ This means that the positions in the hash table will be the following:
      - 
 
 As you can see, there's a good chance that more than one key value will compute the same index. 
-To solve this problem, in standard library values are stored in a buckets[[[should this be something like "in a standard library, values are stored in buckets" or " standard library values are stored in a bucket?]]] — so multiple values
+To solve this problem, in a standard library, values are stored in buckets — so multiple values
 can be under the same index.
 
 
@@ -109,7 +109,7 @@ Let's start with **std::unordered_set**. According to C++ reference:
     removal have average constant-time complexity.
 
 The most important aspect about std::unordered_set is that it contains 
-**unique objects**, which are type of[[[should this be "of type"?]]] **key** and average access time is **constant**.
+**unique objects**, which are of type **key** and average access time is **constant**.
 
 An example of a :code:`std::unordered_set` declaration is shown in the code below:
 
@@ -124,7 +124,7 @@ Please remember that the given values have to be unique.
    
    std::unordered_set<int> n {0, 1, 2, 3, 4};
 
-As in other standard containers, we can conduct on it operations[[[ok to say "we can conduct operations"?]]] like the following:
+As in other standard containers, we can conduct operations like the following:
 
 * size(),
 * insert(...),
@@ -141,7 +141,7 @@ Let's start with definition:
     removal have average constant-time complexity.
 
 This means that the only difference between :code:`std::unordered_set` and :code:`std::unordered_multiset` is
-that the second one allows[[[allows what to store? or should it be "...is allowed to store..."?]]] to store multiple the same keys.[[["store multiple keys"? or "store the same keys"?
+that the second one allows multiple keys to be stored.
 
 An example of the :code:`std::unordered_multiset` declaration is shown in code below:
 
@@ -168,7 +168,7 @@ According to C++ reference:
 This means that the most important information about :code:`std::unordered_map` is that it stores 
 **key-value pairs**, where **key is unique** and the average access time is **constant**.
 
-The code below shows an example of a :code:`std::unordered_map` declaration where key is of type int[[[use code on this?]]] and value is of type 
+The code below shows an example of a :code:`std::unordered_map` declaration where key is of type :code:`int` and value is of type 
 :code:`std::string`:
 
 .. code-block:: cpp
@@ -194,7 +194,7 @@ a lot in common. Let's look at the C++ reference definition:
 
 The only difference is that :code:`std::unordered_multimap` allows for keys to be repeated.
 
-The code below shows an example of a :code:`std::unordered_multimap` declaration where key is of type int[[[use code on this?]]] and value is of type 
+The code below shows an example of a :code:`std::unordered_multimap` declaration where key is of type :code:`int` and value is of type 
 :code:`std::string`:
 
 .. code-block:: cpp
