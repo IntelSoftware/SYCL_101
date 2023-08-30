@@ -1,5 +1,5 @@
-Why SYCL?
-#########
+2) Why SYCL?
+############
 
 .. toctree::
    :maxdepth: 2

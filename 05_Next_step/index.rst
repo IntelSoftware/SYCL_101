@@ -1,4 +1,4 @@
-Next step: SYCL Essentials
+5) Next step: SYCL Essentials
 ##########################
 
 .. toctree::

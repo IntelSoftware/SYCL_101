@@ -1,5 +1,5 @@
-Introduction to SYCL
-##########################
+SYCL 101
+########
 
 .. container:: tiles
 
@@ -15,9 +15,9 @@ Introduction to SYCL
             :alt: GitHub Logo
             :target: 01_Heterogeneous/index.rst
 
-            Why heterogeneous?
+            1- Heterogeneous Compute
 
-         Learn basic heterogeneous concepts and microprocessors architecture
+         Basic heterogeneous & architecture concepts  
 
    .. container:: tile
 
@@ -27,9 +27,9 @@ Introduction to SYCL
             :alt: PDF icon
             :target: 02_Why_SYCL/index.rst
 
-            Why SYCL?
+            2- Why SYCL?
 
-         Learn history, definition and benefits of SYCL.
+         Definition & benefits of SYCL
 
    .. container:: tile
 
@@ -39,9 +39,9 @@ Introduction to SYCL
             :alt: Pen icon
             :target: 03_Modern/index.rst
 
-            Modern c++ Primer
+            3- Modern C++
 
-         Learn basics of modern C++ needed to start working with SYCL.
+         Basics of modern C++ needed for SYCL
 
    .. container:: tile
 
@@ -51,9 +51,9 @@ Introduction to SYCL
             :alt: PDF icon
             :target: 04_SYCL_Conv_USM/index.rst
 
-            SYCL: Conventional vs. USM
+            4- Conventional vs. USM
 
-      SYCL: Conventional vs. USM
+         Conventional vs. USM
 
    .. container:: tile
 
@@ -63,9 +63,9 @@ Introduction to SYCL
             :alt: PDF icon
             :target: 05_Next_step/index.rst
 
-            Next step: SYCL Essentials
+            5- Next step: SYCL Essentials
 
-      Introduction to SYCL Essentials
+         Introduction to SYCL Essentials
 
 .. toctree::
    :hidden:

@@ -27,7 +27,7 @@ Here is the solution for the parallel_for hands-on exercise proposed in the prev
                 });
             });
 
-        host_accessor result(A);        // host_accesor[[accessor?]] is the object that allows 
+        host_accessor result(A);        // host_accessor is the object that allows 
                                         // the host to access the buffer memory
 
         for (int i = 0; i < size; i++)  // Print output
@@ -37,7 +37,7 @@ Here is the solution for the parallel_for hands-on exercise proposed in the prev
     }
 
 As mentioned before, the parallel_for is called from the handler. This 
-SYCL kernel function requires the **range** argument to be stablished: [[established?]]
+SYCL kernel function requires the **range** argument to be established:
 
 .. code-block:: cpp
 

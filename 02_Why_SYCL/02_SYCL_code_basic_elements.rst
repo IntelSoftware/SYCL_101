@@ -56,7 +56,7 @@ the 6th element of a 10-size vector using SYCL specification within C++:
                 });
             });
 
-        host_accessor result(A);        // host_accesor[[misspell? accessor]] is the object that allows 
+        host_accessor result(A);        // host_accessor is the object that allows 
                                         // the host to access the buffer memory
 
         for (int i = 0; i < size; i++)  // Print output
@@ -97,7 +97,7 @@ The command group needs the **accessor**, A_acc,
 
 that is the object that efficiently accesses the buffer elements.
 
-Inside of the command group as well, it resides [[need word here. is "in" correct? Does A_acc reside in the SYCL kernel function?]]the specific **SYCL kernel function**, 
+Inside of the command group as well, it resides the specific **SYCL kernel function**, 
 which is **single_task** in this case. Note that single_task is provided
 by the handler, h:
 
@@ -167,7 +167,7 @@ function provided by the handler, h.
 
 
 
-        host_accessor result(A);        // host_accesor[[accessor?]] is the object that allows 
+        host_accessor result(A);        // host_accessor is the object that allows 
                                         // the host to access the buffer memory
 
         for (int i = 0; i < size; i++)  // Print output

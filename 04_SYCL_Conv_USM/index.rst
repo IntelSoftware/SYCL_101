@@ -1,5 +1,5 @@
-SYCL: Conventional vs. USM
-##########################
+4) Conventional vs. USM
+#############################
 
 .. toctree::
    :maxdepth: 2

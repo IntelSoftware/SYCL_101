@@ -8,15 +8,16 @@ Definition
 SYCL is a high-level single-source standard C++ programming model that can 
 target a wide range of heterogeneous platforms.
 
-SYCL is an industry-driven standard [[added em dash here and after 2014]]—developed by Kronos Group [[add footnote 1? Is there code that can link to the endnote below?]]and 
-announced in March 2014—that allows data parallelism for heterogeneous 
+SYCL is an industry-driven standard —developed 
+by Khronos Group and announced in March 2014— that allows data parallelism for heterogeneous 
 systems based on C++ 17. It is a royalty-free, cross-platform abstraction 
 layer that enables the development of applications and frameworks with 
 the portability and efficiency of OpenCL, while providing a user interface 
 that's flexible and easy to use.
 
-SYCL standard [[is designed to be both highly portable and highly efficient
-and >> This phrase is redundant to the content in previous paragraph. Suggest removing.]] allows applications to offload compute kernels and [[data transfer >> Should this say "tranfer data"?]] to OpenCL-enabled accelerators such as GPUs, FPGAs, and other processors.
+SYCL standard is designed to be both highly portable and highly efficient
+and allows applications to offload compute kernels and data transfer to 
+OpenCL-enabled accelerators such as GPUs, FPGAs, and other processors.
 
 SYCL Features
 --------------
@@ -45,10 +46,10 @@ performance while fostering a vibrant community of SYCL users and providers.  Ne
 specifications are being released to accommadate new features and technological advances.
 The SYCL specifications that have been published as of today are:
 
-- SYCL 1.2 Specification released on May 8, 2015: It is considered obsolete.
-- SYCL 2.2: It was a provisional specification published in February 2016 that is considered deprecated.
-- SYCL 1.2.1 Specification released on April 27, 2020. [[if this was released after SYCL 2.2, should the version number be higher, 2.2.1?]]
-- SYCL 2020 Specification revision 7 released on April 18, 2023.
+- SYCL 1.2: Specification released in May of 2015: It is considered obsolete.
+- SYCL 2.2: It was a provisional specification published in 2016 that is considered deprecated.
+- SYCL 1.2.1: Its latest revision was released on April 27, 2020.
+- SYCL 2020: Specification revision 7 released on April 18, 2023.
 
 The SYCL 2020 specification marks a significant leap forward that features over 40 new improvements, such as:
 
@@ -64,7 +65,7 @@ The SYCL 2020 specification marks a significant leap forward that features over 
 Implementations
 ----------------
 
-A SYCL implementation refers to a software [[implementation >> different word? Application or execution]] of the SYCL programming model. 
+A SYCL implementation refers to a software version or revision of the SYCL programming model. 
 It consists of the necessary tools, libraries, and runtime support that enable developers
 to write SYCL code and execute it on compatible hardware platforms.
 
@@ -84,4 +85,4 @@ These are some of the popular SYCL implementations that are available:
 
 
 
-[[add footnote 1]]Source: Kronos (https://www.khronos.org/sycl/)
+* Source: Khronos (https://www.khronos.org/sycl/)

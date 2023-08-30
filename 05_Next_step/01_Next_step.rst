@@ -78,5 +78,5 @@ to transform you into a proficient, confident, and innovative SYCL
 programmer. Your future in parallel programming awaits, seize the 
 opportunity now. It is totally FREE!!
 
-'**SYCL Essentials** <https://www.intel.com/content/www/us/en/developer/tools/oneapi/training/dpc-essentials.html>'_.
+**Start SYCL Essentials** `here. <https://www.intel.com/content/www/us/en/developer/tools/oneapi/training/dpc-essentials.html>`_
 

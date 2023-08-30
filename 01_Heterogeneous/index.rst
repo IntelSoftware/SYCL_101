@@ -1,5 +1,5 @@
-Why Heterogeneous Compute
-#########################
+1) Heterogeneous Compute
+########################
 
 .. toctree::
    :maxdepth: 2
