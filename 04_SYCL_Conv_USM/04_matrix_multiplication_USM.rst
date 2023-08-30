@@ -2,18 +2,18 @@ SYCL-USM: matrix_multiplication
 ===============================
 
 Matrix multiplication, often referred to as matmul, is a fundamental 
-operation in linear algebra and plays a crucial role in various 
+operation in linear algebra; it plays a crucial role in various 
 scientific and engineering applications, such as image processing, 
 simulation, and machine learning. The operation involves taking the 
 dot product of rows from one matrix with the columns of another matrix 
 to produce a resulting matrix. While conceptually simple, efficient 
 computation of matrix multiplication becomes a challenge when dealing 
 with large matrices due to the inherent parallelism that can be leveraged 
-for optimization. This is where SYCL (pronounced "sickle"), an open 
-standard developed by the Khronos Group, comes into play. SYCL is a 
+for optimization. This is where SYCL (pronounced "sickle")[[[this term has ben used previous many times, no need to define here, delete]]], an open 
+standard developed by the Khronos Group,[[[suggest deleting this phrase about Khronos group and/or adding it to the Introduction.]]] comes into play. SYCL is a 
 programming model and API that enables developers to write code that 
 can be executed on a variety of heterogeneous platforms, including CPUs, 
-GPUs, FPGAs, and other accelerators, using a single-source approach. 
+GPUs, FPGAs, and other accelerators, using a single-source approach.[[[I'm not clear on how "single-source approach" fits into this sentence. Instead of hanging here at the end, seems like it would work better earkier in the sentence, but I'm not sure Wwhat or who performs the single-source approach]]]
 SYCL abstracts the complexities of heterogeneous hardware and facilitates 
 the development of high-performance code while maintaining portability 
 across different devices.
@@ -23,14 +23,14 @@ potential to harness the power of various computing devices while
 maintaining a unified codebase. By expressing parallelism through SYCL's 
 constructs, developers can achieve optimized matrix multiplication 
 routines that efficiently distribute computation across available 
-resources. In the following sections, we will delve into the principles 
-of using SYCL for matrix multiplication, exploring how the SYCL programming 
+resources. In the following sections[[[Which sections does this refer to? the next section is the Conclusion. Actually, much of this sounds like it belongs in the Introduction.]]], we will delve into the principles 
+of using SYCL for matrix multiplication and explore how the SYCL programming 
 model can be utilized to implement and optimize matmul algorithms for 
 diverse hardware architectures. We will discuss key SYCL concepts, such 
-as buffers, accessors, kernels, and queues, that are essential for 
+as buffers, accessors, kernels, and queues that are essential for 
 constructing high-performance and portable matrix multiplication solutions. 
 Through this exploration, we aim to showcase the advantages of utilizing 
-SYCL in tackling the computational challenges posed by matrix multiplication 
+SYCL to tackle the computational challenges posed by matrix multiplication 
 on modern heterogeneous systems.
 
 
@@ -87,7 +87,7 @@ on modern heterogeneous systems.
         return 0;
     }
 
-having the following output:
+The code above produces the following output:
 
 .. code-block:: c++
 
