@@ -6,7 +6,7 @@ for heterogeneous computing. You will learn how to use various Parallel
 STL algorithms for heterogeneous computing and also look at 
 gamma-correction sample code that uses oneDPL.
 
-Learning Objectives: 
+Learning Objectives 
 ********************
 
 * Explain oneDPL Parallel API Algorithms with examples.
