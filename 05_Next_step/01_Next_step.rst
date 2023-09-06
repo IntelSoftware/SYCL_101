@@ -1,19 +1,19 @@
 Introduction to SYCL Essentials
 ###############################
 
-Congratulations on embarking on your fist SYCL journey with "SYCL 101"!!,
+Congratulations on embarking on your first SYCL journey with "SYCL 101"!!,
 your gateway to the world of SYCL programming. As you delve into the 
 foundational aspects of SYCL, you're building a strong base that will 
 empower you to explore the endless possibilities of parallel programming. 
 
 Now that you have completed the SYCL 101 course, **why stop here?**
-Are you Looking to Elevate Your SYCL Skills? Join **SYCL Essentials!**
+Are you Looking to Elevate Your SYCL Skills[[[why title case? If there's an actual section called this, maybe add a link to this title.]]]? Join **SYCL Essentials!**
 
 **SYCL Essentials** is the next FREE step in your SYCL education. As you're 
 starting to grasp the basics, you'll soon realize the incredible 
 potential SYCL holds for optimizing code performance, harnessing 
 parallelism, and unleashing the full power of modern hardware.  You will 
-have access to the most advanced Intel CPUs and GPUs and you will learn how 
+have access to the most advanced Intel® CPUs and GPUs, and you will learn how 
 to target them with your code!
 SYCL Essentials is a more advanced course that has been meticulously crafted 
 to take your skills to the next level and open doors to a deeper 
@@ -30,14 +30,14 @@ techniques that facilitate code organization and maintainability, ensuring
 your SYCL programs are not only powerful but also elegant.
 
 Module 3: DPCPP Unified Shared Memory: Learn how to seamlessly share data 
-between devices, improving data access efficiency and enhancing performance 
+between devices to improve data access efficiency and enhance performance 
 across your applications.
 
 Module 4: DPCPP Sub Groups: Explore the intricacies of sub-groups, a 
 vital concept in SYCL that enables more fine-grained control over 
 work-item execution, leading to optimized parallel processing.
 
-Module 5: Intel Advisor: Master the use of Intel Advisor to analyze 
+Module 5: Intel® Advisor: Master the use of Intel Advisor to analyze 
 and fine-tune your SYCL code, ensuring you're making the most of your 
 hardware's capabilities.
 
@@ -68,8 +68,8 @@ If "SYCL 101" has sparked your curiosity and ignited your passion for
 SYCL programming, "SYCL Essentials" is the natural progression that 
 will catapult your skills to new heights. 
 
-In the next sections we present the modules descriptions along with their 
-Learning objectives more in detail. Take a look at them and get ready 
+In the next sections, we present descriptions for the modules along with their 
+learning objectives more in detail. Take a look at them and get ready 
 to tackle complex challenges, write code that's not just 
 functional but exceptional, and become a true SYCL expert!
 
