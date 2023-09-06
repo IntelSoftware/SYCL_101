@@ -1,15 +1,15 @@
-Module 11: Intel Distribution for GDB
+Module 11: Intel® Distribution for GDB
 #####################################
 
-This module demonstrates how to use the Intel® Distribution for GDB to 
+This module demonstrates how to use Intel® Distribution for GDB to 
 debug kernels running on GPUs.
 
-Learning Objectives: 
+Learning Objectives 
 ********************
 
-* To show how the Intel® Distribution for GDB can help you debug GPU kernels.
+* Show how Intel Distribution for GDB can help you debug GPU kernels.
 
-* Run the Intel Distribution for GDB.
+* Run Intel Distribution for GDB.
 
 * Understand inferiors, threads, and SIMD lanes as shown in GDB.
 
