@@ -39,8 +39,8 @@ extensions = ['myst_parser',
     'sphinx.ext.mathjax',
     'sphinx.ext.ifconfig',
     'sphinx.ext.viewcode',
-    'sphinx.ext.githubpages',
-    'sphinx_new_tab_link',]   # to open links in a new tab
+    'sphinx.ext.githubpages',]
+    # 'sphinx_new_tab_link',]   # to open links in a new tab
 
 pdf_documents = [('index', u'rst2pdf', u'Sample rst2pdf doc', u'Intel Corporation'),]
 

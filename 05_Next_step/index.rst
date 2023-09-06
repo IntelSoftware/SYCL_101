@@ -1,5 +1,5 @@
 5) Next step: SYCL Essentials
-##########################
+##############################
 
 .. toctree::
    :maxdepth: 2

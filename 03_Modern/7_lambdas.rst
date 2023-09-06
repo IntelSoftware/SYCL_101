@@ -31,7 +31,7 @@ Let's take a look at a few simple lambda examples:
 
 
 Parts of the lambda expression
-**************************
+********************************
 
 There are six basic parts of a lambda expression:
 
@@ -49,7 +49,7 @@ The image below shows them in a practical example.
 Capture clause
 ==============
 
-**Capture clause** is also known[[[what is also known? the capture clause?]]]] as **capture list** or **lambda-introducer**. It is the beginning of the 
+**Capture clause** is also called **capture list** or **lambda-introducer**. It is the beginning of the 
 lambda expression; it specifies which variables are captured and whether the capture 
 is by value or by reference. Examples of the capture clause are as follows:
 
@@ -96,7 +96,7 @@ Parameter list
 
 Lambdas can capture variables and accept *input parameters*. A **parameter list** is optional 
 and, in most aspects, resembles the parameter list for a function. Let's see the same simple code in 
-a form of function[[[is this the correct term? should it be "function form" as used in code/line 211 below?]]] and lambda expression.
+a function form and lambda expression.
 
 .. code-block:: cpp
    
@@ -107,7 +107,7 @@ a form of function[[[is this the correct term? should it be "function form" as u
    auto lambdaAdd = [](int x, int y) { return x + y; };
 
 In lambdas, it's possible to use the :code:`auto` keyword as the type specifier in a 
-parameter list it it the type is generic.[[[not sure about this. is it something like "...list if the type is generic."?]]] It can also take another lambda expression as an argument.
+parameter list if the type is generic. It can also take another lambda expression as an argument.
 
 .. code-block:: cpp
    
@@ -193,7 +193,7 @@ together with information that includes whether the number is even or odd. The v
    
    std::vector<int> v {1, 2, 3, 4};
 
-Now, we can prepare the function printing number and see[[[I added verb. is "see" the best one?]]] the :code:`is even` or :code:`is odd`.
+Now, we can prepare the function printing number and phrase 'is even' or 'is odd'.
 
 .. code-block:: cpp
    

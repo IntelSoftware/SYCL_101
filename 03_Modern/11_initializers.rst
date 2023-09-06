@@ -11,7 +11,7 @@ Introduction
 ************
 
 There are many situations when we need to check the value returned by a function or perform 
-conditional operations based on this value. Let's look at the example pseudo-code below:
+conditional operations based on the value of the function. Let's look at the example pseudo-code below:
 
 .. code-block:: cpp
    
@@ -32,8 +32,8 @@ There is nothing wrong with this code, but it can be improved in specific situat
 As shown in the example, the variable :code:`var` is used only for this if-else 
 statement. At the same time, it leaks into the surrounding scope. In that case, we need to make sure to not mix it up with other variables.
 
-Also, if the compiler can explicitly know that this variable will only be used there, it may 
-optimize the code better.[[[Does this mean it will optimize the code better than it did before? seems redundant, suggest deleting "better"]]]
+Also, if the compiler can explicitly know that this variable will only be used there, it may potentially produce more
+optimize the code.
 
 Syntax
 *******

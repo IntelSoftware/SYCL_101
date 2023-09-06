@@ -1,5 +1,5 @@
-Nested Namespaces with Inlined?????? Variables Explanation [[[I think you could do without "Explanation"]]]
-##################################################################
+Nested Namespaces
+##################
 
 This chapter talks about C++ namespaces. You will learn the following:
 
@@ -14,9 +14,8 @@ The **namespace** is a declarative region that provides scope to the identifiers
 functions, and variables. Namespaces are usually used to organize the code into logical groups and to avoid name collisions. It can be especially important when you're using different 
 libraries.
 
-One of the examples of the namespace scope is the C++ Standard Template Library (STL)[[[as used in article 12]]], where all the classes, 
-methods, and templates are declared. You can find it in the code[[[I added "it" to this phrase, but what is "it"? The namespace?]]] :code:`std::` before multiple class or 
-function declarations form[[[from?]]] STL in C++. Sometimes you can also find the directive
+One of the examples of the namespace scope is the C++ Standard Template Library (STL) as used in article 12, where all the classes, 
+methods, and templates are declared. You can find STL namespace in the code :code:`std::` before multiple class or function declarations from STL in C++. Sometimes you can also find the directive 
 :code:`using namespace std;`.
 
 Defining a namespace
@@ -64,7 +63,7 @@ another one. The resolution of namespace variables is hierarchical. The syntax i
    }
 
 As you can see, those declarations take a lot of space and sometimes it's difficult to track all 
-of the levels of the namespaces declared. But in modern C++, nested namespaces can be also write simpler,[[[does this work? "...writing nested namespaces can be simplified."]]]
+of the levels of the namespaces declared. But in modern C++, writing nested namespaces can be simplified.
 as shown below:
 
 .. code-block:: cpp

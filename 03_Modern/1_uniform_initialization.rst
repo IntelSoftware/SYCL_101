@@ -18,7 +18,7 @@ Expression initialization
 To better understand the concept, let's get familiar with the following terms:
 
 * **direct initialization**, which uses an explicit set of constructor arguments to create an object.
-* **copy initialization*, which uses another object to initialize an object.
+* **copy initialization**, which uses another object to initialize an object.
 
 The code below shows both direct and copy initialization:
 

@@ -1,5 +1,5 @@
 Standard Template Library (STL) on Concurrent and Parallel Algorithms
-##################################################################
+#######################################################################
 
 This chapter talks about concurrent and parallel STL algorithms. You will learn the following:
 
@@ -36,8 +36,7 @@ Execution policies
 *******************
 
 To use the parallel algorithms from STL, you need to include the :code:`<execution>` 
-header. The next step is to invoke the chosen algorithm with an execution policy, which allows you to specify how the algorithm should be executed. In C++, the 
-following execution policies are available:
+header. The next step is to invoke the chosen algorithm with an execution policy, which allows you to specify how the algorithm should be executed. In C++, the following execution policies are available:
 
 * sequenced_policy (and the corresponding global object :code:`std::execution::seq`) — sequential 
   execution of the algorithm. 
@@ -52,13 +51,12 @@ Let's see examples of the use of all the policies.
 
 .. note::
 
-[[[I attempted to edit here and messed up the code and subsequent font ("Note" disappeared and text is italic). Can you please fix?]]]We will be using small sets of data just to show how the policies work, but remember 
-   that the benefits of using policies usually comes from dealing with large amounts of data.
+   We will be using small sets of data just to show how the policies work, but remember that the benefits of using policies usually comes from dealing with large amounts of data.
 
 sequenced_policy
 =================
 
-For sequential policy[[[sequenced_policy? See "parallel_policy" below.]]], we will use the :code:`std::sort` algorithm.
+For sequenced_policy, we will use the :code:`std::sort` algorithm.
 
 .. code-block:: cpp
    
@@ -80,7 +78,7 @@ For sequential policy[[[sequenced_policy? See "parallel_policy" below.]]], we wi
       return 0;
    }
 
-Using sequential policy[[[sequenced_policy?]]] has several advantages that include the following:
+Using sequenced_policy has several advantages that include the following:
 
 * It is ideal for small tasks (when the parallel overhead doesn't exist).
 * Data races can be avoided.
