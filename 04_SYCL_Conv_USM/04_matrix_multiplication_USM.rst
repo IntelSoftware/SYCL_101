@@ -9,11 +9,10 @@ dot product of rows from one matrix with the columns of another matrix
 to produce a resulting matrix. While conceptually simple, efficient 
 computation of matrix multiplication becomes a challenge when dealing 
 with large matrices due to the inherent parallelism that can be leveraged 
-for optimization. This is where SYCL (pronounced "sickle")[[[this term has ben used previous many times, no need to define here, delete]]], an open 
-standard developed by the Khronos Group,[[[suggest deleting this phrase about Khronos group and/or adding it to the Introduction.]]] comes into play. SYCL is a 
+for optimization. This is where SYCL comes into play. SYCL is a 
 programming model and API that enables developers to write code that 
 can be executed on a variety of heterogeneous platforms, including CPUs, 
-GPUs, FPGAs, and other accelerators, using a single-source approach.[[[I'm not clear on how "single-source approach" fits into this sentence. Instead of hanging here at the end, seems like it would work better earkier in the sentence, but I'm not sure Wwhat or who performs the single-source approach]]]
+GPUs, FPGAs, and other accelerators, using a single-source approach.
 SYCL abstracts the complexities of heterogeneous hardware and facilitates 
 the development of high-performance code while maintaining portability 
 across different devices.
@@ -23,16 +22,8 @@ potential to harness the power of various computing devices while
 maintaining a unified codebase. By expressing parallelism through SYCL's 
 constructs, developers can achieve optimized matrix multiplication 
 routines that efficiently distribute computation across available 
-resources. In the following sections[[[Which sections does this refer to? the next section is the Conclusion. Actually, much of this sounds like it belongs in the Introduction.]]], we will delve into the principles 
-of using SYCL for matrix multiplication and explore how the SYCL programming 
-model can be utilized to implement and optimize matmul algorithms for 
-diverse hardware architectures. We will discuss key SYCL concepts, such 
-as buffers, accessors, kernels, and queues that are essential for 
-constructing high-performance and portable matrix multiplication solutions. 
-Through this exploration, we aim to showcase the advantages of utilizing 
-SYCL to tackle the computational challenges posed by matrix multiplication 
-on modern heterogeneous systems.
-
+resources. In the code below we present the matrix multiplication code in
+SYCL format using USM:
 
 .. code-block:: c++
 
@@ -51,22 +42,22 @@ on modern heterogeneous systems.
     int main() {
         queue q;
 
-        //# STEP 1 : Get device information
+        // STEP 1 : Get device information
         std::cout << "Device : " << q.get_device().get_info<info::device::name>() << "\n";
 
-        //# STEP 2 : Initialize vectors in shared memory
+        // STEP 2 : Initialize vectors in shared memory
         int *data1 = malloc_shared<int>(N * N, q);
         int *data2 = malloc_shared<int>(N * N, q);
         int *dataR = malloc_shared<int>(N * N, q);
 
-        //# STEP 3 : Asign values to vectors
+        // STEP 3 : Asign values to vectors
         for (int i = 0; i < N * N; i++) {
             data1[i] = 10;
             data2[i] = 20;
             dataR[i] =  0;
         }
 
-        //# STEP 4 : Proceed with the calculation
+        // STEP 4 : Proceed with the calculation
         q.parallel_for(range<2>{N,N}, [=](item<2> item){
             const int j = item.get_id(0);
             const int i = item.get_id(1);
@@ -75,7 +66,7 @@ on modern heterogeneous systems.
                 dataR[i*N+j] += data1[i*N+k] * data2[k*N+j];
         }).wait();
 
-        //# STEP 5 : Print output values
+        // STEP 5 : Print output values
         for (int i = 0; i < N * N; i++) std::cout << dataR[i] << " ";
         std::cout << "\n";
 

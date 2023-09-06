@@ -7,7 +7,7 @@ foundational aspects of SYCL, you're building a strong base that will
 empower you to explore the endless possibilities of parallel programming. 
 
 Now that you have completed the SYCL 101 course, **why stop here?**
-Are you Looking to Elevate Your SYCL Skills[[[why title case? If there's an actual section called this, maybe add a link to this title.]]]? Join **SYCL Essentials!**
+Would you like to elevate your SYCL skills? Join **SYCL Essentials!**
 
 **SYCL Essentials** is the next FREE step in your SYCL education. As you're 
 starting to grasp the basics, you'll soon realize the incredible 
