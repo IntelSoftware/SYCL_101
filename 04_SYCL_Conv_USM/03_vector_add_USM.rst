@@ -1,18 +1,18 @@
 SYCL-USM: vector_add
 ====================
 
-In this section we explore vector addition using USM within the SYCL 
+In this section, we explore vector addition using USM within the SYCL 
 framework. USM enables memory regions that are accessible from 
 both the host and the devices, reducing the need for explicit 
 data transfers and simplifying memory management. This approach 
 not only streamlines code but also allows developers to focus 
 on algorithmic design rather than memory-related intricacies. 
-The code sample below presents the steps of using USM with SYCL for
-vector_add which it offers a more intuitive and efficient 
+The code sample below presents the steps for using USM with SYCL for
+vector_add, which offers a more intuitive and efficient 
 way to harness the capabilities of heterogeneous computing resources.
 
-Note that with the use of USM there is no need of defining buffers,
-handlers and accessors. In this case the malloc_shared function of USM is a sufficient
+Note that using USM eliminates the need to define buffers,
+handlers, and accessors. In this case, the malloc_shared function of USM is sufficient
 to allocate and manage memory access:
 
 .. In this discussion, we delve into the world of vector addition 
@@ -24,7 +24,7 @@ to allocate and manage memory access:
 .. By the end of this exploration, you'll have a solid understanding 
 .. of how to harness the power of USM in SYCL to efficiently perform 
 .. vector addition and lay the foundation for more intricate parallel 
-.. algorithms.
+.. algorithms.[[[these 2 paragraphs don't show up in the Preview mode. Is it from a different section (Intro?) or possibly an earlier draft? I edited anyway.]]]
 
 .. vector_add:
 .. --------------
@@ -80,16 +80,16 @@ to allocate and manage memory access:
       return 0;
    }
 
-In this example we have used malloc_shared which is appropriate when
-data movement happens implicitly between host and device.
+In this example, we used malloc_shared, which is appropriate when
+data movement happens implicitly between the host and device.
 
-Additionally USM offers **malloc_device** and **malloc_host** that
+Additionally, USM offers **malloc_device** and **malloc_host**, which
 are approches to tackle memory management access by the host or device
-explictly but this course does not cover them for now.
+explicitly, but this course does not cover them for now.
 
-So when to use USM versus the conventional SYCL? As a summary, the 
-use of USM is a good approach to consider when:
+So, when should you use USM versus the conventional SYCL? In summary, 
+using USM is a good approach to consider when:
 
-- The code has many pointers that are susceptible to future changes
+- The code has many pointers that are susceptible to future changes.
 
-- When it is expected that the application will gain complexity over time
+- When it is expected that the application will gain complexity over time.
