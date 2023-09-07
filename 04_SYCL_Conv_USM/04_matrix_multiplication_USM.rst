@@ -5,9 +5,9 @@ Matrix multiplication, often referred to as matmul, is a fundamental operation i
 
 In this context, leveraging SYCL for matrix multiplication offers the potential to harness the power of various computing devices while maintaining a unified codebase. By expressing parallelism through SYCL's constructs, developers can achieve optimized matrix multiplication routines that efficiently distribute computation across available resources. In the code below we present the matrix multiplication code in SYCL format using USM:
 
-.. code-block:: c++
- #include <CL/sycl.hpp>
-    
+.. code-block:: cpp
+
+    #include <CL/sycl.hpp>
     using namespace sycl;
 
     static const int N = 3;
@@ -53,7 +53,7 @@ In this context, leveraging SYCL for matrix multiplication offers the potential 
 
 The code above produces the following output:
 
-.. code-block:: c++
+.. code-block:: cpp
 
     Device : Intel(R) UHD Graphics [0x9a60]
     600 600 600 600 600 600 600 600 600 

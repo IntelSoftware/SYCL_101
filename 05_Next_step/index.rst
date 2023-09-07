@@ -5,6 +5,8 @@
    :maxdepth: 2
 
    01_Next_step.rst
+   01_SYCL_Essentials_modules.rst
+   02_SYCL_Essentials_learning_objectives.rst
    Module_01.rst
    Module_02.rst
    Module_03.rst
