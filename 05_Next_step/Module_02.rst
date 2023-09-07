@@ -1,10 +1,7 @@
 Module 2: DPCPP Program Structure
 #################################
 
-This module demonstrates basic **SYCL code anatomy** and 
-program structure. You will learn about important **SYCL classes** and 
-different types of kernels. You will also learn about 
-**buffer accessor memory model** and synchronizations when using buffers.
+This module demonstrates basic **SYCL code anatomy** and program structure. You will learn about important **SYCL classes** and different types of kernels. You will also learn about **buffer accessor memory model** and synchronizations when using buffers.
 
 Learning Objectives 
 ********************

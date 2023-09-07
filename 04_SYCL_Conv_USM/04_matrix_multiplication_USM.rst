@@ -1,39 +1,12 @@
 SYCL-USM: matrix_multiplication
 ===============================
 
-Matrix multiplication, often referred to as matmul, is a fundamental 
-operation in linear algebra; it plays a crucial role in various 
-scientific and engineering applications, such as image processing, 
-simulation, and machine learning. The operation involves taking the 
-dot product of rows from one matrix with the columns of another matrix 
-to produce a resulting matrix. While conceptually simple, efficient 
-computation of matrix multiplication becomes a challenge when dealing 
-with large matrices due to the inherent parallelism that can be leveraged 
-for optimization. This is where SYCL comes into play. SYCL is a 
-programming model and API that enables developers to write code that 
-can be executed on a variety of heterogeneous platforms, including CPUs, 
-GPUs, FPGAs, and other accelerators, using a single-source approach.
-SYCL abstracts the complexities of heterogeneous hardware and facilitates 
-the development of high-performance code while maintaining portability 
-across different devices.
+Matrix multiplication, often referred to as matmul, is a fundamental operation in linear algebra; it plays a crucial role in various scientific and engineering applications, such as image processing, simulation, and machine learning. The operation involves taking the dot product of rows from one matrix with the columns of another matrix to produce a resulting matrix. While conceptually simple, efficient computation of matrix multiplication becomes a challenge when dealing with large matrices due to the inherent parallelism that can be leveraged for optimization. This is where SYCL comes into play. SYCL is a programming model and API that enables developers to write code that can be executed on a variety of heterogeneous platforms, including CPUs, GPUs, FPGAs, and other accelerators, using a single-source approach. SYCL abstracts the complexities of heterogeneous hardware and facilitates the development of high-performance code while maintaining portability across different devices.
 
-In this context, leveraging SYCL for matrix multiplication offers the 
-potential to harness the power of various computing devices while 
-maintaining a unified codebase. By expressing parallelism through SYCL's 
-constructs, developers can achieve optimized matrix multiplication 
-routines that efficiently distribute computation across available 
-resources. In the code below we present the matrix multiplication code in
-SYCL format using USM:
+In this context, leveraging SYCL for matrix multiplication offers the potential to harness the power of various computing devices while maintaining a unified codebase. By expressing parallelism through SYCL's constructs, developers can achieve optimized matrix multiplication routines that efficiently distribute computation across available resources. In the code below we present the matrix multiplication code in SYCL format using USM:
 
 .. code-block:: c++
-
-    //==============================================================
-    // Copyright © Intel Corporation
-    //
-    // SPDX-License-Identifier: MIT
-    // =============================================================
-
-    #include <CL/sycl.hpp>
+ #include <CL/sycl.hpp>
     
     using namespace sycl;
 

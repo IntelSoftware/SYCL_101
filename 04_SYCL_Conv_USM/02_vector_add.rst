@@ -1,14 +1,6 @@
 SYCL-Conventional: vector_add
 =============================
-
-
-.. Introduction to codes:
-.. ----------------------
-
-In the following, we dissect the conventional vector addition technique. 
-This approach typically requires explicit memory management, 
-including allocating memory on the host and devices, copying 
-data between them, and synchronizing the operations.
+In the following, we dissect the conventional vector addition technique. This approach typically requires explicit memory management, including allocating memory on the host and devices, copying data between them, and synchronizing the operations.
 
 .. code-block:: cpp
 
@@ -62,9 +54,4 @@ data between them, and synchronizing the operations.
       return 0;
    }
 
-We can see that using the conventional approach with
-SYCL, the programmer is required to define the memory buffers,
-handlers, and accessors. While effective, this method can lead
-to intricate code and hinder productivity due to its manual 
-memory management requirements. In the next section, we present
-the same vector_add code sample approached with the use of USM.
+We can see that using the conventional approach with SYCL, the programmer is required to define the memory buffers, handlers, and accessors. While effective, this method can lead to intricate code and hinder productivity due to its manual memory management requirements. In the next section, we present the same vector_add code sample approached with the use of USM.

@@ -3,7 +3,7 @@ Move Semantics
 
 This chapter talks about move semantics. You will learn the following:
 
-#. What is move semantics?
+#. What are move semantics?
 #. What are the different value categories and when should they be used?
 #. What is universal reference T&&?
 #. How and why should std::move be used?
@@ -12,19 +12,16 @@ This chapter talks about move semantics. You will learn the following:
 Introduction
 ************
 
-Move semantics allows an object, under certain conditions, to take ownership of some other object's 
-external resources.
+Move semantics allows an object under certain conditions to take ownership of some other object's external resources.
 
 Value categories (glvalue and rvalue)
 **************************************
 
-In C++, every expression has a type and belongs to a specific **value category**. These are the basic 
-rules for a compiler to follow when creating, copying, and moving objects during expression evaluation.
+In C++, every expression has a type and belongs to a specific **value category**. These are the basic rules for a compiler to follow when creating, copying, and moving objects during expression evaluation.
 
 Here are some C++ expression value categories:
    
-* **glvalue** — Expression that has an identity; it's possible to determine if two expressions refer 
-  to the same entity.
+* **glvalue** — Expression that has an identity; it's possible to determine if two expressions refer to the same entity.
 * **rvalue** — Expression that can be moved from.
 * **lvalue** — Has an identity and can't be moved from.
 * **xvalue** — Has an identity and can be moved from.
@@ -45,8 +42,7 @@ Let's look at the lvalue and rvalue in the following example.
  
    foo(); // Result of foo call expr is an r-value
 
-Any name of variable, function, template parameter object, or data member is an lvalue. It's important to note that it doesn't matter how complex the expression is. As long as it maintains an identity,
-the expression is an lvalue.
+Any name of variable, function, template parameter object, or data member is an lvalue. It's important to note that it doesn't matter how complex the expression is. As long as it maintains an identity, the expression is an lvalue.
 
 The integer constants are *prvalues*, like in the code above — the result of a function call.
 
@@ -61,18 +57,13 @@ Let's imagine a function returning a :code:`int` value, like below:
       return 3;
    }
 
-In this case, :code:`returnValue()` returns the temporary number :code:`3`, which is a prvalue. Now, 
-we will try to assign the value to it, as shown below:
+In this case, :code:`returnValue()` returns the temporary number :code:`3`, which is a prvalue. Now, we will try to assign the value to it, as shown below:
 
 .. code-block:: cpp
    
    returnValue() = 17; // error
 
-We will receive an error: :code:`lvalue required as left operand of assignment`. That's because we 
-are trying to use the left operand of the assignment on prvalue. 
-
-But when we change the :code:`returnValue()` function to return a reference to an already existing memory 
-location, everything will work fine. See the code below:
+We will receive an error: :code:`lvalue required as left operand of assignment`. That's because we are trying to use the left operand of the assignment on prvalue. But when we change the :code:`returnValue()` function to return a reference to an already existing memory location, everything will work fine. See the code below:
 
 .. code-block:: cpp
    
@@ -86,38 +77,24 @@ location, everything will work fine. See the code below:
    
    returnValue() = 17; // works fine
 
-And even though the ability to return an lvalue may not seem intuitive, 
-it can be useful when implementing more advanced functions like overloaded operators.
+And even though the ability to return an lvalue may not seem intuitive, it can be useful when implementing more advanced functions like overloaded operators.
 
 lvalue-to-prvalue conversion
 ============================
 
-An lvalue may be converted to a prvalue. This is totally legal and occurs frequently. Let's look at 
-:code:`+operator` as an example. According to the C++ specification, it takes two prvalues as arguments 
-and returns a prvalue.
+An lvalue may be converted to a prvalue. This is totally legal and occurs frequently. Let's look at :code:`+operator` as an example. According to the C++ specification, it takes two prvalues as arguments and returns a prvalue.
     
 .. code-block:: cpp
    
    int x = 10, y=20;
    int z = x + y;
     
-:code:`x` and :code:`y` are lvalues, but the additional operator wants prvalues. 
-*How is it possible?* Because of an implicit lvalue-to-prvalue conversion. There are many more 
-operators performing similar conversions. 
-
-But what about the opposite — converting prvalue to lvalue? It is not possible due to the C++ design.
+:code:`x` and :code:`y` are lvalues, but the additional operator wants prvalues. *How is it possible?* Because of an implicit lvalue-to-prvalue conversion. There are many more operators performing similar conversions. But what about the opposite — converting prvalue to lvalue? It is not possible due to the C++ design.
 
 Universal references (&&)
 *************************
 
-One of the main features related to the rvalues introduced in C++11 was rvalue reference. Usually, 
-the :code:`&&` notation is known as a sytnax for rvalue reference. But it is not always true. 
-
-:code:`T&&` can hold both lvalue and rvalue references, which is called a **universal reference**.
-But remember that :code:`&&` only means a universal reference when type deduction is involved. In 
-other cases, we can assume that it means only an rvalue reference.
-
-Let's see it in code. We will start with a universal reference, as the :code:`T` is deducted.
+One of the main features related to the rvalues introduced in C++11 was rvalue reference. Usually, the :code:`&&` notation is known as a sytnax for rvalue reference. But it is not always true. :code:`T&&` can hold both lvalue and rvalue references, which is called a **universal reference**.  But remember that :code:`&&` only means a universal reference when type deduction is involved. In other cases, we can assume that it means only an rvalue reference.  Let's see it in code.  We will start with a universal reference, as the :code:`T` is deducted.
 
 .. code-block:: cpp
    
@@ -130,8 +107,7 @@ Now, let's move on to an rvalue reference, as there is no type deduction.
    
    void foo(std::string&& param);
 
-Finally, the last thing is to show the concept of prefect forwarding, which is when a universal reference can be 
-propagated, preserving the l-r 'valueness'. 
+Finally, the last thing is to show the concept of prefect forwarding, which is when a universal reference can be propagated, preserving the l-r 'valueness'. 
 
 .. code-block:: cpp
    
@@ -143,8 +119,7 @@ propagated, preserving the l-r 'valueness'.
       foo(std::forward<T>(param)); // l or r value depending on the param passed to `bar`
    }
 
-In this case, since both functions :code:`foo` and :code:`bar` are using a universal reference, :code:`foo` 
-will receive an l or r value, depending on the param passed to :code:`bar`.
+In this case, since both functions :code:`foo` and :code:`bar` are using a universal reference, :code:`foo` will receive an l or r value, depending on the param passed to :code:`bar`.
 
 std::move
 **********
@@ -153,18 +128,7 @@ Let's start by answering the question: What is :code:`std::move`?
 
 According to C++ Reference:
 
-   :code:`std::move` is used to indicate that an object t may be "moved from" (i.e., allowing the 
-   efficient transfer of resources from t to another object).
-   
-In other words, it is a way to efficiently transfer contents of an object to another, leaving the 
-source in a valid but undefined state. When you move a value from a register or 
-memory location to another place, the value on the source register or memory location is still there.
-
-And more formally, :code:`std::move` is a C++ Standard Library function that's defined in the :code:`<utility>` 
-header. It is used to cast an l-value reference to an r-value reference, which enables move semantics.
-
-Let's see an example. We will start with a declaration of the function 
-consuming the element.
+   :code:`std::move` is used to indicate that an object t may be "moved from" (i.e., allowing the efficient transfer of resources from t to another object).  In other words, it is a way to efficiently transfer contents of an object to another, leaving the source in a valid but undefined state. When you move a value from a register or memory location to another place, the value on the source register or memory location is still there.  And more formally, :code:`std::move` is a C++ Standard Library function that's defined in the :code:`<utility>` header. It is used to cast an l-value reference to an r-value reference, which enables move semantics.  Let's see an example. We will start with a declaration of the function consuming the element.
 
 .. code-block:: cpp
    
@@ -187,11 +151,9 @@ After those operations, the declared element :code:`element` is nullptr, as it w
 Move constructor and Rule of Five 
 *********************************
 
-:code:`std::move` is actually just a request to move. If the type of the object does not have a move constructor/assign-operator defined, the move operation will fall back to a copy. 
-In that case, we will not experience any benefits of using the move operation.
+:code:`std::move` is actually just a request to move. If the type of the object does not have a move constructor/assign-operator defined, the move operation will fall back to a copy. In that case, we will not experience any benefits of using the move operation.
 
-That is why it is important to know how to create a move constructor. At the same time, 
-in C++ we have something called **Rule of Five**, which is as follows:
+That is why it is important to know how to create a move constructor. At the same time, in C++ we have something called **Rule of Five**, which is as follows:
 
 #. If a class requires a user-defined destructor, a user-defined copy constructor, or a user-defined copy assignment operator, it almost certainly requires all three.
 #. Any class for which move semantics are desirable, it also needs to declare the move constructor and the move assignment operator.
@@ -204,8 +166,7 @@ Those result in creating five elements:
 #. user-defined move constructor
 #. user-defined move assignment operator
 
-Let's show it in the example. Imagine a class called :code:`MoveClass` with a private member called 
-:code:`str_ptr` being :code:`char*`. To show the Rule of Five, we need to declare the following:
+Let's show it in the example. Imagine a class called :code:`MoveClass` with a private member called :code:`str_ptr` being :code:`char*`. To show the Rule of Five, we need to declare the following:
 
 * custom destructor
 * custom copy constructor

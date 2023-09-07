@@ -10,19 +10,12 @@ This chapter talks about C++ namespaces. You will learn the following:
 Introduction
 ************
 
-The **namespace** is a declarative region that provides scope to the identifiers like names of types, 
-functions, and variables. Namespaces are usually used to organize the code into logical groups and to avoid name collisions. It can be especially important when you're using different 
-libraries.
-
-One of the examples of the namespace scope is the C++ Standard Template Library (STL) as used in article 12, where all the classes, 
-methods, and templates are declared. You can find STL namespace in the code :code:`std::` before multiple class or function declarations from STL in C++. Sometimes you can also find the directive 
-:code:`using namespace std;`.
+The **namespace** is a declarative region that provides scope to the identifiers like names of types, functions, and variables. Namespaces are usually used to organize the code into logical groups and to avoid name collisions. It can be especially important when you're using different libraries.  One of the examples of the namespace scope is the C++ Standard Template Library (STL) as used in article 12, where all the classes, methods, and templates are declared. You can find STL namespace in the code :code:`std::\` before multiple class or function declarations from STL in C++. Sometimes you can also find the directive :code:`using namespace std;`. 
 
 Defining a namespace
 =====================
 
-To define a namespace, you have to start with the :code:`namespace` keyword followed by the name, as 
-below:
+To define a namespace, you have to start with the :code:`namespace` keyword followed by the name, as below:
 
 .. code-block:: cpp
    
@@ -32,8 +25,7 @@ below:
       // ...
    }
 
-Note that there is no semicolon :code:`;` after the closing bracket. 
-To call the function or variable declared within the namespace, prepend the namespace name as shown below:
+Note that there is no semicolon :code:`;` after the closing bracket. To call the function or variable declared within the namespace, prepend the namespace name as shown below:
 
 .. code-block:: cpp
    
@@ -44,8 +36,7 @@ To call the function or variable declared within the namespace, prepend the name
 Nested namespaces
 ******************
 
-In C++, namespaces can be nested, which makes it possible to define one namespace inside 
-another one. The resolution of namespace variables is hierarchical. The syntax is shown below:
+In C++, namespaces can be nested, which makes it possible to define one namespace inside another one. The resolution of namespace variables is hierarchical. The syntax is shown below:
 
 .. code-block:: cpp
    
@@ -62,9 +53,7 @@ another one. The resolution of namespace variables is hierarchical. The syntax i
       }
    }
 
-As you can see, those declarations take a lot of space and sometimes it's difficult to track all 
-of the levels of the namespaces declared. But in modern C++, writing nested namespaces can be simplified.
-as shown below:
+As you can see, those declarations take a lot of space and sometimes it's difficult to track all of the levels of the namespaces declared. But in modern C++, writing nested namespaces can be simplified.  As shown below:
 
 .. code-block:: cpp
    
@@ -73,11 +62,7 @@ as shown below:
          // declarations
    }
 
-It is useful when you want to declare functions and variables in the deepest 
-namespace. It also allows you to easily track the namespace in which you're writing your declarations.
-
-Similarly, as with a single namespace, to call the function or variable declared within the nested 
-namespace, you need to write all levels of the namespaces, like below:
+It is useful when you want to declare functions and variables in the deepest namespace. It also allows you to easily track the namespace in which you're writing your declarations.  Similarly, as with a single namespace, to call the function or variable declared within the nested namespace, you need to write all levels of the namespaces, like below:
 
 .. code-block:: cpp
    
@@ -121,7 +106,3 @@ The output of the code will look like this:
 
 
 This means that the inner foo function was called first, followed by the outer foo function.
-
-
-
-

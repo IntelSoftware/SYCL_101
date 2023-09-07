@@ -36,14 +36,13 @@ Here is the solution for the parallel_for hands-on exercise proposed in the prev
 
     }
 
-As mentioned before, the parallel_for is called from the handler. This 
-SYCL kernel function requires the **range** argument to be established:
+As mentioned before, the parallel_for is called from the handler. This SYCL kernel function requires the **range** argument to be established:
 
 .. code-block:: cpp
 
             range<1>(size)
 
-as well as the **id** argument, which refers to the index, named indx here:
+as well as the **id** argument, which refers to the index, named **indx** here:
 
 .. code-block:: cpp
 
@@ -55,6 +54,4 @@ so all elements of the accessor can be modified as follows:
 
             A_acc[indx] = 77; 
 
-Note that it is not the buffer, **A**, that
-is modified inside the SYCL kernel function, but the accessor, **A_acc**,
-which manages the access and usage of the buffer memory.
+Note that it is not the buffer, **A**, that is modified inside the SYCL kernel function, but the accessor, **A_acc**, which manages the access and usage of the buffer memory.

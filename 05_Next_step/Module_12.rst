@@ -1,10 +1,7 @@
 Module 12: DPCPP Local Memory And Atomics
 #########################################
 
-This module demonstrates how to utilize a device's **shared local memory** 
-to reduce latency in accessing data for kernel computation. The module 
-also introduces **atomic operations**, which help avoid data race conditions when 
-multiple work items are updating the same memory object.
+This module demonstrates how to utilize a device's **shared local memory** to reduce latency in accessing data for kernel computation. The module also introduces **atomic operations**, which help avoid data race conditions when multiple work items are updating the same memory object.
 
 Learning Objectives 
 ********************

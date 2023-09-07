@@ -1,10 +1,7 @@
 Module 3: DPCPP Unified Shared Memory
 #####################################
 
-This module demonstrates how to implement different modes 
-of **Unified Shared Memory (USM)** in SYCL code, as well 
-as how to solve for data dependencies for in-order 
-and out-of-order tasks.
+This module demonstrates how to implement different modes of **Unified Shared Memory (USM)** in SYCL code, as well as how to solve for data dependencies for in-order and out-of-order tasks.
 
 Learning Objectives 
 ********************

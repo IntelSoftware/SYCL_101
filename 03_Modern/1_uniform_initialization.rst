@@ -12,7 +12,7 @@ Introduction
 
 In modern C++ there is a uniform method for initializing data called **uniform initialization**.
 
-Expression initialization 
+Expression Initialization 
 =========================
 
 To better understand the concept, let's get familiar with the following terms:
@@ -72,13 +72,13 @@ Let's look at uniform initialization on different build-in and custom types:
    .. code-block:: cpp
 
       class foo{
-      public:
-         foo() : _i(0), _f(0.0) {}
-         foo(int i, float f) : _i(i), _f(f) {}
+         public:
+            foo() : _i(0), _f(0.0) {}
+            foo(int i, float f) : _i(i), _f(f) {}
 
-      private:
-         int _i;
-         float _f;
+         private:
+            int _i;
+            float _f;
       };
 
       foo f1{};
@@ -103,10 +103,7 @@ To exemplify, we already know there are many ways to initialize the variable.
    int i = {1}; // copy-list initialization
    auto i{1};   // direct initialization of type deduced to int 
 
-For simple type initialization, it's not a problem to use the most common method. However,
-when we use different, more complicated custom types, the consistent syntax can change 
-the experience with code. This can be especially important if you consider the generic code that should 
-be able to initialize any type — it will be not possible with :code:`()` initialization.
+For simple type initialization, it's not a problem to use the most common method. However, when we use different, more complicated custom types, the consistent syntax can change the experience with code. This can be especially important if you consider the generic code that should be able to initialize any type — it will be not possible with :code:`()` initialization.
 
 .. code-block:: cpp
 
@@ -122,8 +119,7 @@ Narrowing conversions are not allowed
 
 The second benefit is that uniform initialization **does not allow narrowing conversions**.
 
-Before uniform initialization, with C-style C++, the code below will work, and :code:`double` will just 
-convert to :code:`int`.
+Before uniform initialization, with C-style C++, the code below will work, and :code:`double` will just convert to :code:`int`.
 
 .. code-block:: cpp
 
@@ -141,7 +137,7 @@ The same with bracket initialization will not work and it forces the user to typ
    int i{int(d)};              // old C++-style type-cast
 
 
-Fixes most vexing parse
+Fixes most Vexing Parse
 =======================
 
 The most vexing parse comes from a rule in C++ that says that anything that could be considered a function declaration should be parsed by the compiler as a function declaration.
@@ -152,15 +148,14 @@ with three zeros :code:`{0, 0, 0}`,
 .. code-block:: cpp
 
    class foo{
-   public:
-      foo() { ... }
+      public:
+         foo() { ... }
 
-   private:
-      std::vector<int> v(3, 0); 
+      private:
+         std::vector<int> v(3, 0); 
    };
 
-This code will not compile because the vector initialization was interpreted by the compiler as a 
-function declaration. We have three possible solutions for this problem. 
+This code will not compile because the vector initialization was interpreted by the compiler as a function declaration. We have three possible solutions for this problem. 
 
 The first is the most obvious — we can just use uniform initialization for the vector.
 
@@ -168,8 +163,7 @@ The first is the most obvious — we can just use uniform initialization for the
 
    std::vector<int> v{0, 0, 0};
 
-This is not always the best solution, especially when we need to initialize the long vector and 
-typing every element is not an option.
+This is not always the best solution, especially when we need to initialize the long vector and typing every element is not an option.
 
 The second solution is to move the initialization to the constructor:
 
@@ -188,11 +182,7 @@ And the last solution is to use copy initialization:
 Common problems with uniform initialization 
 *******************************************
 
-Even when the uniform initialization helps with a lot of problems in C++, there are also some 
-issues related to using it. The first of them is about using :code:`auto` for variable 
-declaration. Deduced type for the variable can be :code:`std::initializer_list` instead of the type a
-programmer would expect. This happens mostly when we combine auto variable declaration with an equal 
-sign or if it has multiple elements, like in the code shown below:
+Even when the uniform initialization helps with a lot of problems in C++, there are also some issues related to using it. The first of them is about using :code:`auto` for variable declaration. Deduced type for the variable can be :code:`std::initializer_list` instead of the type a programmer would expect. This happens mostly when we combine auto variable declaration with an equal sign or if it has multiple elements, like in the code shown below: 
 
 .. code-block:: cpp
 
@@ -209,21 +199,18 @@ Another problem can happen with the vector initialization. It can be tricky, esp
    std::vector<int> v(3,0); // vector contains tree zeros {0, 0, 0}
    std::vector<int> v{3,0}; // vector contains three and zero {3, 0}
 
-The last problem can be called "strongly prefer :code:`std::initializer_list` constructors." 
-It means that when calling the constructor using the uniform initialization syntax, the constructor will overload while declaring its parameter of type :code:`std::initializer_list` (when it exists).
+The last problem can be called "strongly prefer :code:`std::initializer_list` constructors." It means that when calling the constructor using the uniform initialization syntax, the constructor will overload while declaring its parameter of type :code:`std::initializer_list` (when it exists).
+
 The example below demonstrates this situation:
 
 .. code-block:: cpp
 
    class foo {
-   public:
-      foo(int i, float f) { ... }
-      foo(std::initializer_list<bool> list) { ... }
+      public:
+         foo(int i, float f) { ... }
+         foo(std::initializer_list<bool> list) { ... }
    };
 
    foo object{13, 2.7}; // compilation error
 
-The error occurs because instead of using the first constructor (with :code:`int` and :code:`float`), 
-there is the constructor overload to the "strongly preferred" one with :code:`std::initializer_list` 
-as a parameter. So, the problem is caused by narrowing conversions from :code:`int` and :code:`double` 
-to :code:`bool`. 
+The error occurs because instead of using the first constructor (with :code:`int` and :code:`float`), there is the constructor overload to the "strongly preferred" one with :code:`std::initializer_list` as a parameter. So, the problem is caused by narrowing conversions from :code:`int` and :code:`double` to :code:`bool`. 

@@ -5,19 +5,7 @@ What is SYCL?
 Definition
 -----------
 
-SYCL is a high-level single-source standard C++ programming model that can 
-target a wide range of heterogeneous platforms.
-
-SYCL is an industry-driven standard —developed 
-by Khronos Group and announced in March 2014— that allows data parallelism for heterogeneous 
-systems based on C++ 17. It is a royalty-free, cross-platform abstraction 
-layer that enables the development of applications and frameworks with 
-the portability and efficiency of OpenCL, while providing a user interface 
-that's flexible and easy to use.
-
-SYCL standard is designed to be both highly portable and highly efficient
-and allows applications to offload compute kernels and data transfer to 
-OpenCL-enabled accelerators such as GPUs, FPGAs, and other processors.
+SYCL is a high-level single-source standard C++ programming model that can target a wide range of heterogeneous platforms.  SYCL is an industry-driven standard developed by Khronos Group and announced in March 2014 that allows data parallelism for heterogeneous systems based on C++ 17. It is a royalty-free, cross-platform abstraction layer that enables the development of applications and frameworks with the portability and efficiency of OpenCL, while providing a user interface that's flexible and easy to use.  SYCL standard is designed to be both highly portable and highly efficient and allows applications to offload compute kernels and data transfer to OpenCL-enabled accelerators such as GPUs, FPGAs, and other processors.
 
 SYCL Features
 --------------
@@ -40,16 +28,14 @@ SYCL Features
 Specifications
 ---------------
 
-SYCL utilizes specifications to standardize and streamline the development of parallel 
-applications for heterogeneous architectures, enabling portability, productivity, and 
-performance while fostering a vibrant community of SYCL users and providers.  New 
-specifications are being released to accommadate new features and technological advances.
+SYCL utilizes specifications to standardize and streamline the development of parallel applications for heterogeneous architectures, enabling portability, productivity, and performance while fostering a vibrant community of SYCL users and providers.  New specifications are being released to accommodate new features and technological advances.  
+
 The SYCL specifications that have been published as of today are:
 
-- SYCL 1.2: Specification released in May of 2015: It is considered obsolete.
-- SYCL 2.2: It was a provisional specification published in 2016 that is considered deprecated.
-- SYCL 1.2.1: Its latest revision was released on April 27, 2020.
-- SYCL 2020: Specification revision 7 released on April 18, 2023.
+- **SYCL 1.2**: Specification released in May of 2015: It is considered obsolete.
+- **SYCL 2.2**: It was a provisional specification published in 2016 that is considered deprecated.
+- **SYCL 1.2.1**: Its latest revision was released on April 27, 2020.
+- **SYCL 2020**: Specification revision 7 released on April 18, 2023.
 
 The SYCL 2020 specification marks a significant leap forward that features over 40 new improvements, such as:
 
@@ -65,15 +51,7 @@ The SYCL 2020 specification marks a significant leap forward that features over 
 Implementations
 ----------------
 
-A SYCL implementation refers to a software version or revision of the SYCL programming model. 
-It consists of the necessary tools, libraries, and runtime support that enable developers
-to write SYCL code and execute it on compatible hardware platforms.
-
-Different vendors and organizations can provide their own SYCL implementations,
-each with its own set of features, optimizations, and supported hardware platforms. 
-These implementations provide the necessary compiler, libraries, and runtime 
-components to enable developers to write and execute SYCL code efficiently on their 
-respective platforms.
+A SYCL implementation refers to a software version or revision of the SYCL programming model. It consists of the necessary tools, libraries, and runtime support that enable developers to write SYCL code and execute it on compatible hardware platforms. Different vendors and organizations can provide their own SYCL implementations, each with its own set of features, optimizations, and supported hardware platforms. These implementations provide the necessary compiler, libraries, and runtime components to enable developers to write and execute SYCL code efficiently on their respective platforms.
 
 These are some of the popular SYCL implementations that are available:
 

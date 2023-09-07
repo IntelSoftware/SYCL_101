@@ -1,11 +1,9 @@
 SYCL Code Basic Elements
 ========================
 
-SYCL offers a broad range of advantages to developers, including improved productivity, 
-better performance, and enhanced code maintainability. In this lesson, students 
-will gain an overall understanding of basic SYCL features and concepts. 
+SYCL offers a broad range of advantages to developers, including improved productivity, better performance, and enhanced code maintainability. In this lesson, students will gain an overall understanding of basic SYCL features and concepts. 
 
-Most featured SYCL offerings
+SYCL Advantages
 ----------------------------
 
 **1.** SYCL provides an **easier programming model for heterogeneous applications** than traditional models such as OpenCL or CUDA. 
@@ -20,17 +18,10 @@ Most featured SYCL offerings
 
 **6.** SYCL **allows third-party vendors to provide tools** that help optimize code for different hardware architectures. 
 
-.. First parallel SYCL code:  [[this doesn't show up in Preview mode]]
-.. -------------------------
-
-Basic SYCL code: single_task
+Basic SYCL Code: single_task
 -----------------------------
 
-Here we will use a very common SYCL code as the first approach to 
-learn about the basic SYCL components.  The intent of this code is to modify only 
-the 6th element of a 10-size vector using SYCL specification within C++:
-
-.. // source: 'SYCL Parallelism Using parallel_for | Intel Software <https://www.youtube.com/watch?v=KConKN1olYI>'_
+Here we will use a very common SYCL code as the first approach to learn about the basic SYCL components.  The intent of this code is to modify only the 6th element of a 10-size vector using SYCL specification within C++:
 
 .. code-block:: cpp
 
@@ -65,17 +56,7 @@ the 6th element of a 10-size vector using SYCL specification within C++:
 
     }
 
-The first object that it is necessary in the SYCL code is the **queue**, Q.  
-The queue is the fundamental construct used to submit work, control the 
-execution flow, and coordinate data transfers between the host and device
-in a parallel and heterogeneous computing environment, such as CPUs or GPUs.
-
-Next, we have to define the **buffer**, A, which is the data container that 
-represents the region of memory that is accessible by the host and the device,
-and it is used to share and transfer data.
-
-The queue requires the use of the **command group**, which in the code above
-is defined with:
+The first object that it is necessary in the SYCL code is the **queue**, Q.  The queue is the fundamental construct used to submit work, control the execution flow, and coordinate data transfers between the host and device in a parallel and heterogeneous computing environment, such as CPUs or GPUs.  Next, we have to define a **buffer**, in this example A is the accessor to the buffer.  This is the data container that represents the region of memory that is accessible by the host and the device, and it is used to share and transfer data. The queue requires the use of a **command group**, which in the code above is defined with:
 
 .. code-block:: cpp
 
@@ -85,9 +66,7 @@ is defined with:
 
         }
 
-The command group represents a unit of work that can be submitted to
-a SYCL queue for execution; its main function is to define the
-operations or computations that are to be performed on the target device.
+The command group represents a unit of work that can be submitted to a SYCL queue for execution; its main function is to define the operations or computations that are to be performed on the target device.
 
 The command group needs the **accessor**, A_acc,
 
@@ -95,11 +74,9 @@ The command group needs the **accessor**, A_acc,
 
             accessor A_acc(A, h);
 
-that is the object that efficiently accesses the buffer elements.
+that is the object that accesses the buffer elements.
 
-Inside of the command group as well, it resides the specific **SYCL kernel function**, 
-which is **single_task** in this case. Note that single_task is provided
-by the handler, h:
+Inside of the command group resides the specific **SYCL kernel function**, which is **single_task** in this case. Note that single_task is provided by the handler, h:
 
 .. code-block:: cpp
 
@@ -107,12 +84,9 @@ by the handler, h:
                 A_acc[5] = 77; 
             });
 
-The **handler**, h, is the object that represents a context in which command
-groups are defined.  It specifies the operations and dependencies 
-within a command group and controls the execution behavior of those operations.
+The **handler**, h, is the object that represents a context in which command groups are defined.  It specifies the operations and dependencies within a command group and controls the execution behavior of those operations.  One consideration to keep in mind is that only one SYCL kernel function, even if it is the same, can be executed in the command group. 
 
-One consideration to keep in mind is that only one SYCL kernel function, even if 
-it is the same, can be executed in the command group. The **kernel code** in this case is:
+The **kernel code** in this case is:
 
 .. code-block:: cpp
 
@@ -120,22 +94,14 @@ it is the same, can be executed in the command group. The **kernel code** in thi
 
 Note that a lambda function can be used as kernel code as well.
 
-**Source**: https://www.youtube.com/watch?v=KConKN1olYI&t=1s
-
-.. // source: 'SYCL Parallelism Using parallel_for | Intel Software <https://www.youtube.com/watch?v=KConKN1olYI>'_
-
-
-
 Basic SYCL code: parallel_for Hands-on 
 --------------------------------------
 
-To become familiar with of the SYCL structure, we propose 
-the following hands-on exercise:  **Create a variation of the above single_task code
-that changes all elements of the 10-size vector with the value 77 using 
-a SYCL kernel function parallel_for instead of using single_task.**
+To become familiar with of the SYCL structure, we propose the following hands-on exercise:  
 
-**Hint**: Since the loop has to be a SYCL kernel function, we can use the parallel_for
-function provided by the handler, h.
+**Create a variation of the above single_task code that changes all elements of the 10-size vector with the value 77 using a SYCL kernel function parallel_for instead of using single_task.** 
+
+**Hint**: Since the loop has to be a SYCL kernel function, we can use the parallel_for function provided by the handler, h.
 
 .. code-block:: cpp
 
@@ -182,16 +148,15 @@ The solution to this parallel_for hands-on exercise is in the next section.
 Main SYCL concepts takeaways
 ----------------------------
 
-To recap, these are the main concepts introduced in this section and
-collectively provide a framework for expressing parallelism,
-managing data transfers, and controlling the execution of workloads
-in SYCL programs to enable efficient execution on heterogeneous platforms.
+To recap, these are the main concepts introduced in this section and collectively provide a framework for expressing parallelism, managing data transfers, and controlling the execution of workloads in SYCL programs to enable efficient execution on heterogeneous platforms. 
 
 - **Queue**: A SYCL queue manages the execution of command groups on a specific device. It acts as a command queue, allowing you to submit command groups for execution and control the order of execution.
 
 - **Scheduler**: The scheduler in SYCL is an internal component of the runtime system that manages the execution and scheduling of command groups on devices. It optimizes the execution by considering device capabilities, workload distribution, dependencies, and resource availability. The queue is the primary interface through which tasks are submitted to the scheduler for execution.
 
 - **Buffer**: A buffer in SYCL is a data container that represents a region of memory accessible by both the host and the device. It enables efficient data transfer and sharing between the host and the device without explicit memory management.
+
+- **Accessor**: Data represented by a buffer cannot be directly accessed through the buffer object. Instead, we must create accessor objects that allow us to safely access a buffer’s data. Accessors inform the runtime where and how we want to access data, allowing the runtime to ensure that the right data is in the right place at the right time.
 
 - **Command group**: In SYCL, a command group represents a unit of work that is submitted for execution on an OpenCL device. It encapsulates a set of operations and allows you to express parallelism and dependencies between tasks. Remember to call only a SYCL kernel function per command group.
 

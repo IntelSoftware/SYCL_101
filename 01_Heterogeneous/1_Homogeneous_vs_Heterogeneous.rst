@@ -13,7 +13,7 @@ Heterogeneous Compute
 
 Heterogeneous computing is preferred when the workload consists of tasks that can benefit from different types of processing units. For example, GPUs excel at parallelizing graphics and general-purpose computing tasks, while FPGAs offer highly customizable and efficient processing for specific algorithms. By utilizing specialized accelerators, heterogeneous computing systems can achieve higher performance and energy efficiency for certain workloads.
 
-Advantages of accelerators in heterogeneous computing 
+Advantages of Accelerators in Heterogeneous Computing 
 =================================================================
 
 1. Enhanced performance: Accelerators are specifically designed to excel at certain types of computations. By offloading specific tasks to accelerators, overall performance can be significantly improved.
@@ -22,7 +22,7 @@ Advantages of accelerators in heterogeneous computing
 
 3. Ability to further optimize code: Developers can use accelerators to tailor the hardware and software for specific algorithms or applications, enabling higher performance and efficiency.
 
-Challenges using accelerators in a heterogeneous computing environment
+Challenges using Accelerators in a Heterogeneous Computing Environment
 =========================================================================
 
 1. Programming complexity: Unlike homogeneous systems, heterogeneous computing requires different programming models and languages for various processing units. This complexity increases the development effort.

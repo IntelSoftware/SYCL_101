@@ -1,8 +1,7 @@
 Module 8: DPCPP Reduction
 #########################
 
-This module demonstrates how reductions can be parallelized. You will 
-learn about the **reduction group algorithm** and **kernel reductions in SYCL**.
+This module demonstrates how reductions can be parallelized. You will learn about the **reduction group algorithm** and **kernel reductions in SYCL**.
 
 Learning Objectives 
 ********************
