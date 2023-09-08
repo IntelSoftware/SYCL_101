@@ -4,5 +4,5 @@
 .. toctree::
    :maxdepth: 2
 
-   1_Homogeneous_vs_Heterogeneous
-   2_oneAPI_SYCL
+   01_Homogeneous_vs_Heterogeneous
+   02_oneAPI_SYCL

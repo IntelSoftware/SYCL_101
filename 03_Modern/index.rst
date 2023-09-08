@@ -8,15 +8,15 @@
 .. toctree::
    :maxdepth: 2
 
-   1_uniform_initialization
-   2_multithreading
-   3_smart_pointers
-   4_hash_tables
-   5_array
-   6_move
-   7_lambdas
-   8_thread
-   9_for_each
+   01_uniform_initialization
+   02_multithreading
+   03_smart_pointers
+   04_hash_tables
+   05_array
+   06_move
+   07_lambdas
+   08_thread
+   09_for_each
    10_auto
    11_initializers
    12_STL_concurrent_algorithms
