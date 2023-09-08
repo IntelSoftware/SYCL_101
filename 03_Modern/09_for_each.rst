@@ -3,9 +3,10 @@ std::for_each in Parallel
 
 This chapter talks about for_each. You will learn the following:
 
-#. What is a for_each expression?
-#. What are the parts of for_each?
-#. How can a for_each be used in C++ code?
+#. What is a *std::for_each* expression?
+#. How can a *std::for_each* be used in C++ code?
+#. What kind of parallelization can be used with *std::for_each*?
+
 
 Introduction
 ************
