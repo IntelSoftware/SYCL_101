@@ -64,7 +64,7 @@ smartquotes=False
 #
 
 project_title = 'SYCL 101'
-html_title = project_title
+html_title    = project_title
 
 html_theme = 'pydata_sphinx_theme'
 html_output_encoding = 'ascii'
