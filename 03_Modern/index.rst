@@ -15,7 +15,6 @@
    05_array
    06_move
    07_lambdas
-   08_thread
    09_for_each
    10_auto
    11_initializers

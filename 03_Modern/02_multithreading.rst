@@ -1,5 +1,5 @@
 Multithreading
-#############################
+##############
 
 This chapter talks about multithreading. You will learn the following:
 
@@ -12,7 +12,7 @@ This chapter talks about multithreading. You will learn the following:
 Introduction
 ************
 
-**Multithreading** is a feature that allows concurrent execution of two or more parts of a program for maximum utilization of the resources. Each part of such a program is called  thread. So, threads are lightweight processes within a bigger process.  In C++, multithreading was introduced in C++11, but became a part of the standard library (STL) in C++17. 
+**Multithreading** is a feature that allows concurrent execution of two or more parts of a program for maximum utilization of the resources. Each part of such a program is called thread. So, threads are lightweight sub-processes within a bigger process.  In C++, multithreading was introduced in C++11, but became a part of the standard library (STL) in C++17. 
 
 Why use Multithreading?
 ***********************
@@ -67,10 +67,10 @@ Creating and launching a thread is really simple. Let's look at the simple examp
 
    int main() {
       // 3. Initialize thread and execute
-      std::thread t(callFromThread);
+      std::thread my_thread(callFromThread);
 
       // 4. Join thread t with the main thread 
-      t.join();
+      my_thread.join();
 
       return 0;
    }
@@ -133,11 +133,11 @@ In this case, as we are using multiple threads, it is important to mention, that
 
 
 Joining and Detaching Threads
-==============================
+=============================
 
 We already used :code:`join()` on the threads. But take a deeper look on join and detach operations.
 
-Joining threads make them waiting for each other. Imagine that once a thread is started then another thread can wait for this new thread to finish. In that scenario, we are calling :code:`join()` function on the :code:`std::thread` object, like in example below:
+Joining threads make them waiting for each other. Imagine that once a thread is started, then another thread can wait for this new thread to finish. In that scenario, we are calling :code:`join()` function on the :code:`std::thread` object, like in example below:
 
 .. code-block:: cpp
    
@@ -157,13 +157,27 @@ In addition to **joining** threads, one can also **detach** them. The detached t
 
 Remember that after calling :code:`detach()`, :code:`std::thread` object is no longer associated with the actual thread of execution.
 
+Most Common Objects of the Thread Class
+=======================================
+
+We have introduced the class ``std::thread`` with its object ``join()`` but ``std::thread`` has more.  These are brief descriptions of the most relevant:
+
+* ``get_id()``: This returns a numerical identifier that uniquely represents the thread object under consideration. A key application of this identifier is the facilitation of thread-local storage, a concept employed when managing static or global data that needs to be distinct for each individual thread.
+
+* ``interrupt()``: This object compels the thread to come to an immediate halt. It does not receive the chance to proceed further; no additional tasks or operations will be performed. The scheduler will disregard it, even if it was in the midst of executing a task. We recommend caution when applying this command to a thread.
+
+* ``yield()``: This one informs the scheduler that the current thread is temporarily yielding control and can be revisited later. In a preemptive scheduling context, this is valuable to ensure that threads without meaningful tasks do not monopolize execution time that could be more effectively utilized by other productive threads.
+
+* ``join()``: This suspends the execution of the current thread until the thread being joined completes its execution. It serves as the primary mechanism for thread synchronization. A typical scenario for its application involves the main thread initiating a background task within a separate thread, performing other operations in the meantime, and then pausing to ensure that the background task has concluded before proceeding further.
+
+
 Problems with Multithreading
-******************************
+****************************
 
 When running multithreaded programs we can face problems with **access to shared data** by multiple threads. Simultaneous access to the same resource can lead to race conditions, errors and chaos in programs. This problem occurs mostly due to the consequences of modifying shared data.  There will be no issue if the data we share is read-only because the data read by one thread is unaffected by whether or not another thread is reading the same data. However, once data is shared between threads and one or more threads begin modifying the data, difficulties arise.  We will take a look at some different possible problems with shared data that can happen in multithreading programming.
 
 Deadlock
-===========
+========
 
 Deadlock is a situation where none of the threads can proceed with operation because each waits for another. Imagine the situation where we have two threads (T1 and T2) and two resources (R1 and R2). Thread T1 requires resource R1, and thread T2 requires resource R2. In that situation deadlock can arise when T1 is holding on R2 and waiting for R1 while at the same time, thread T2 is holding R1 and waiting for R2. This situation is depicted in the image below with the circle waiting.
 
@@ -172,7 +186,7 @@ Deadlock is a situation where none of the threads can proceed with operation bec
 There is a general guide to avoid deadlocks. Simply don't wait for another thread if there is a chance it is waiting for you. 
 
 Race Conditions
-================
+===============
 
 Race condition is the situation when two concurrent threads access the same resources and unintentionally produces different results depending on the execution order.
 
@@ -185,6 +199,6 @@ As you can see in the first scenario, thread 1 executed first, so its result was
 To avoid race conditions, any operation on a shared resource must be executed atomically. One way to achieve atomicity is by using critical sections — mutually exclusive parts of the program.
 
 Summary
-********
+*******
 
 To summarize, multithreading is used for parallel execution of multiple tasks. It can increase the efficiency of the program but also can be tricky when dealing with shared data. This was a very short introduction to multithreading. There is still much more to be learned.
