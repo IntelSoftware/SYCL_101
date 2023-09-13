@@ -27,5 +27,4 @@ By the end of SYCL 101, you'll not only grasp the fundamental concepts of SYCL b
    03_Modern/index.rst
    04_SYCL_Conv_USM/index.rst
    05_Next_step/index.rst
-   faq.rst
 
