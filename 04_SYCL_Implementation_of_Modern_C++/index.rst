@@ -1,4 +1,4 @@
-4) Conventional vs. USM
+4) SYCL Implementations of Modern C++
 #############################
 
 .. toctree::
