@@ -4,6 +4,7 @@
 .. toctree::
    :maxdepth: 2
 
-   01_What_is_SYCL
-   02_SYCL_code_basic_elements
-   03_parallel_for_solution
+   01_What_is_SYCL.rst
+   02_SYCL_basic_code_single_task.rst
+   03_SYCL_basic_code_parallel_for.rst
+   04_Conclusions.rst

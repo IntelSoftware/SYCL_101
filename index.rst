@@ -13,7 +13,7 @@ Course Outline:
 
 **Modern C++:** SYCL and modern C++ are a formidable combination. In this section, we'll cover essential C++ features and how they enhance SYCL programming, ensuring you're well-prepared for advanced topics.
 
-**Conventional vs. USM:** Dive into memory management with a comparison of conventional approaches and Unified Shared Memory (USM). Discover how USM can optimize your SYCL code and improve performance.
+**SYCL Implementations of Modern C++:** Dive into memory management with a comparison of conventional approaches and Unified Shared Memory (USM). Discover how USM can optimize your SYCL code and improve performance.
 
 **Next Step: SYCL Essentials:** As you wrap up the course, we'll introduce the free SYCL Essentials course as your best next step in your SYCL journey to continue exploring this exciting field.
 
@@ -22,9 +22,9 @@ By the end of SYCL 101, you'll not only grasp the fundamental concepts of SYCL b
 .. toctree::
    :maxdepth: 1
 
-   01_Heterogeneous/index.rst
-   02_Why_SYCL/index.rst
-   03_Modern/index.rst
-   04_SYCL_Conv_USM/index.rst
-   05_Next_step/index.rst
+   01_Heterogeneous/index
+   02_Why_SYCL/index
+   03_Modern/index
+   04_SYCL_Implementations/index
+   05_Next_step/index
 

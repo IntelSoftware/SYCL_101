@@ -2,7 +2,7 @@
 ##############################
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    00_Next_step.rst
    01_Module.rst
