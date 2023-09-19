@@ -1,7 +1,7 @@
 SYCL Basic Code: single_task
 ============================
 
-SYCL offers a broad range of advantages to developers, including improved productivity, better performance, and enhanced code maintainability. In this lesson, you will gain an overall understanding of basic SYCL features and concepts. 
+SYCL offers many advantages to developers, including improved productivity, better performance, and enhanced code maintainability. In this lesson, you will gain an overall understanding of basic SYCL features and concepts. 
 
 SYCL Advantages
 ----------------------------
@@ -31,16 +31,16 @@ In this subsection, we present a code with a simple SYCL algorithm called ``sing
     int main() {
 
         queue Q;                        // The queue, Q, is the object that
-                                        // submits the task to the device
+                                        // submits the task to a device.
         int const size = 10;
         buffer<int> A{ size };          // The buffer, A, is the memory used to
-                                        // transfer data between host and device
+                                        // transfer data between host and device.
         
         Q.submit([&](handler& h) {      // The handler, h, is the object that contains 
-                                        // the parallel_for function to be used
+                                        // the single_task function to be used.
             
             accessor A_acc(A, h);       // The accessor, A_acc, is the object that
-                                        // efficiently accesses the buffer elements
+                                        // efficiently accesses the buffer elements.
                                         
             h.single_task([=]() {
                 A_acc[5] = 77; 
@@ -49,7 +49,7 @@ In this subsection, we present a code with a simple SYCL algorithm called ``sing
             });
 
         host_accessor result(A);        // host_accessor is the object that allows 
-                                        // the host to access the buffer memory
+                                        // the host to access the buffer memory.
 
         for (int i = 0; i < size; i++)  // Print output
             std::cout << result[i] << " "; std::cout << "\n";
@@ -114,10 +114,10 @@ To become familiar with the SYCL structure, we propose the following hands-on ex
     int main() {
 
         queue Q;                        // The queue, Q, is the object that
-                                        // submits the task to the device
+                                        // submits the task to a device.
         int const size = 10;
         buffer<int> A{ size };          // The buffer, A, is the memory used to
-                                        // transfer data between host and device
+                                        // transfer data between host and device.
     
 
 
@@ -137,7 +137,7 @@ To become familiar with the SYCL structure, we propose the following hands-on ex
 
 
         host_accessor result(A);        // host_accessor is the object that allows 
-                                        // the host to access the buffer memory
+                                        // the host to access the buffer memory.
 
         for (int i = 0; i < size; i++)  // Print output
             std::cout << result[i] << " "; std::cout << "\n";
@@ -145,7 +145,7 @@ To become familiar with the SYCL structure, we propose the following hands-on ex
 
     }
 
-If you are thinking that ``single_task`` might not be the best approach you are in the right track. .
+If you are thinking that ``single_task`` might not be the best approach you are in the right track.
 
 .. note::
 

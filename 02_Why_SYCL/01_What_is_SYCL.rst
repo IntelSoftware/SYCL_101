@@ -20,9 +20,9 @@ SYCL Features
 
 - **Ease of hierarchical parallelism:** Inspired by OpenCL and OpenMP, SYCL makes data parallelism easy to understand by using hierarchical parallelism and modern C++ instructions, so tasks are easily organized and synchronized, which makes the code more efficient and less fragmented. 
 
-- **Two compilation phases:** SYCL requires two compilation passes, one for the host code and one for the device code. However, contrarily to OpenCL, SYCL has only one source file, meaning there is only one executable. The two compilations can be made by the same compiler. 
+- **Two compilation phases:** SYCL requires two compilation passes, one for the host code and one for the device code. However, unlike OpenCL, SYCL is single-source, meaning there is only one executable. The two compilations can be made by the same compiler. 
 
-- **High-level programmer model:** SYCL provides several high-level abstractions over common boilerplate code in OpenCL and other backends. This includes selecting devices, allocating, copying data, managing dependencies, scheduling compiling kernels, and much more. 
+- **High-level programming model:** SYCL provides several high-level abstractions over common boilerplate code in OpenCL and other backends. This includes selecting devices, allocating storage, copying data, managing dependencies, scheduling kernels, and much more. 
 
 
 Specifications
@@ -58,7 +58,7 @@ These are some of the popular SYCL implementations that are available:
    - **DPCP++** by Intel as part of the oneAPI solution that supports Intel CPUs, GPUs, and FPGAs as well as NVIDIA and AMD GPUs 
    - **ComputeCpp** by Codeplay
    - **TriSYCL** by Xilinx
-   - **HipSYCL** (Open SYCL) by the University of Heidelberg
+   - **Open SYCL** (formerly hipSYCL) by the University of Heidelberg
    - **neoSYCL** by the Tohoku University
 
 
