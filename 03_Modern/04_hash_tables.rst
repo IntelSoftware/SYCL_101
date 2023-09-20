@@ -1,9 +1,9 @@
 Hash Tables
 ############
 
-This chapter talks about hash tables. You will learn the following:
+This chapter covers hash tables. You will learn the following:
 
-#. What is a hash table and why should I use it?
+#. What is a hash table and why should you use it?
 #. What is hashing and a hash function?
 #. What are the C++ standard library implementations for hash tables?
 
@@ -11,16 +11,13 @@ This chapter talks about hash tables. You will learn the following:
 Introduction
 ************
 
-A **hash table** is a data structure that stores elements in key-value pairs. **Key** is a unique value used to compute a table index, when **value** is data associated with the key.  The benefit of using a hash table is that it has quick access time. Typically, the time complexity is a constant (O(1) access time).
+A **hash table** is a data structure that stores elements in key-value pairs. **Key** is a unique value used to compute a table index and **value** is the data associated with the key.  The benefit of using a hash table is its fast access time. Typically, the time complexity is a constant (O(1) access time).
 
-Hashing function
+Hashing Function
 ================
 
-As stated previously, in a hash table, a new index is processed using the key and the corresponding value to this key is stored in the index. This process is called hashing and the function performing this operation is called **hashing function**.
-
-Here's an example.
-
-Please consider a hashing function as operation mod 10 and a set of key-value pairs to insert into hash table :code:`{{15, 25}, {23, 63}, {12, 22}, {48, 78}, {30, 0}}`.
+As stated previously, in a hash table, a new index is processed using the key and the corresponding value for this key is stored in the index. This process is called hashing and the function performing this operation is called a **hashing function**.
+For example, consider a hashing function as operation mod 10 and a set of key-value pairs to insert into hash table :code:`{{15, 25}, {23, 63}, {12, 22}, {48, 78}, {30, 0}}`.
 
 .. list-table:: 
    :widths: 25 50 25
@@ -79,31 +76,30 @@ As you can see, there's a good chance that more than one key value will compute 
 C++ Standard Library Hash Tables
 ********************************
 
-In the C++ standard library there are four different hash tables available. They are the equivalents of standard containers but with a hashing function:
+In the C++ standard library, four different hash tables are available. They are the equivalents of standard containers but with a hashing function:
 
 * std::unordered_set (equivalent of std::set)
 * std::unordered_multiset (equivalent of std::multiset)
 * std::unordered_map (equivalent of std::map)
 * std::unordered_multimap (equivalent of std::multimap)
 
-Let's look at all of them one by one.
+Let's look at them one by one.
 
 Set
 ===
 
-Let's start with **std::unordered_set**. According to C++ reference:
+Let's start with **std::unordered_set**. According to the C++ Reference:
 
-    :code:`std::unordered_set` is an associative container that contains a set of unique objects of type Key. Search, insertion, and removal have average constant-time complexity.
+    :code:`std::unordered_set` is an associative container holding a set of unique objects of type Key. Search, insertion, and removal have average constant time complexity.
 
-The most important aspect about std::unordered_set is that it contains **unique objects**, which are of type **key** and average access time is **constant**.
-
+The most important aspect of std::unordered_set is that it contains **unique objects**, which are of type **key**, and has average access time **constant**.
 An example of a :code:`std::unordered_set` declaration is shown in the code below:
 
 .. code-block:: cpp
    
    std::unordered_set<int> n;
 
-To initialize :code:`std::unordered_set`, we can simply assign values to it at the time of declaration.  Please remember that the given values have to be unique.
+To initialize :code:`std::unordered_set`, we can simply assign values to it at declaration.  Remember that the given values have to be unique.
 
 .. code-block:: cpp
    
@@ -118,19 +114,17 @@ As in other standard containers, we can conduct operations like the following:
 * find(...),
 * iteration over elements.
 
-Similar to :code:`std::unordered_set` is **std::unordered_multiset**.  Let's start with definition:
+Similar to :code:`std::unordered_set` is **std::unordered_multiset**.  Let's start with a definition:
 
-    :code:`std::unordered_multiset` is an associative container that contains a set of possibly non-unique objects of type Key. Search, insertion, and removal have average constant-time complexity.
-
-This means that the only difference between :code:`std::unordered_set` and :code:`std::unordered_multiset` is that the second one allows multiple keys to be stored.
-
+    :code:`std::unordered_multiset` is an associative container holding a set of possibly non-unique objects of type Key. Search, insertion, and removal have average constant time complexity.
+This means that the only difference between :code:`std::unordered_set` and :code:`std::unordered_multiset` is that the latter allows multiple keys to be stored.
 An example of the :code:`std::unordered_multiset` declaration is shown in code below:
 
 .. code-block:: cpp
    
    std::unordered_multiset<int> n;
 
-To initialize :code:`std::unordered_multiset`, we can simply assign values to it at the time of declaration.  This time the values may be repeated.
+To initialize :code:`std::unordered_multiset`, we can simply assign values to it at declaration.  This time the values may be repeated.
 
 .. code-block:: cpp
    
@@ -139,19 +133,18 @@ To initialize :code:`std::unordered_multiset`, we can simply assign values to it
 Map
 ===
 
-Now, we will move to the map containers, starting with **std::unordered_map**.  According to C++ reference:
+Now, we will move to the map containers, starting with **std::unordered_map**.  According to the C++ Reference:
 
-    :code:`std:unordered_map` is an associative container that contains key-value pairs with unique keys. Search, insertion, and removal of elements have average constant-time complexity.
+    :code:`std:unordered_map` is an associative container holding key-value pairs with unique keys. Search, insertion, and removal of elements have average constant time complexity.
 
 This means that the most important information about :code:`std::unordered_map` is that it stores **key-value pairs**, where **key is unique** and the average access time is **constant**.
-
 The code below shows an example of a :code:`std::unordered_map` declaration where key is of type :code:`int` and value is of type :code:`std::string`:
 
 .. code-block:: cpp
    
    std::unordered_map<int, std::string> m;
 
-To initialize :code:`std::unordered_map`, we can simply assign values to it at the time of declaration.  Please remember that the key values have to be unique.
+To initialize :code:`std::unordered_map`, we can simply assign values to it at declaration.  Remember that the key values have to be unique.
 
 .. code-block:: cpp
    
@@ -159,19 +152,17 @@ To initialize :code:`std::unordered_map`, we can simply assign values to it at t
                                            {1, "one"}, 
                                            {2, "two"}};
 
-Similarly, as with a set container, **std::unordered_multimap** and :code:`std::unordered_map` have a lot in common. Let's look at the C++ reference definition:
+Similarly, as with a set container, **std::unordered_multimap** and :code:`std::unordered_map` have a lot in common. Let's look at the C++ Reference definition:
 
-    :code:`std::unordered_multimap` is an unordered associative container that supports equivalent keys (an unordered_multimap may contain multiple copies of each key value) and that associates values of another type with the keys. (...) Search, insertion, and removal have average constant-time complexity.
-
+    :code:`std::unordered_multimap` is an unordered associative container that supports equivalent keys (an unordered_multimap may contain multiple copies of each key value) and that associates values of another type with the keys. (...) Search, insertion, and removal have average constant time complexity.
 The only difference is that :code:`std::unordered_multimap` allows for keys to be repeated.
-
 The code below shows an example of a :code:`std::unordered_multimap` declaration where key is of type :code:`int` and value is of type :code:`std::string`:
 
 .. code-block:: cpp
    
    std::unordered_multimap<int, std::string> m;
 
-To initialize :code:`std::unordered_multimap`, as before, we can assign values to it at the time of declaration. This time the keys don't need to be unique.
+To initialize :code:`std::unordered_multimap`, as before, we can assign values to it at declaration. This time the keys don't need to be unique.
 
 .. code-block:: cpp
    

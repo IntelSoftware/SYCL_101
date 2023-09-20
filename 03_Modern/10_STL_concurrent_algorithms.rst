@@ -1,10 +1,10 @@
 Standard Template Library (STL) on Concurrent and Parallel Algorithms
 #######################################################################
 
-This chapter talks about concurrent and parallel STL algorithms. You will learn the following:
+This chapter covers concurrent and parallel STL algorithms. You will learn the following:
 
 #. What are STL algorithms? 
-#. What execution policies are available as part of STL?
+#. What execution policies are available as part of the STL?
 #. How are different execution policies used?
 #. What are the benefits and drawbacks of using specific execution policies?
 #. What are the best practices when using concurrent and parallel STL algorithms?
@@ -12,33 +12,33 @@ This chapter talks about concurrent and parallel STL algorithms. You will learn 
 Introduction
 ************
 
-The Standard Template Library (STL) offers over 150 algorithms including ones that run sequentially. To take advantage of the capabilities of many cores, programmers must parallelize these libraries using the low-level concurrency APIs, which is not easy.  Fortunately, since C++17, most of the STL algorithms are parallelized and support for vectorization has been added.  
+The STL offers over 150 algorithms including those that run sequentially. To take advantage of parallel hardware, programmers must parallelize these libraries using low-level threading APIs, which is not easy.  Fortunately, since C++17, most of the STL algorithms are parallelized and support for vectorization has been added.  
 
 What are STL Algorithms?
 ****************************
 
-STL algorithms are a set of powerful functions offered by the C++ Standard Library that enable the execution of various operations on data containers such as vectors, lists, and arrays. These algorithms are designed to be very effective and generic, making them ideal for a wide range of applications.  STL techniques can be used to help avoid repeatedly implementing simple functions, and instead focus on addressing higher-level problems.  Examples of algorithms available within the STL include :code:`std::find`, :code:`std::sort`, and :code:`std::replace`. These algorithms can drastically improve the efficiency and readability of the code. 
+STL algorithms are a set of powerful functions that enable the execution of various operations on data containers such as vectors, lists, and arrays. These algorithms are designed to be generic, making them ideal for a wide range of applications.  The STL helps avoid repeatedly implementing simple functions, and instead focus on addressing higher-level problems.  Examples of algorithms available within the STL include :code:`std::find`, :code:`std::sort`, and :code:`std::replace`. These algorithms can drastically improve the efficiency and readability of the code. 
 
 Execution Policies
 *******************
 
-To use the parallel algorithms from STL, you need to include the :code:`<execution>` header. The next step is to invoke the chosen algorithm with an execution policy, which allows you to specify how the algorithm should be executed. In C++, the following execution policies are available:
+To use the STL parallel algorithms, you need to include the :code:`<execution>` header. The next step is to invoke the chosen algorithm with an execution policy, which allows you to specify how the algorithm should be executed. In C++, the following execution policies are available:
 
 * sequenced_policy (and the corresponding global object :code:`std::execution::seq`) — sequential execution of the algorithm. 
 * parallel_policy (and the corresponding global object :code:`std::execution::par`) — parallel execution of the algorithm.
 * parallel_unsequenced_policy (and the corresponding global object :code:`std::execution::par_unseq`) — parallel execution of the algorithm with the ability to use vector instructions.
 * unsequenced_policy (and the corresponding global object :code:`std::execution::unseq`) — execution of the algorithm with the ability to use vector instructions.
 
-Let's see examples of the use of all the policies. 
+Let's see examples of the use of these policies. 
 
 .. note::
 
-   We will be using small sets of data just to show how the policies work, but remember that the benefits of using policies usually comes from dealing with large amounts of data.
+   We will be using small data sets just to show how the policies work, but remember that the benefits of using policies usually comes from dealing with large amounts of data.
 
 sequenced_policy
 =================
 
-For sequenced_policy, we will use the :code:`std::sort` algorithm.
+We will use the :code:`std::sort` algorithm to demonstrate the sequential execution policy:
 
 .. code-block:: cpp
    
@@ -60,10 +60,10 @@ For sequenced_policy, we will use the :code:`std::sort` algorithm.
       return 0;
    }
 
-Using sequenced_policy has several advantages that include the following:
+Using sequenced_policy has several advantages:
 
-* It is ideal for small tasks (when the parallel overhead doesn't exist)
-* Data races can be avoided
+* It is ideal for small tasks that don't warrant the parallel overhead.
+* Data races can be avoided.
 * It is simple and predictable.
 
 At the same time, sequenced_policy is not efficient for large tasks with a lot of data. 
@@ -71,7 +71,7 @@ At the same time, sequenced_policy is not efficient for large tasks with a lot o
 parallel_policy
 ================
 
-For parallel_policy, we will use the :code:`std::find` algorithm.
+We will use the :code:`std::find` algorithm to demonstrated the parallel execution policy:
 
 .. code-block:: cpp
    
@@ -95,12 +95,12 @@ For parallel_policy, we will use the :code:`std::find` algorithm.
 
 When using parallel_policy, we can benefit from the following:
 
-* Faster execution for larger tasks and on larger datasets.
-* Optimal usage of multi-core systems.
+* Faster execution for larger tasks and on larger datasets
+* Optimal usage of multicore systems
 
 At the same time, it is important to remember that:
 
-* It may introduce overhead, and if that's the case, it is not always faster than sequential execution.
+* It may introduce overhead. If that's the case, it is not always faster than sequential execution.
 * It is the programmer's responsibility to avoid data races and deadlocks.
 
 
@@ -136,15 +136,15 @@ For parallel_unsequenced_policy, we used the :code:`std::transform` algorithm wi
 
 Here, similar to the parallel_policy, we can:
 
-* Realize faster execution for repetitive operations.
-* Benefit from using hardware with vector instructions.
+* Realize faster execution for repetitive operations
+* Benefit from using hardware with vector instructions
 
 On the other hand, we need to remember that it is not suitable for all tasks (e.g., tasks where the order of operations is important).
 
 unsequenced_policy
 ====================
 
-For the last policy — unsequenced_policy — we are using the  :code:`std::for_each` algorithm:
+For the last policy — unsequenced_policy — we are using the :code:`std::for_each` algorithm:
 
 .. code-block:: cpp
    
@@ -169,12 +169,12 @@ For the last policy — unsequenced_policy — we are using the  :code:`std::for
 
 Using unsequenced_policy, we can:
 
-* Experience fast execution on a single thread.
-* Avoid race conditions.
+* Experience fast execution on a single thread
+* Avoid race conditions
 
 At the same time, the execution of the sequence is not deterministic, so we need to make sure that the order is not important for the task we are doing.
 
-Best practices 
+Best Practices 
 ***************
 
 To make the most of STL on concurrent and parallel algorithms, it's worth considering the following best practices:
@@ -186,4 +186,4 @@ To make the most of STL on concurrent and parallel algorithms, it's worth consid
 Summary
 ********
 
-STL algorithms and concurrent programming approaches are useful additions to data scientists and software engineers' toolkits. Try it yourself and create the code that compares the performance of different execution policies on the same task. Remember to work on a large set of data. 
+STL algorithms and concurrent programming approaches are useful additions to data scientists and software engineers' toolkits. Try it yourself and create the code that compares the performance of different execution policies on the same task. Remember to work on a large set of data.
