@@ -1,16 +1,16 @@
 Uniform Initialization
 #######################
 
-This chapter talks about uniform initialization. You will learn the following:
+This chapter covers uniform initialization. You will learn the following:
 
-#.	What is uniform initialization and how can it be used?
+#. What is uniform initialization and how can it be used?
 #. Why should uniform initialization be used?
 #. What are the common problems with uniform initialization? 
 
 Introduction
 ************
 
-In modern C++ there is a uniform method for initializing data called **uniform initialization**.
+In modern C++, there is a uniform method for initializing data called **uniform initialization**.
 
 Expression Initialization 
 =========================
@@ -27,10 +27,10 @@ The code below shows both direct and copy initialization:
    std::string direct("direct initialization");
    std::string copy = "copy initialization";
 
-Brace-initialization
+Brace Initialization
 ====================
 
-To uniformly initialize objects of any type, **brace-initialization form {}** may be used for both direct and copy initialization. When used with brace-initialization, we call initializations, direct-list and copy-list. 
+To uniformly initialize objects of any type, **brace initialization form {}** may be used for both direct and copy initialization. When used with brace initialization, we call initializations direct-list and copy-list. 
 
 The code below shows both direct-list and copy-list initialization:
 
@@ -39,9 +39,9 @@ The code below shows both direct-list and copy-list initialization:
    std::string direct{"direct-list initialization"};
    std::string copy = {"copy-list initialization"};
 
-Let's look at uniform initialization on different build-in and custom types:
+Let's look at uniform initialization on different built-in and custom types:
 
-#. Build-in types:
+#. Built-in types:
 
    .. code-block:: cpp
    
@@ -84,16 +84,16 @@ Let's look at uniform initialization on different build-in and custom types:
       foo f1{};
       foo f2{13, 2.7};
 
-Why should uniform initialization be used?
+Why Should Uniform Initialization Be Used?
 *******************************************
 
-Within the uniform initialization, we can list several advantages. 
+We can list several advantages of uniform initialization.
 
-Consistent syntax
+Consistent Syntax
 =================
 
 The first is **very consistent syntax**.
-To exemplify, we already know there are many ways to initialize the variable.
+For example, we already know there are many ways to initialize the variable:
 
 .. code-block:: cpp
 
@@ -114,7 +114,7 @@ For simple type initialization, it's not a problem to use the most common method
    std::unordered_map<int, std::string> {{1, "one"}, {2, "two"}};
 
 
-Narrowing conversions are not allowed
+Narrowing Conversions Are Not Allowed
 =====================================
 
 The second benefit is that uniform initialization **does not allow narrowing conversions**.
@@ -137,7 +137,7 @@ The same with bracket initialization will not work and it forces the user to typ
    int i{int(d)};              // old C++-style type-cast
 
 
-Fixes most Vexing Parse
+Fixes Most Vexing Parse
 =======================
 
 The most vexing parse comes from a rule in C++ that says that anything that could be considered a function declaration should be parsed by the compiler as a function declaration.
@@ -179,10 +179,10 @@ And the last solution is to use copy initialization:
 
 
 
-Common problems with uniform initialization 
+Common Problems with Uniform Initialization 
 *******************************************
 
-Even when the uniform initialization helps with a lot of problems in C++, there are also some issues related to using it. The first of them is about using :code:`auto` for variable declaration. Deduced type for the variable can be :code:`std::initializer_list` instead of the type a programmer would expect. This happens mostly when we combine auto variable declaration with an equal sign or if it has multiple elements, like in the code shown below: 
+Even when uniform initialization helps, there are also some issues related to using it. The first of them is about using :code:`auto` for variable declaration. Deduced type for the variable can be :code:`std::initializer_list` instead of the type a programmer would expect. This happens mostly when we combine auto variable declaration with an equal sign or if it has multiple elements, as in the following code: 
 
 .. code-block:: cpp
 
@@ -192,7 +192,7 @@ Even when the uniform initialization helps with a lot of problems in C++, there 
    auto variable{13, 17, 8};    // compilation error variable contains multiple expressions
    auto variable = {13, 17, 8}; // variable is of type std::initializer_list<int>
 
-Another problem can happen with the vector initialization. It can be tricky, especially when a programmer is learning C++. See the difference between declarations below:
+Another problem can happen with the vector initialization. It can be tricky, especially when a programmer is just learning C++. See the difference between declarations below:
 
 .. code-block:: cpp
 

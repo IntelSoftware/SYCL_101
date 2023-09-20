@@ -1,7 +1,7 @@
 Lambdas
 #######
 
-This chapter talks about lambdas. You will learn the following:
+This chapter covers lambdas. You will learn the following:
 
 #. What is a C++ lambda expression?
 #. What are the parts of a lambda?
@@ -17,7 +17,7 @@ Introduction
    // Simple lambda printing string
    [] { std::cout << "Simple lambda\n"; };
 
-   // Simple lambda returning sum of 2 elements
+   // Simple lambda returning sum of two elements
    auto lambda_sum = [](int x, int y){ return x + y; };
    
    // Simple lambda for sorting elements of the vector using std::sort
@@ -44,7 +44,7 @@ The image below shows them in a practical example.
 Capture Clause
 ==============
 
-**Capture clause** is also called **capture list** or **lambda-introducer**. It is the beginning of the lambda expression; it specifies which variables are captured and whether the capture is by value or by reference. Examples of the capture clause are as follows:
+**Capture clause** is also called **capture list** or **lambda-introducer**. It is the beginning of the lambda expression. It specifies which variables are captured and whether the capture is by value or by reference. Examples of the capture clause are as follows:
 
 * :code:`[]` — capture nothing
 * :code:`[=]` — capture local objects like variables and parameters by value
@@ -70,7 +70,7 @@ Let's see them in an example.
    auto getReference = [&]() -> int& { return number; };
    getReference(); // returns int& to number
 
-There is also a feature called **generalized capture**. We can use this feature to introduce and initialize new variables in the capture clause, without the need to have those variables exist in the lambda function's enclosing scope. The type of the variable is deducted from the type produced by the expression. This feature is useful when we want to use it in lambda move-only variables from the surrounding scope. See the code below:
+There is also a feature called **generalized capture**. We can use this feature to introduce and initialize new variables in the capture clause, without the need to have those variables exist in the lambda function's enclosing scope. The type of the variable is deduced from the type produced by the expression. This feature is useful when we want to use it in lambda move-only variables from the surrounding scope:
 
 .. code-block:: cpp
    
@@ -79,10 +79,10 @@ There is also a feature called **generalized capture**. We can use this feature 
    // Lambda using generalized capture
    auto lambda = [capturedValue = std::move(ptr)] { /* use ptr*/ };
 
-Parameter list
+Parameter List
 ==============
 
-Lambdas can capture variables and accept *input parameters*. A **parameter list** is optional and, in most aspects, resembles the parameter list for a function. Let's see the same simple code in a function form and lambda expression.
+Lambdas can capture variables and accept *input parameters*. A **parameter list** is optional and, in most aspects, resembles the parameter list for a function. Let's see the same simple code in a function form and as a lambda expression.
 
 .. code-block:: cpp
    
@@ -98,10 +98,10 @@ In lambdas, it's possible to use the :code:`auto` keyword as the type specifier 
    
    auto lambdaAdd = [](auto x, auto y) { return x + y; };
 
-Mutable specification
+Mutable Specification
 ======================
 
-By default, value-captures cannot be modified inside the lambda because the compiler-generated method is marked as :code:`const`, but using the :code:`mutable` keyword cancels this out. This means that the **mutable specification** enables the body of a lambda expression to modify variables that are captured by value.
+By default, value captures cannot be modified inside the lambda because the compiler-generated method is marked as :code:`const`, but using the :code:`mutable` keyword cancels this out. This means that the **mutable specification** enables the body of a lambda expression to modify variables that are captured by value.
 
 .. code-block:: cpp
    
@@ -116,10 +116,10 @@ By default, value-captures cannot be modified inside the lambda because the comp
    // Due to usage of mutable lambda can modify number
    auto lambdaMutable = [number] () mutable { number = 2; };
 
-Exception specification
+Exception Specification
 =======================
 
-You can specify that the lambda will not throw any exception using the :code:`noexcept` keyword. You can see what will happen if you run the code below.
+You can specify that the lambda will not throw any exception using the :code:`noexcept` keyword. You can see what will happen if you compile and run the following code:
 
 .. code-block:: cpp
    
@@ -127,10 +127,10 @@ You can specify that the lambda will not throw any exception using the :code:`no
 
 Most C++ compilers should show the warning during compilation, but other than that, the code will not throw the exception.
 
-Return-type
+Return Type
 ===========
 
-In general, the returned type of the lambda expression is automatically deducted and there is no need to use the :code:`auto` keyword for that, like shown below:
+In general, the returned type of the lambda expression is automatically deduced and there is no need to use the :code:`auto` keyword for that, as shown below:
 
 .. code-block:: cpp
    
@@ -150,10 +150,10 @@ You can omit the return-type part of a lambda expression if the lambda body cont
    // lambda returning int as deduced type from the single return statement
    [](int x) { return x; }(7);
 
-Lambda body
+Lambda Body
 ===========
 
-As the lambda expression is the same as the ordinary function, its body can contain anything that's allowed in a function body. This means that a lambda body, similar to a function body, can access the following:
+Because the lambda expression is the same as an ordinary function, its body can contain anything that's allowed in a function body. This means that a lambda body, similar to a function body, can access the following:
 
 * Captured variables from the enclosing scope
 * Parameter
@@ -161,13 +161,13 @@ As the lambda expression is the same as the ordinary function, its body can cont
 * Class data members (when lambda is declared inside a class and :code:`this` is captured)
 * Variables with static storage duration (like global variables)
 
-Let's look at the code example. We would like to print the elements of the declared vector together with information that includes whether the number is even or odd. The vector declaration is as follows:
+Let's look at a code example. We would like to print the elements of the declared vector together with information that includes whether the number is even or odd. The vector declaration is as follows:
 
 .. code-block:: cpp
    
    std::vector<int> v {1, 2, 3, 4};
 
-Now, we can prepare the function printing number and phrase 'is even' or 'is odd'.
+Now, we can prepare the function printing number and the phrase "is even" or "is odd."
 
 .. code-block:: cpp
    
@@ -182,14 +182,14 @@ Now, we can prepare the function printing number and phrase 'is even' or 'is odd
       }
    }
 
-To use this function on the vector elements, we are using the :code:`for_each` function form algorithms 
+To apply this function to all vector elements, we are using the :code:`for_each` function from the algorithms 
 library.
 
 .. code-block:: cpp
    
    for_each(v.begin(), v.end(), isEvenOrOdd);
 
-The same result can be achieved by using the lambda-expression instead of the :code:`isEvenOrOdd` function:
+The same result can be achieved by using a lambda expression instead of the :code:`isEvenOrOdd` function:
 
 .. code-block:: cpp
    
@@ -203,4 +203,4 @@ The same result can be achieved by using the lambda-expression instead of the :c
       }
    });
 
-As we can see, there are no limitations related to the size of the lambda. The only thing that may limited is the readability of the code and the fact that lambdas are typically used as minor helper functions in our code.
+As you can see, there are no limitations related to the size of the lambda. The only limit may be the readability of the code, as lambdas are typically used as small helper functions.
