@@ -1,6 +1,6 @@
-SYCL-Conventional: vector_add
-=============================
-In the following code, we dissect the conventional vector addition technique with the use of ``buffer``, ``handler`` and ``accessor``. This approach typically requires explicit memory management, including allocating memory on the host and devices, copying data between them, and synchronizing the operations:
+Conventional vector_add with SYCL
+=================================
+In the following code, we dissect the conventional vector addition technique that uses ``buffer``, ``handler`` and ``accessor``. This approach typically requires explicit memory management, including allocating memory on the host and devices, copying data between them, and synchronizing their operations:
 
 .. code-block:: cpp
 
@@ -56,7 +56,7 @@ In the following code, we dissect the conventional vector addition technique wit
 
 These are the main SYCL steps to read from the code:
 
-* **Vector Initialization:** Three vectors ``vector1``, ``vector2``, and ``vectorR`` of size N are created in the host and initialized with specific values. These vectors represent the input vectors and the result vector of a vector addition operation.
+* **Vector Initialization:** Three vectors ``vector1``, ``vector2``, and ``vectorR`` of size N are created on the host and initialized with specific values. They represent the input vectors and the result vector of a vector addition operation.
 
 * **Create Buffers:** Three SYCL buffers, ``vector1_buffer``, ``vector2_buffer``, and ``vectorR_buffer``, are created to hold the data of the vectors. These buffers are used for data transfer between the host and the SYCL device (e.g., GPU).
 
@@ -68,4 +68,4 @@ These are the main SYCL steps to read from the code:
 
 * **Host Accessor:** After the SYCL task is completed, a host accessor ``h_a`` is created for the ``vectorR_buffer`` to copy the data from the device to the host.
 
-While effective, this method can lead to intricate code and hinder productivity due to its manual memory management requirements. In the next section, we present the same vector_add code sample approached with the use of USM.
+While effective, this method can lead to intricate code and hinder productivity due to its manual memory management requirements. In the next section, we'll implement vector_add using USM.

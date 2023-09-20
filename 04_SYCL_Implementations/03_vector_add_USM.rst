@@ -1,9 +1,8 @@
-SYCL-USM: vector_add
-====================
+USM vector_add with SYCL
+========================
 
-In this discussion, we present the vector addition case addressed with the use of USM. We'll examine the steps involved in implementing vector addition with SYCL, and highlight how the SYCL programming model simplifies the utilization of heterogeneous computing resources. 
-
-The main takeaway is that with USM there is no requirement to define ``buffers``, ``handlers``, and ``accessors``. In this case, the ``malloc_shared`` function of USM is sufficient to allocate and manage memory access:
+In this discussion, we implement vector addition using Unified Shared Memory (USM), highlighting how the SYCL programming model simplifies the utilization of heterogeneous computing resources. 
+The main takeaway is that with USM there is no requirement to define ``buffers``, ``handlers``, and ``accessors``. In this case, the USM ``malloc_shared`` function is sufficient to allocate and manage memory access:
 
 .. code-block:: cpp
 
@@ -62,7 +61,7 @@ This part of the code:
 
 gets device information from the ``q``, and prints information about the selected device.
 
-and the **USM** gets established here:
+**USM** gets established here:
 
 .. code-block:: cpp
 
@@ -70,9 +69,8 @@ and the **USM** gets established here:
       int *data2 = malloc_shared<int>(N, q);
       int *dataR = malloc_shared<int>(N, q);
 
-where three shared memory arrays ``data1``, ``data2``, and ``dataR`` are allocated using ``malloc_shared<int>(N, q)`` and become accessible during computation by both, host and device.
-
-Additionally, USM offers ``malloc_device`` and ``malloc_host``, which are approaches to tackle memory management access by the host or device explicitly, but this course does not cover them for now.
+where three shared memory arrays ``data1``, ``data2``, and ``dataR`` are allocated using ``malloc_shared<int>(N, q)``. They are accessible during computation by both the host and device.
+USM also offers ``malloc_device`` and ``malloc_host`` to explicitly allocate memory on the host or device, but they will not be covered in this course.
 
 So, when should you use USM versus the conventional SYCL? In summary, using USM is a good approach to consider when:
 

@@ -6,7 +6,7 @@ Using buffers, handlers, and accessors versus using USM (Unified Shared Memory) 
 Advantages of Using Buffers, Handlers, and Accessors:
 -----------------------------------------------------
 
-* **Fine-Grained Control:** Buffers, handlers, and accessors provide fine-grained control over memory management and data transfer. This can be advantageous when you need precise control over memory allocation, data movement, and synchronization.
+* **Fine-Grained Control:** Buffers, handlers, and accessors provide fine-grained control over memory management and data transfer. This can be advantageous when you need precise control over memory allocation, data movement, and synchronization. It can also be more flexible when multiple devices need to access the same data.
 
 * **Explicit Data Movement:** Buffers and accessors allow you to explicitly control when data is transferred between the host and device. This can be useful when optimizing data movement for specific application requirements.
 
@@ -41,8 +41,8 @@ Disadvantages of Using USM:
 
 * **Limited Control:** While USM simplifies memory management, it also limits your control over low-level memory operations. This may be a disadvantage in scenarios where fine-grained control is essential for performance optimization.
 
-* **Performance Trade-offs:** Depending on the hardware and use case, USM may introduce performance trade-offs compared to using buffers and explicit data movement control.
+* **Performance Trade-offs:** Depending on the hardware and use case, USM may introduce performance tradeoffs compared to using buffers and explicit data movement control.
 
 * **Compatibility:** Not all SYCL-compatible devices and platforms support USM, so there may be limitations on where you can deploy USM-based code.
 
-In summary, the choice between using buffers, handlers, and accessors versus USM in SYCL depends on your specific application requirements and your familiarity with SYCL programming. Buffers, handlers, and accessors provide more control but can be more complex, while USM simplifies memory management but may not offer the same level of control in all situations. Consider the trade-offs and choose the approach that best suits your application's needs and your development expertise.
+In summary, the choice between using buffers, handlers, and accessors versus USM in SYCL depends on your specific application requirements and your familiarity with SYCL programming. Buffers, handlers, and accessors provide more control but can be more complex, while USM simplifies memory management but may not offer the same level of control in all situations. Consider the tradeoffs and choose the approach that best suits your application's needs and your development expertise.
