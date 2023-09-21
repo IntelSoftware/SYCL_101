@@ -117,6 +117,7 @@ As in other standard containers, we can conduct operations like the following:
 Similar to :code:`std::unordered_set` is **std::unordered_multiset**.  Let's start with a definition:
 
     :code:`std::unordered_multiset` is an associative container holding a set of possibly non-unique objects of type Key. Search, insertion, and removal have average constant time complexity.
+
 This means that the only difference between :code:`std::unordered_set` and :code:`std::unordered_multiset` is that the latter allows multiple keys to be stored.
 An example of the :code:`std::unordered_multiset` declaration is shown in code below:
 
@@ -155,6 +156,7 @@ To initialize :code:`std::unordered_map`, we can simply assign values to it at d
 Similarly, as with a set container, **std::unordered_multimap** and :code:`std::unordered_map` have a lot in common. Let's look at the C++ Reference definition:
 
     :code:`std::unordered_multimap` is an unordered associative container that supports equivalent keys (an unordered_multimap may contain multiple copies of each key value) and that associates values of another type with the keys. (...) Search, insertion, and removal have average constant time complexity.
+    
 The only difference is that :code:`std::unordered_multimap` allows for keys to be repeated.
 The code below shows an example of a :code:`std::unordered_multimap` declaration where key is of type :code:`int` and value is of type :code:`std::string`:
 
