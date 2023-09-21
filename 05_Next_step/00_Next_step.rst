@@ -1,7 +1,7 @@
 Introduction to SYCL Essentials
 ###############################
 
-Congratulations on embarking on your first SYCL journey with "SYCL 101"!!, your gateway to the world of SYCL programming. As you delve into the foundational aspects of SYCL, you're building a strong base that will empower you to explore the endless possibilities of parallel programming. 
+Congratulations on embarking on your first SYCL journey with "SYCL 101"!!, your gateway to the world of SYCL programming. As you delve into the foundational aspects of SYCL, you're building a strong base that will empower you to explore the possibilities of parallel programming. 
 
 Now that you have completed the SYCL 101 course, **why stop here?** Would you like to elevate your SYCL skills? Join **SYCL Essentials!**
 
