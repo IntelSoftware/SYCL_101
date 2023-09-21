@@ -1,5 +1,5 @@
-Module 5: Intel® Adviso
-########################
+Module 5: Intel® Advisor
+#########################
 
 This module demonstrates various aspects of **Intel® Advisor**. The first uses Intel Advisor to show performance offload opportunities found in a sample application, followed by additional command-line options for getting offload advisor results. The second gives an example of **roofline analysis** and command-line options for getting Advisor results.
 
