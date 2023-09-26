@@ -1,0 +1,715 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="ascii" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Smart Pointers &#8212; SYCL 101</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tiles.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '03_Modern/03_smart_pointers';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Hash Tables" href="04_hash_tables.html" />
+    <link rel="prev" title="Multithreading" href="02_multithreading.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">SYCL 101</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../01_Heterogeneous/index.html">
+                        1) Heterogeneous Compute
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../02_Why_SYCL/index.html">
+                        2) Why SYCL?
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        3) Modern C++
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../04_SYCL_Implementations/index.html">
+                        4) SYCL Implementations of Modern C++
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../05_Next_step/index.html">
+                        5) Next step: SYCL Essentials
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../01_Heterogeneous/index.html">
+                        1) Heterogeneous Compute
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../02_Why_SYCL/index.html">
+                        2) Why SYCL?
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        3) Modern C++
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../04_SYCL_Implementations/index.html">
+                        4) SYCL Implementations of Modern C++
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../05_Next_step/index.html">
+                        5) Next step: SYCL Essentials
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_uniform_initialization.html">Uniform Initialization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_multithreading.html">Multithreading</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Smart Pointers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_hash_tables.html">Hash Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_array.html">std::array Container</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_move.html">Move Semantics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_lambdas.html">Lambdas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_auto.html">Type Inference in C++ (auto and decltype)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_initializers.html">Initializers in if and switch Statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_STL_concurrent_algorithms.html">Standard Template Library (STL) on Concurrent and Parallel Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_nested_namespaces.html">Nested Namespaces</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">3) Modern C++</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Smart Pointers</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="smart-pointers">
+<h1>Smart Pointers<a class="headerlink" href="#smart-pointers" title="Permalink to this heading">#</a></h1>
+<p>This chapter covers smart pointers. You will learn the following:</p>
+<ol class="arabic simple">
+<li><p>What are smart pointers?</p></li>
+<li><p>When should different smart pointer types be used?</p></li>
+<li><p>Why should you use smart pointers?</p></li>
+</ol>
+<section id="what-are-smart-pointers-and-when-should-they-be-used">
+<h2>What are Smart Pointers and When Should They be Used?<a class="headerlink" href="#what-are-smart-pointers-and-when-should-they-be-used" title="Permalink to this heading">#</a></h2>
+<p>Let's start with the definition of smart pointers. Smart pointers are a type with values that may be used like pointers but with the added benefit of automated memory management. We have three types of smart pointers declared in the <code class="code docutils literal notranslate"><span class="pre">&lt;memory&gt;</span></code> STD library:</p>
+<ul class="simple">
+<li><p>std::unique_ptr</p></li>
+<li><p>std::shared_ptr</p></li>
+<li><p>std::weak_ptr</p></li>
+</ul>
+<p>In general, smart pointers are used in code that involves tracking the ownership of a piece of memory and allocating or deallocating it. They typically eliminate the necessity to do these things explicitly.</p>
+<p>It is worth mentioning that regular pointers can be still used in code with oblivious memory ownership. This would typically be in functions that get a pointer from someplace else and do not allocate or deallocate memory and do not store a copy of the pointer that outlasts their execution.  Let's take a deeper look at each of the smart pointer types.</p>
+</section>
+<section id="std-unique-ptr">
+<h2>std::unique_ptr<a class="headerlink" href="#std-unique-ptr" title="Permalink to this heading">#</a></h2>
+<p>According to the C++ Reference:</p>
+<blockquote>
+<div><p><code class="code docutils literal notranslate"><span class="pre">std::unique_ptr</span></code> is a smart pointer that owns and manages another object through a pointer and disposes of that object when the unique_ptr goes out of scope.</p>
+</div></blockquote>
+<p>In other words, it is a smart pointer with <strong>unique object ownership</strong> semantics. It is a 1-to-1 relationship between a pointer and its allocated object on the heap. It's important to know that if the unique pointer is destructed, the allocated object on the heap is also destroyed.</p>
+<section id="syntax">
+<h3>Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading">#</a></h3>
+<p>The unique pointer is declared as follows:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ptr</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">);</span><span class="w"> </span><span class="c1">// allocation of new int on heap</span>
+</pre></div>
+</div>
+<p>As mentioned previously, the smart pointer has automated memory management. It will be destroyed at the end of the code block in which it was declared. Remember, the object it points to will also be destroyed.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ptr</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// pointer usage</span>
+
+<span class="p">}</span><span class="w"> </span><span class="c1">// ptr is destroyed, which means the int object is also destroyed</span>
+</pre></div>
+</div>
+</section>
+<section id="usage">
+<h3>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h3>
+<p>Generally, <code class="code docutils literal notranslate"><span class="pre">std::unique_ptr</span></code> is used when you want your object to last only as long as a single owning reference to it does. Let's look at a practical example to demonstrate <code class="code docutils literal notranslate"><span class="pre">std::unique_ptr</span></code> usage and some of its functions.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// big object declaration</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">foo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="k">public</span><span class="o">:</span>
+<span class="w">   </span><span class="kt">void</span><span class="w"> </span><span class="n">bar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">processFoo</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">foo</span><span class="o">&amp;</span><span class="w"> </span><span class="n">object</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>First, we will create the smart unique pointer. Remember, do not use <code class="code docutils literal notranslate"><span class="pre">new</span></code> operator on the unique pointer directly.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">foo</span><span class="o">&gt;</span><span class="w"> </span><span class="n">foo_ptr</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">foo</span><span class="p">());</span>
+</pre></div>
+</div>
+<p>We can call the method on the object using the <cite>-&gt;</cite> operator:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">foo_ptr</span><span class="o">-&gt;</span><span class="n">bar</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>And pass the foo object reference to the function using the <code class="code docutils literal notranslate"><span class="pre">*</span></code> operator. Note that the unique pointer cannot be copied or passed by value because it is a pointer.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">processFoo</span><span class="p">(</span><span class="o">*</span><span class="n">foo_ptr</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>It's possible to access the raw pointer using the <code class="code docutils literal notranslate"><span class="pre">get()</span></code> method. It's especially helpful if you want to use the smart pointer to manage memory while still passing the raw pointer to code that doesn't support smart pointers.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">foo_ptr</span><span class="p">.</span><span class="n">get</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>We can also free memory before exiting the code block with a unique pointer declaration using the <code class="code docutils literal notranslate"><span class="pre">reset()</span></code> method:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">foo_ptr</span><span class="p">.</span><span class="n">reset</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+<section id="std-make-unique">
+<h3>std::make_unique<a class="headerlink" href="#std-make-unique" title="Permalink to this heading">#</a></h3>
+<p>To make the creation of unique pointers easier and safer, the <code class="code docutils literal notranslate"><span class="pre">std::make_unique</span></code> function constructs an object of a given type and wraps it in <code class="code docutils literal notranslate"><span class="pre">std::unique_ptr</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">13</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This is also the preferred way to create unique pointers (instead of using the <code class="code docutils literal notranslate"><span class="pre">new</span></code> operator). The only exception is when you need to customize a way to delete the object or are adopting a raw pointer from elsewhere &#8212;. In that case, do not use <code class="code docutils literal notranslate"><span class="pre">std::make_unique</span></code>.</p>
+</section>
+</section>
+<section id="std-shared-ptr">
+<h2>std::shared_ptr<a class="headerlink" href="#std-shared-ptr" title="Permalink to this heading">#</a></h2>
+<p>Similar to <code class="code docutils literal notranslate"><span class="pre">std::unique_ptr</span></code>, we will start with the C++ Reference definition of <code class="code docutils literal notranslate"><span class="pre">std::shared_ptr</span></code>:</p>
+<blockquote>
+<div><p><code class="code docutils literal notranslate"><span class="pre">std::shared_ptr</span></code> is a smart pointer that retains shared ownership of an object through a pointer. Several shared_ptr objects may own the same object.</p>
+</div></blockquote>
+<p>This means that <code class="code docutils literal notranslate"><span class="pre">std::shared_ptr</span></code> is a smart pointer with <strong>shared object ownership</strong> semantics. It is worth mentioning that the shared pointer is destroyed when the remaining <code class="code docutils literal notranslate"><span class="pre">std::shared_ptr</span></code> owning the object is destroyed.</p>
+<section id="id1">
+<h3>Syntax<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<p>The shared pointer is declared as follows:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ptr</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">);</span><span class="w"> </span><span class="c1">// allocation of new int on heap</span>
+</pre></div>
+</div>
+<p>The allocated int (or any other object within <code class="code docutils literal notranslate"><span class="pre">std:shared_ptr</span></code>) is called a <strong>managed object</strong>.  In contrast to the unique pointer, an object managed by a shared pointer can be shared with as many shared pointers as we like.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ptr2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ptr</span><span class="p">;</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">ptr3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ptr</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h3>Usage<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<p>Usually, you will use <code class="code docutils literal notranslate"><span class="pre">std::shared_ptr</span></code> when you do want numerous references to your object and you don't want it to be deallocated until all of these references have been removed.</p>
+<p>The methods shown for <code class="code docutils literal notranslate"><span class="pre">std::unique_ptr</span></code> are the same for <code class="code docutils literal notranslate"><span class="pre">std::shared_ptr</span></code>, like creation, calling object methods, dereferencing, accessing the raw pointer, and resetting it. In this part, we will focus only on those functionalities specific to <code class="code docutils literal notranslate"><span class="pre">std::shared_ptr</span></code>.</p>
+<p>Let's start with copy initialization and via assignment.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ptr2</span><span class="p">(</span><span class="n">ptr</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ptr3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ptr</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>It's also possible to check how many instances of <code class="code docutils literal notranslate"><span class="pre">std::shared_ptr</span></code> manage the same object and if the current object is unique (i.e., other shared pointers don't manage this object):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ptr</span><span class="p">.</span><span class="n">use_count</span><span class="p">();</span><span class="w"> </span><span class="c1">// returns number of shared pointers managing the same object as ptr</span>
+<span class="n">ptr</span><span class="p">.</span><span class="n">unique</span><span class="p">();</span><span class="w">    </span><span class="c1">// returns true if ptr is the only shared_ptr managing object, false otherwise</span>
+</pre></div>
+</div>
+<p>Finally, the last functionality is the comparison operation. Two unrelated shared pointers will never be equal (even when they contain the same information), but related shared pointers are always equal.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">pt1</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;str1&quot;</span><span class="p">));</span>
+<span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">pt2</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;str1&quot;</span><span class="p">));</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">pt1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">pt2</span><span class="p">;</span><span class="w"> </span><span class="c1">// return false because pt1 and pt2 are not related</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">pt3</span><span class="p">(</span><span class="n">pt1</span><span class="p">);</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">pt1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">pt3</span><span class="p">;</span><span class="w"> </span><span class="c1">// returns true because pt1 and pt3 are related</span>
+</pre></div>
+</div>
+</section>
+<section id="std-make-shared">
+<h3>std::make_shared<a class="headerlink" href="#std-make-shared" title="Permalink to this heading">#</a></h3>
+<p>As in the case of <code class="code docutils literal notranslate"><span class="pre">std::unique_ptr</span></code>, <code class="code docutils literal notranslate"><span class="pre">std::shared_ptr</span></code> includes a dedicated (and preferred) method for creating pointers called <code class="code docutils literal notranslate"><span class="pre">std::make_shared()</span></code>. It constructs an object of a given type and wraps it in <code class="code docutils literal notranslate"><span class="pre">std::shared_ptr</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">13</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Be aware that there isn't a way to release the memory for the control block and the managed object separately when using <code class="code docutils literal notranslate"><span class="pre">std::make_shared</span></code>. It creates a single heap allocation for both the control block and the managed object, so we have to wait until we can release both the managed object and the control block.</p>
+</section>
+</section>
+<section id="std-weak-ptr">
+<h2>std::weak_ptr<a class="headerlink" href="#std-weak-ptr" title="Permalink to this heading">#</a></h2>
+<p>As the C++ Reference defines:</p>
+<blockquote>
+<div><p><code class="code docutils literal notranslate"><span class="pre">std::weak_ptr</span></code> is a smart pointer that holds a non-owning (&quot;weak&quot;) reference to an object that is managed by <code class="code docutils literal notranslate"><span class="pre">std::shared_ptr</span></code>. It must be converted to <code class="code docutils literal notranslate"><span class="pre">std::shared_ptr</span></code> in order to access the referenced object.</p>
+</div></blockquote>
+<section id="id3">
+<h3>Syntax<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<p>The weak pointer is declared as in the code below:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">weak_ptr</span><span class="w"> </span><span class="n">ptr</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>And later it can be used to observe the object of a shared pointer:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">sh_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span>
+<span class="n">ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sh_ptr</span><span class="p">;</span><span class="w"> </span><span class="c1">// watches the managed object of sh_ptr</span>
+</pre></div>
+</div>
+<p>Remember that a control block on a shared pointer object keeps track of the number of <strong>shared and weak pointers</strong>. The object is removed when the shared counter hits zero, but the control block remains active until the weak counter also reaches zero.</p>
+</section>
+<section id="id4">
+<h3>Usage<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<p>Why would we ever use a weak pointer? Generally, weak pointers are used when you do want to refer to your object from multiple places and do not want your object to be deallocated until all these references are themselves gone.  Sometimes, you need to store the shared_ptr's underlying object without increasing the reference count. Often, this issue occurs when <code class="code docutils literal notranslate"><span class="pre">shared_ptr</span></code> objects have cyclic references. Let's see an example:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">A</span><span class="p">;</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">B</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span><span class="w"> </span><span class="n">A_ptr</span><span class="p">;</span>
+<span class="w">   </span><span class="o">~</span><span class="n">B</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;~B()&quot;</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">A</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">B</span><span class="o">&gt;</span><span class="w"> </span><span class="n">B_ptr</span><span class="p">;</span>
+<span class="w">   </span><span class="o">~</span><span class="n">A</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;~A()&quot;</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="k">auto</span><span class="w"> </span><span class="n">BB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">B</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">   </span><span class="k">auto</span><span class="w"> </span><span class="n">AA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span><span class="p">();</span>
+
+<span class="w">   </span><span class="n">AA</span><span class="o">-&gt;</span><span class="n">B_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BB</span><span class="p">;</span>
+<span class="w">   </span><span class="n">BB</span><span class="o">-&gt;</span><span class="n">A_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AA</span><span class="p">;</span>
+
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The problem with the code above is that destructors will not be called so there is a memory leak. Keep in mind that the managed object of the shared pointer is deleted when the reference count reaches zero &#8212;. Let's analyze the situation.
+When <code class="code docutils literal notranslate"><span class="pre">BB</span></code> goes out of scope, it will be not be deleted because it still manages the object to which <code class="code docutils literal notranslate"><span class="pre">AA.B_ptr</span></code> points. A similar situation occurs with the <code class="code docutils literal notranslate"><span class="pre">AA</span></code> &#8212;. If it goes out of scope, its managed object is not deleted either because <code class="code docutils literal notranslate"><span class="pre">BB.A_ptr</span></code> points to it.
+This problem can be solved with a weak pointer.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">A</span><span class="p">;</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">B</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span><span class="w"> </span><span class="n">A_ptr</span><span class="p">;</span>
+<span class="w">   </span><span class="o">~</span><span class="n">B</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;~B()&quot;</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">A</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="n">std</span><span class="o">::</span><span class="n">weak_ptr</span><span class="o">&lt;</span><span class="n">B</span><span class="o">&gt;</span><span class="w"> </span><span class="n">B_ptr</span><span class="p">;</span><span class="w"> </span><span class="c1">// using weak_ptr instead of shared_ptr</span>
+<span class="w">   </span><span class="o">~</span><span class="n">A</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;~A()&quot;</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="k">auto</span><span class="w"> </span><span class="n">BB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">B</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="w">   </span><span class="k">auto</span><span class="w"> </span><span class="n">AA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">A</span><span class="o">&gt;</span><span class="p">();</span>
+
+<span class="w">   </span><span class="n">AA</span><span class="o">-&gt;</span><span class="n">B_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BB</span><span class="p">;</span>
+<span class="w">   </span><span class="n">BB</span><span class="o">-&gt;</span><span class="n">A_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AA</span><span class="p">;</span>
+
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Now, both destructors are called when <code class="code docutils literal notranslate"><span class="pre">BB</span></code> goes out of scope. It can be destroyed because a weak pointer pointed to it and later, <code class="code docutils literal notranslate"><span class="pre">AA</span></code> can be destroyed because it is pointing to nothing. It doesn't matter whether <code class="code docutils literal notranslate"><span class="pre">AA</span></code> or <code class="code docutils literal notranslate"><span class="pre">BB</span></code> goes out of scope first. When <code class="code docutils literal notranslate"><span class="pre">BB</span></code> goes out of scope, it calls for the destruction of all managed objects, like <code class="code docutils literal notranslate"><span class="pre">A_ptr</span></code>.  So, even if <code class="code docutils literal notranslate"><span class="pre">AA</span></code> went out of scope first and was not destroyed, they will be destroyed together with <code class="code docutils literal notranslate"><span class="pre">BB</span></code>.</p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="02_multithreading.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Multithreading</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="04_hash_tables.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Hash Tables</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-smart-pointers-and-when-should-they-be-used">What are Smart Pointers and When Should They be Used?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#std-unique-ptr">std::unique_ptr</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#syntax">Syntax</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#std-make-unique">std::make_unique</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#std-shared-ptr">std::shared_ptr</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Syntax</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Usage</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#std-make-shared">std::make_shared</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#std-weak-ptr">std::weak_ptr</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Syntax</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Usage</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/03_Modern/03_smart_pointers.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      &#169; Copyright 2023, various.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

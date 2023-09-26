@@ -1,0 +1,679 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="ascii" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Move Semantics &#8212; SYCL 101</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tiles.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '03_Modern/06_move';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Lambdas" href="07_lambdas.html" />
+    <link rel="prev" title="std::array Container" href="05_array.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">SYCL 101</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../01_Heterogeneous/index.html">
+                        1) Heterogeneous Compute
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../02_Why_SYCL/index.html">
+                        2) Why SYCL?
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        3) Modern C++
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../04_SYCL_Implementations/index.html">
+                        4) SYCL Implementations of Modern C++
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../05_Next_step/index.html">
+                        5) Next step: SYCL Essentials
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../01_Heterogeneous/index.html">
+                        1) Heterogeneous Compute
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../02_Why_SYCL/index.html">
+                        2) Why SYCL?
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        3) Modern C++
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../04_SYCL_Implementations/index.html">
+                        4) SYCL Implementations of Modern C++
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../05_Next_step/index.html">
+                        5) Next step: SYCL Essentials
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_uniform_initialization.html">Uniform Initialization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_multithreading.html">Multithreading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_smart_pointers.html">Smart Pointers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_hash_tables.html">Hash Tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_array.html">std::array Container</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Move Semantics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_lambdas.html">Lambdas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_auto.html">Type Inference in C++ (auto and decltype)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_initializers.html">Initializers in if and switch Statements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_STL_concurrent_algorithms.html">Standard Template Library (STL) on Concurrent and Parallel Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_nested_namespaces.html">Nested Namespaces</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">3) Modern C++</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Move Semantics</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="move-semantics">
+<h1>Move Semantics<a class="headerlink" href="#move-semantics" title="Permalink to this heading">#</a></h1>
+<p>This chapter covers move semantics. You will learn the following:</p>
+<ol class="arabic simple">
+<li><p>What are move semantics?</p></li>
+<li><p>What are the different value categories and when should they be used?</p></li>
+<li><p>What is universal reference T&amp;&amp;?</p></li>
+<li><p>How and why should std::move be used?</p></li>
+<li><p>How is a move constructor created? (Rule of Five)</p></li>
+</ol>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<p>Move semantics allows an object under certain conditions to take ownership of some other object's external resources.</p>
+</section>
+<section id="value-categories-glvalue-and-rvalue">
+<h2>Value Categories (glvalue and rvalue)<a class="headerlink" href="#value-categories-glvalue-and-rvalue" title="Permalink to this heading">#</a></h2>
+<p>In C++, every expression has a type and belongs to a specific <strong>value category</strong>. These are the basic rules for a compiler to follow when creating, copying, and moving objects during expression evaluation.</p>
+<p>Here are some C++ expression value categories:</p>
+<ul class="simple">
+<li><p><strong>glvalue</strong> &#8212; Expression that has an identity; it's possible to determine if two expressions refer to the same entity.</p></li>
+<li><p><strong>rvalue</strong> &#8212; Expression that can be moved from.</p></li>
+<li><p><strong>lvalue</strong> &#8212; Has an identity and can't be moved from.</p></li>
+<li><p><strong>xvalue</strong> &#8212; Has an identity and can be moved from.</p></li>
+<li><p><strong>prvalue</strong> &#8212; Doesn't have an identity and can be moved from.</p></li>
+</ul>
+<p>The diagram below shows different expression types and the dependencies between them:</p>
+<figure class="align-default">
+<img alt="../_images/move-semantics-expressions.png" src="../_images/move-semantics-expressions.png" />
+</figure>
+<p>Let's look at the lvalue and rvalue in the following example:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">size_t</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="c1">// x expression is lvalue</span>
+
+<span class="kt">size_t</span><span class="w"> </span><span class="nf">foo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">}</span>
+
+<span class="n">foo</span><span class="p">();</span><span class="w"> </span><span class="c1">// Result of foo call expr is an rvalue</span>
+</pre></div>
+</div>
+<p>Any name of variable, function, template parameter object, or data member is an lvalue. It's important to note that it doesn't matter how complex the expression is. As long as it maintains an identity, the expression is an lvalue.</p>
+<p>The integer constants are <em>prvalues</em>, like in the code above &#8212; the result of a function call.</p>
+<section id="functions-returning-lvalue-and-prvalue">
+<h3>Functions Returning lvalue and prvalue<a class="headerlink" href="#functions-returning-lvalue-and-prvalue" title="Permalink to this heading">#</a></h3>
+<p>Let's imagine a function returning a <code class="code docutils literal notranslate"><span class="pre">int</span></code> value:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">returnValue</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In this case, <code class="code docutils literal notranslate"><span class="pre">returnValue()</span></code> returns the temporary number <code class="code docutils literal notranslate"><span class="pre">3</span></code>, which is a prvalue. Now, we will try to assign the value to it:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">returnValue</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">17</span><span class="p">;</span><span class="w"> </span><span class="c1">// error</span>
+</pre></div>
+</div>
+<p>We will receive an error: <code class="code docutils literal notranslate"><span class="pre">lvalue</span> <span class="pre">required</span> <span class="pre">as</span> <span class="pre">left</span> <span class="pre">operand</span> <span class="pre">of</span> <span class="pre">assignment</span></code>. That's because we are trying to use the left operand of the assignment on prvalue. But when we change the <code class="code docutils literal notranslate"><span class="pre">returnValue()</span></code> function to return a reference to an already existing memory location, everything will work fine:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">globalValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">43</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="o">&amp;</span><span class="w"> </span><span class="nf">returnValue</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="n">globalValue</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// ...</span>
+
+<span class="n">returnValue</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">17</span><span class="p">;</span><span class="w"> </span><span class="c1">// works fine</span>
+</pre></div>
+</div>
+<p>Even though the ability to return an lvalue may not seem intuitive, it can be useful when implementing more advanced functions like overloaded operators.</p>
+</section>
+<section id="lvalue-to-prvalue-conversion">
+<h3>lvalue-to-prvalue Conversion<a class="headerlink" href="#lvalue-to-prvalue-conversion" title="Permalink to this heading">#</a></h3>
+<p>An lvalue may be converted to a prvalue. This is totally legal and occurs frequently. Let's look at <code class="code docutils literal notranslate"><span class="pre">+operator</span></code> as an example. According to the C++ standard, it takes two prvalues as arguments and returns a prvalue.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="mi">20</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><code class="code docutils literal notranslate"><span class="pre">x</span></code> and <code class="code docutils literal notranslate"><span class="pre">y</span></code> are lvalues, but the additional operator wants prvalues. <em>How is it possible?</em> Because of an implicit lvalue-to-prvalue conversion. There are many more operators performing similar conversions. But what about the opposite &#8212; converting prvalue to lvalue? It is not possible due to the C++ design.</p>
+</section>
+</section>
+<section id="universal-references">
+<h2>Universal References (&amp;&amp;)<a class="headerlink" href="#universal-references" title="Permalink to this heading">#</a></h2>
+<p>One of the main features related to the rvalues introduced in C++11 was rvalue reference. Usually, the <code class="code docutils literal notranslate"><span class="pre">&amp;&amp;</span></code> notation is known as a syntax for rvalue reference. But it is not always true. <code class="code docutils literal notranslate"><span class="pre">T&amp;&amp;</span></code> can hold both lvalue and rvalue references, which is called a <strong>universal reference</strong>.  But remember that <code class="code docutils literal notranslate"><span class="pre">&amp;&amp;</span></code> only means a universal reference when type deduction is involved. In other cases, we can assume that it means only an rvalue reference.  Let's see it in code.  We will start with a universal reference, as the <code class="code docutils literal notranslate"><span class="pre">T</span></code> is deduced.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">foo</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">param</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Now, let's move on to an rvalue reference, as there is no type deduction.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">param</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Finally, the last thing is to show the concept of prefect forwarding, which is when a universal reference can be propagated, preserving the l-r 'valueness'.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">foo</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">param</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">}</span>
+
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
+<span class="kt">void</span><span class="w"> </span><span class="n">bar</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">param</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="n">foo</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">param</span><span class="p">));</span><span class="w"> </span><span class="c1">// l or r value depending on the param passed to `bar`</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In this case, because both functions <code class="code docutils literal notranslate"><span class="pre">foo</span></code> and <code class="code docutils literal notranslate"><span class="pre">bar</span></code> are using a universal reference, <code class="code docutils literal notranslate"><span class="pre">foo</span></code> will receive an l or r value, depending on the param passed to <code class="code docutils literal notranslate"><span class="pre">bar</span></code>.</p>
+</section>
+<section id="std-move">
+<h2>std::move<a class="headerlink" href="#std-move" title="Permalink to this heading">#</a></h2>
+<p>Let's start by answering the question: What is <code class="code docutils literal notranslate"><span class="pre">std::move</span></code>?</p>
+<p>According to the C++ Reference:</p>
+<blockquote>
+<div><p><code class="code docutils literal notranslate"><span class="pre">std::move</span></code> is used to indicate that an object t may be &quot;moved from&quot; (i.e., allowing the efficient transfer of resources from t to another object).  In other words, it is a way to efficiently transfer contents of an object to another, leaving the source in a valid but undefined state. When you move a value from a register or memory location to another place, the value on the source register or memory location is still there.  And more formally, <code class="code docutils literal notranslate"><span class="pre">std::move</span></code> is a C++ Standard Library function that's defined in the <code class="code docutils literal notranslate"><span class="pre">&lt;utility&gt;</span></code> header. It is used to cast an l-value reference to an r-value reference, which enables move semantics.</p>
+</div></blockquote>
+<p>Let's see an example. We will start with a declaration of the function consuming the element.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">consume_element</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">element</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Then, let's declare it and consume using a prepared function and <code class="code docutils literal notranslate"><span class="pre">std:move</span></code>.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">element</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">30</span><span class="p">);</span>
+<span class="n">consume_element</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">el</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>After those operations, the declared element <code class="code docutils literal notranslate"><span class="pre">element</span></code> is nullptr, as it was moved.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">assert</span><span class="p">(</span><span class="n">element</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">nullptr</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="move-constructor-and-rule-of-five">
+<h2>Move Constructor and Rule of Five<a class="headerlink" href="#move-constructor-and-rule-of-five" title="Permalink to this heading">#</a></h2>
+<p><code class="code docutils literal notranslate"><span class="pre">std::move</span></code> is actually just a request to move. If the type of the object does not have a move constructor/assign operator defined, the move operation will fall back to a copy. In that case, we will not experience any benefits of using the move operation.</p>
+<p>That is why it is important to know how to create a move constructor. At the same time, in C++ we have something called <strong>Rule of Five</strong>, which is as follows:</p>
+<ol class="arabic simple">
+<li><p>If a class requires a user-defined destructor, a user-defined copy constructor, or a user-defined copy assignment operator, it almost certainly requires all three.</p></li>
+<li><p>Any class for which move semantics are desirable needs to declare the move constructor and the move assignment operator.</p></li>
+</ol>
+<p>Those result in creating five elements:</p>
+<ol class="arabic simple">
+<li><p>user-defined destructor</p></li>
+<li><p>user-defined copy constructor</p></li>
+<li><p>user-defined copy assignment operator</p></li>
+<li><p>user-defined move constructor</p></li>
+<li><p>user-defined move assignment operator</p></li>
+</ol>
+<p>Let's show this with an example. Imagine a class called <code class="code docutils literal notranslate"><span class="pre">MoveClass</span></code> with a private member called <code class="code docutils literal notranslate"><span class="pre">str_ptr</span></code> being <code class="code docutils literal notranslate"><span class="pre">char*</span></code>. To show the Rule of Five, we need to declare the following:</p>
+<ul class="simple">
+<li><p>custom destructor</p></li>
+<li><p>custom copy constructor</p></li>
+<li><p>custom move constructor</p></li>
+<li><p>custom copy assignment operator</p></li>
+<li><p>custom move assignment operator</p></li>
+</ul>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MoveClass</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">str_ptr</span><span class="p">;</span>
+
+<span class="k">public</span><span class="o">:</span>
+<span class="w">   </span><span class="k">explicit</span><span class="w"> </span><span class="n">MoveClass</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">str_ptr</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">strlen</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">         </span><span class="n">str_ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">char</span><span class="p">[</span><span class="n">size</span><span class="p">];</span><span class="w">      </span><span class="c1">// allocate</span>
+<span class="w">         </span><span class="n">std</span><span class="o">::</span><span class="n">memcpy</span><span class="p">(</span><span class="n">str_ptr</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="p">);</span><span class="w"> </span><span class="c1">// populate</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">   </span><span class="p">}</span>
+
+<span class="w">   </span><span class="c1">// Destructor - we need to deallocate str_ptr</span>
+<span class="w">   </span><span class="o">~</span><span class="n">MoveClass</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">delete</span><span class="p">[]</span><span class="w"> </span><span class="n">str_ptr</span><span class="p">;</span>
+<span class="w">   </span><span class="p">}</span>
+
+<span class="w">   </span><span class="c1">// Copy constructor - uses explicit constructor, parameter passed is const&amp;</span>
+<span class="w">   </span><span class="n">MoveClass</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">MoveClass</span><span class="o">&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span>
+<span class="w">      </span><span class="o">:</span><span class="w"> </span><span class="n">MoveClass</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">str_ptr</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">   </span><span class="c1">// Move constructor - uses std::exchange function, parameter passed is &amp;&amp;</span>
+<span class="w">   </span><span class="n">MoveClass</span><span class="p">(</span><span class="n">MoveClass</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="k">noexcept</span>
+<span class="w">      </span><span class="o">:</span><span class="w"> </span><span class="n">std_ptr</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">exchange</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">str_ptr</span><span class="p">,</span><span class="w"> </span><span class="k">nullptr</span><span class="p">))</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">   </span><span class="c1">// Copy assignment operator - uses copy constructor,</span>
+<span class="w">   </span><span class="c1">// passed parameter similarly to copy constructor is const&amp;</span>
+<span class="w">   </span><span class="n">MoveClass</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">MoveClass</span><span class="o">&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MoveClass</span><span class="p">(</span><span class="n">other</span><span class="p">);</span>
+<span class="w">   </span><span class="p">}</span>
+
+<span class="w">   </span><span class="c1">// Move assignment operator - uses std::swap function,</span>
+<span class="w">   </span><span class="c1">// passed parameter similarly to copy constructor is &amp;&amp;</span>
+<span class="w">   </span><span class="n">MoveClass</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">MoveClass</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="k">noexcept</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">str_ptr</span><span class="p">,</span><span class="w"> </span><span class="n">other</span><span class="p">.</span><span class="n">str_ptr</span><span class="p">);</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="05_array.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">std::array Container</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="07_lambdas.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lambdas</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#value-categories-glvalue-and-rvalue">Value Categories (glvalue and rvalue)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#functions-returning-lvalue-and-prvalue">Functions Returning lvalue and prvalue</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lvalue-to-prvalue-conversion">lvalue-to-prvalue Conversion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#universal-references">Universal References (&amp;&amp;)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#std-move">std::move</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#move-constructor-and-rule-of-five">Move Constructor and Rule of Five</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/03_Modern/06_move.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      &#169; Copyright 2023, various.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

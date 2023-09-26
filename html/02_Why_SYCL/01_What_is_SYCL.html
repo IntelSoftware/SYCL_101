@@ -1,0 +1,538 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="ascii" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>What is SYCL? &#8212; SYCL 101</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tiles.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '02_Why_SYCL/01_What_is_SYCL';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="SYCL Basic Code: single_task" href="02_SYCL_basic_code_single_task.html" />
+    <link rel="prev" title="2) Why SYCL?" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">SYCL 101</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../01_Heterogeneous/index.html">
+                        1) Heterogeneous Compute
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        2) Why SYCL?
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../03_Modern/index.html">
+                        3) Modern C++
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../04_SYCL_Implementations/index.html">
+                        4) SYCL Implementations of Modern C++
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../05_Next_step/index.html">
+                        5) Next step: SYCL Essentials
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../01_Heterogeneous/index.html">
+                        1) Heterogeneous Compute
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        2) Why SYCL?
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../03_Modern/index.html">
+                        3) Modern C++
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../04_SYCL_Implementations/index.html">
+                        4) SYCL Implementations of Modern C++
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../05_Next_step/index.html">
+                        5) Next step: SYCL Essentials
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">What is SYCL?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_SYCL_basic_code_single_task.html">SYCL Basic Code: single_task</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_SYCL_basic_code_parallel_for.html">SYCL Basic Code: parallel_for</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Conclusions.html">Conclusions</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">2) Why SYCL?</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">What is SYCL?</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="what-is-sycl">
+<h1>What is SYCL?<a class="headerlink" href="#what-is-sycl" title="Permalink to this heading">#</a></h1>
+<section id="definition">
+<h2>Definition<a class="headerlink" href="#definition" title="Permalink to this heading">#</a></h2>
+<p>SYCL is a high-level single-source standard C++ programming model that can target a wide range of heterogeneous platforms.  SYCL is an industry-driven standard developed by Khronos Group and announced in March 2014 that allows data parallelism for heterogeneous systems based on C++ 17. It is a royalty-free, cross-platform abstraction layer that enables the development of applications and frameworks with the portability and efficiency of OpenCL, while providing a user interface that's flexible and easy to use.  SYCL standard is designed to be both highly portable and highly efficient and allows applications to offload compute kernels and data transfer to OpenCL-enabled accelerators such as GPUs, FPGAs, and other processors.</p>
+</section>
+<section id="sycl-features">
+<h2>SYCL Features<a class="headerlink" href="#sycl-features" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>SYCL is modern standard C++:</strong> Unlike many other programming models and languages that require language extensions, SYCL does not need any of that. It is pure standard C++; any SYCL application will compile and run using a SYCL library, even if a device compiler and a device are not available in your system.</p></li>
+<li><p><strong>SYCL is open, multivendor, and multiarchitecture:</strong> Because there is no need to copy data, it enables pointer-based algorithms and data structures to be used across architectures of different vendors and makes it easier to use the same code on different devices.</p></li>
+<li><p><strong>Separation of data access and data storage:</strong> When using buffers and accessors in SYCL, the data access and data storage are kept separate. This allows the programmer to create data-parallel tasks easily, without needing to manually track data movement and event dependencies between kernels.</p></li>
+<li><p><strong>No need to copy data:</strong> Unified Shared Memory (USM) allows different devices, such as CPUs and GPUs, to share and access data without having to copy it between them.</p></li>
+<li><p><strong>Ease of hierarchical parallelism:</strong> Inspired by OpenCL and OpenMP, SYCL makes data parallelism easy to understand by using hierarchical parallelism and modern C++ instructions, so tasks are easily organized and synchronized, which makes the code more efficient and less fragmented.</p></li>
+<li><p><strong>Two compilation phases:</strong> SYCL requires two compilation passes, one for the host code and one for the device code. However, unlike OpenCL, SYCL is single-source, meaning there is only one executable. The two compilations can be made by the same compiler.</p></li>
+<li><p><strong>High-level programming model:</strong> SYCL provides several high-level abstractions over common boilerplate code in OpenCL and other backends. This includes selecting devices, allocating storage, copying data, managing dependencies, scheduling kernels, and much more.</p></li>
+</ul>
+</section>
+<section id="specifications">
+<h2>Specifications<a class="headerlink" href="#specifications" title="Permalink to this heading">#</a></h2>
+<p>SYCL utilizes specifications to standardize and streamline the development of parallel applications for heterogeneous architectures, enabling portability, productivity, and performance while fostering a vibrant community of SYCL users and providers.  New specifications are being released to accommodate new features and technological advances.</p>
+<p>The SYCL specifications that have been published as of today are:</p>
+<ul class="simple">
+<li><p><strong>SYCL 1.2</strong>: Specification released in May of 2015: It is considered obsolete.</p></li>
+<li><p><strong>SYCL 2.2</strong>: It was a provisional specification published in 2016 that is considered deprecated.</p></li>
+<li><p><strong>SYCL 1.2.1</strong>: Its latest revision was released on April 27, 2020.</p></li>
+<li><p><strong>SYCL 2020</strong>: Specification revision 7 released on April 18, 2023.</p></li>
+</ul>
+<p>The SYCL 2020 specification marks a significant leap forward that features over 40 new improvements, such as:</p>
+<ul class="simple">
+<li><p><strong>Unified Shared Memory (USM)</strong>, enabling code with pointers to work naturally without buffers or accessors.</p></li>
+<li><p><strong>Parallel reductions</strong>, adding a built-in reduction operation and helping to avoid boilerplate code, providing maximum performance for hardware with built-in operations.</p></li>
+<li><p><strong>Work group and sub-group algorithms</strong>, enabling efficient operations between work items.</p></li>
+<li><p><strong>Class template argument deduction (CTAD)</strong> and deduction guides to enable simpler class template instantiation.</p></li>
+<li><p><strong>Simplification of accessors</strong>, which adds a built-in reduction operation, reduces the burden of boilerplate code, and enables simplified C++ patterns.</p></li>
+<li><p><strong>Expanded interoperability</strong> with different backends, enabling support for backends other than OpenCL.</p></li>
+<li><p><strong>Improvements to atomic operations</strong> to be closer to C++ atomics to enable more parallel programming freedom.</p></li>
+</ul>
+</section>
+<section id="implementations">
+<h2>Implementations<a class="headerlink" href="#implementations" title="Permalink to this heading">#</a></h2>
+<p>A SYCL implementation refers to a software version or revision of the SYCL programming model. It consists of the necessary tools, libraries, and runtime support that enable developers to write SYCL code and execute it on compatible hardware platforms. Different vendors and organizations can provide their own SYCL implementations, each with its own set of features, optimizations, and supported hardware platforms. These implementations provide the necessary compiler, libraries, and runtime components to enable developers to write and execute SYCL code efficiently on their respective platforms.</p>
+<p>These are some of the popular SYCL implementations that are available:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>DPCP++</strong> by Intel as part of the oneAPI solution that supports Intel CPUs, GPUs, and FPGAs as well as NVIDIA and AMD GPUs</p></li>
+<li><p><strong>ComputeCpp</strong> by Codeplay</p></li>
+<li><p><strong>TriSYCL</strong> by Xilinx</p></li>
+<li><p><strong>Open SYCL</strong> (formerly hipSYCL) by the University of Heidelberg</p></li>
+<li><p><strong>neoSYCL</strong> by the Tohoku University</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Source: Khronos (<a class="reference external" href="https://www.khronos.org/sycl/">https://www.khronos.org/sycl/</a>)</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">2) Why SYCL?</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="02_SYCL_basic_code_single_task.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">SYCL Basic Code: single_task</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">Definition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sycl-features">SYCL Features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specifications">Specifications</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementations">Implementations</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/02_Why_SYCL/01_What_is_SYCL.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      &#169; Copyright 2023, various.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

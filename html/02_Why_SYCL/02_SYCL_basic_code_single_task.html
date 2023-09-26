@@ -1,0 +1,620 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="ascii" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>SYCL Basic Code: single_task &#8212; SYCL 101</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tiles.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '02_Why_SYCL/02_SYCL_basic_code_single_task';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="SYCL Basic Code: parallel_for" href="03_SYCL_basic_code_parallel_for.html" />
+    <link rel="prev" title="What is SYCL?" href="01_What_is_SYCL.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">SYCL 101</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../01_Heterogeneous/index.html">
+                        1) Heterogeneous Compute
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        2) Why SYCL?
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../03_Modern/index.html">
+                        3) Modern C++
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../04_SYCL_Implementations/index.html">
+                        4) SYCL Implementations of Modern C++
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../05_Next_step/index.html">
+                        5) Next step: SYCL Essentials
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../01_Heterogeneous/index.html">
+                        1) Heterogeneous Compute
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        2) Why SYCL?
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../03_Modern/index.html">
+                        3) Modern C++
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../04_SYCL_Implementations/index.html">
+                        4) SYCL Implementations of Modern C++
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../05_Next_step/index.html">
+                        5) Next step: SYCL Essentials
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_What_is_SYCL.html">What is SYCL?</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">SYCL Basic Code: single_task</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_SYCL_basic_code_parallel_for.html">SYCL Basic Code: parallel_for</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_Conclusions.html">Conclusions</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">2) Why SYCL?</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">SYCL Basic Code: single_task</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="sycl-basic-code-single-task">
+<h1>SYCL Basic Code: single_task<a class="headerlink" href="#sycl-basic-code-single-task" title="Permalink to this heading">#</a></h1>
+<p>SYCL offers many advantages to developers, including improved productivity, better performance, and enhanced code maintainability. In this lesson, you will gain an overall understanding of basic SYCL features and concepts.</p>
+<section id="sycl-advantages">
+<h2>SYCL Advantages<a class="headerlink" href="#sycl-advantages" title="Permalink to this heading">#</a></h2>
+<p><strong>1.</strong> SYCL provides an <strong>easier programming model for heterogeneous applications</strong> than traditional models such as OpenCL or CUDA.</p>
+<p><strong>2.</strong> SYCL <strong>supports modern C++ language features</strong> and can help simplify writing portable and maintainable code.</p>
+<p><strong>3.</strong> SYCL allows developers to take advantage of heterogeneous hardware architectures and <strong>utilize multiple processors or accelerators simultaneously</strong>.</p>
+<p><strong>4.</strong> SYCL provides an abstraction layer that makes it <strong>easier to port code to different hardware</strong> architectures.</p>
+<p><strong>5.</strong> SYCL enables the development of <strong>high-performance</strong> and <strong>data-parallel</strong> applications.</p>
+<p><strong>6.</strong> SYCL <strong>allows third-party vendors to provide tools</strong> that help optimize code for different hardware architectures.</p>
+</section>
+<section id="basic-sycl-code-1-single-task">
+<h2>Basic SYCL Code #1: single_task<a class="headerlink" href="#basic-sycl-code-1-single-task" title="Permalink to this heading">#</a></h2>
+<p>In this subsection, we present a code with a simple SYCL algorithm called <code class="docutils literal notranslate"><span class="pre">single_task</span></code>, which equivalent in standard C++ would be <code class="docutils literal notranslate"><span class="pre">std::thread</span></code>, to gain a fundamental understanding of SYCL components. <strong>The construct</strong> <code class="docutils literal notranslate"><span class="pre">single_task</span></code> <strong>is used to define a unit of work that should be executed on a single processing element, typically a single CPU core or GPU thread.</strong> Our goal in this code is to modify specifically the 6th element of a 10-size vector using the SYCL <code class="docutils literal notranslate"><span class="pre">single_task</span></code> command. We will provide a comprehensive explanation of each segment of the code.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;CL/sycl.hpp&gt;</span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">sycl</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">queue</span><span class="w"> </span><span class="n">Q</span><span class="p">;</span><span class="w">                        </span><span class="c1">// The queue, Q, is the object that</span>
+<span class="w">                                    </span><span class="c1">// submits the task to a device.</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="w">    </span><span class="n">buffer</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">A</span><span class="p">{</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="p">};</span><span class="w">          </span><span class="c1">// The buffer, A, is the memory used to</span>
+<span class="w">                                    </span><span class="c1">// transfer data between host and device.</span>
+
+<span class="w">    </span><span class="n">Q</span><span class="p">.</span><span class="n">submit</span><span class="p">([</span><span class="o">&amp;</span><span class="p">](</span><span class="n">handler</span><span class="o">&amp;</span><span class="w"> </span><span class="n">h</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">      </span><span class="c1">// The handler, h, is the object that contains</span>
+<span class="w">                                    </span><span class="c1">// the single_task function to be used.</span>
+
+<span class="w">        </span><span class="n">accessor</span><span class="w"> </span><span class="n">A_acc</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">);</span><span class="w">       </span><span class="c1">// The accessor, A_acc, is the object that</span>
+<span class="w">                                    </span><span class="c1">// efficiently accesses the buffer elements.</span>
+
+<span class="w">        </span><span class="n">h</span><span class="p">.</span><span class="n">single_task</span><span class="p">([</span><span class="o">=</span><span class="p">]()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">A_acc</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">77</span><span class="p">;</span>
+<span class="w">            </span><span class="p">});</span>
+
+<span class="w">        </span><span class="p">});</span>
+
+<span class="w">    </span><span class="n">host_accessor</span><span class="w"> </span><span class="n">result</span><span class="p">(</span><span class="n">A</span><span class="p">);</span><span class="w">        </span><span class="c1">// host_accessor is the object that allows</span>
+<span class="w">                                    </span><span class="c1">// the host to access the buffer memory.</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w">  </span><span class="c1">// Print output</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In SYCL code, several fundamental components play vital roles in coordinating work, managing data, and ensuring seamless communication between the host and device. One of these essential elements is the <code class="docutils literal notranslate"><span class="pre">queue</span></code>, denoted as <code class="docutils literal notranslate"><span class="pre">Q</span></code>. The queue serves as the central construct used to submit work items, control execution flow, and facilitate data transfers in a parallel and heterogeneous computing environment, such as CPUs or GPUs.</p>
+<p>Another critical component is the <code class="docutils literal notranslate"><span class="pre">buffer</span></code>, represented as <code class="docutils literal notranslate"><span class="pre">A</span></code>. This <code class="docutils literal notranslate"><span class="pre">buffer</span></code> serves as a data container that defines the region of memory accessible by both the host and the device, enabling efficient data sharing and transfer between them.</p>
+<p>Another fundamental concept in SYCL programming is the <strong>command group</strong> that, in our code, it is defined by:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Q</span><span class="p">.</span><span class="n">submit</span><span class="p">([</span><span class="o">&amp;</span><span class="p">](</span><span class="n">handler</span><span class="o">&amp;</span><span class="w"> </span><span class="n">h</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="p">...</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <strong>command group</strong> represents a unit of work that can be submitted to a SYCL queue for execution; its main function is to define the operations or computations that are to be performed on the target device.</p>
+<p>The command group needs the <code class="docutils literal notranslate"><span class="pre">accessor</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">accessor</span><span class="w"> </span><span class="nf">A_acc</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">accessor</span></code>, <code class="docutils literal notranslate"><span class="pre">A_acc</span></code>, is the object used to define the access rights (<code class="docutils literal notranslate"><span class="pre">read-only</span></code>, <code class="docutils literal notranslate"><span class="pre">write-only</span></code>, or <code class="docutils literal notranslate"><span class="pre">read-write</span></code>) of specific kernels to the buffer elements.</p>
+<p>Inside of the command group resides the specific <strong>SYCL kernel function</strong>, which is <code class="docutils literal notranslate"><span class="pre">single_task</span></code> in this case. Note that <code class="docutils literal notranslate"><span class="pre">single_task</span></code> is provided by the handler, <code class="docutils literal notranslate"><span class="pre">h</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">h</span><span class="p">.</span><span class="n">single_task</span><span class="p">([</span><span class="o">=</span><span class="p">]()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">A_acc</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">77</span><span class="p">;</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">handler</span></code> is the object that represents a context in which command groups are defined.  It specifies the operations and dependencies within a command group and controls the execution behavior of those operations.  One consideration to keep in mind is that only one SYCL <strong>kernel function</strong>, even if it is the same, can be executed in the command group.</p>
+<p>The <strong>kernel function</strong> in this case is:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">A_acc</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">77</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Note that a lambda function can be used as kernel function as well.</p>
+</section>
+<section id="basic-sycl-code-2-parallel-for-hands-on">
+<h2>Basic SYCL Code #2: parallel_for Hands-on<a class="headerlink" href="#basic-sycl-code-2-parallel-for-hands-on" title="Permalink to this heading">#</a></h2>
+<p>To become familiar with the SYCL structure, we propose the following hands-on exercise for you to think about:</p>
+<p><strong>Create a variation of the</strong> <code class="docutils literal notranslate"><span class="pre">single_task</span></code> <strong>code that changes, in one step, all elements of a 10-size vector to the value of 77.</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;CL/sycl.hpp&gt;</span>
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">sycl</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="n">queue</span><span class="w"> </span><span class="n">Q</span><span class="p">;</span><span class="w">                        </span><span class="c1">// The queue, Q, is the object that</span>
+<span class="w">                                    </span><span class="c1">// submits the task to a device.</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="w">    </span><span class="n">buffer</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">A</span><span class="p">{</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="p">};</span><span class="w">          </span><span class="c1">// The buffer, A, is the memory used to</span>
+<span class="w">                                    </span><span class="c1">// transfer data between host and device.</span>
+
+
+
+<span class="w">    </span><span class="c1">//********** YOUR CODE STARTS HERE **********//</span>
+
+<span class="w">    </span><span class="c1">// Step 1) Submit the queue with the handler definition:</span>
+
+<span class="w">    </span><span class="c1">// Step 2) Define the accessor with buffer and handler:</span>
+
+<span class="w">    </span><span class="c1">// Step 3) Call parallel_for from the handler specifying range and index:</span>
+
+<span class="w">    </span><span class="c1">// Step 4) Change the accessor elements with the desired value using the index:</span>
+
+
+<span class="w">    </span><span class="c1">//********** YOUR CODE ENDS HERE **********//</span>
+
+
+
+<span class="w">    </span><span class="n">host_accessor</span><span class="w"> </span><span class="n">result</span><span class="p">(</span><span class="n">A</span><span class="p">);</span><span class="w">        </span><span class="c1">// host_accessor is the object that allows</span>
+<span class="w">                                    </span><span class="c1">// the host to access the buffer memory.</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w">  </span><span class="c1">// Print output</span>
+<span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If you are thinking that <code class="docutils literal notranslate"><span class="pre">single_task</span></code> might not be the best approach you are in the right track.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The best way to tackle this is with the use of <code class="docutils literal notranslate"><span class="pre">parallel_for</span></code>.</p>
+</div>
+<p>The solution to this <code class="docutils literal notranslate"><span class="pre">parallel_for</span></code> hands-on exercise is in the next section.</p>
+</section>
+<section id="main-sycl-concepts-takeaways">
+<h2>Main SYCL concepts takeaways<a class="headerlink" href="#main-sycl-concepts-takeaways" title="Permalink to this heading">#</a></h2>
+<p>To recap, let's revisit the main concepts introduced in this section for expressing parallelism, managing data transfers, and controlling the execution of workloads in SYCL programs to enable efficient execution on heterogeneous platforms:</p>
+<ul class="simple">
+<li><p><strong>Queue</strong>: A SYCL queue manages the execution of command groups on a specific device. It acts as a command queue, allowing you to submit command groups for execution and control the order of execution.</p></li>
+<li><p><strong>Scheduler</strong>: The scheduler in SYCL is an internal component of the runtime system that manages the execution and scheduling of command groups on devices. It optimizes the execution by considering device capabilities, workload distribution, dependencies, and resource availability. The queue is the primary interface through which tasks are submitted to the scheduler for execution.</p></li>
+<li><p><strong>Buffer</strong>: A buffer in SYCL is a data container that represents a region of memory accessible by both the host and the device. It enables efficient data transfer and sharing between the host and the device without explicit memory management.</p></li>
+<li><p><strong>Accessor</strong>: Data represented by a buffer cannot be directly accessed through the buffer object. Instead, we must create accessor objects that allow us to safely access a buffer&#8217;s data. Accessors inform the runtime where and how we want to access data, allowing the runtime to ensure that the right data is in the right place at the right time.</p></li>
+<li><p><strong>Command group</strong>: In SYCL, a command group represents a unit of work that is submitted for execution on an OpenCL device. It encapsulates a set of operations and allows you to express parallelism and dependencies between tasks. Remember to call only a SYCL kernel function per command group.</p></li>
+<li><p><strong>Handler</strong>: A handler in SYCL represents a context in which command groups are defined. It provides methods for specifying operations within a command group, such as kernel invocations and memory transfers, and controls the execution behavior of those operations.</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="01_What_is_SYCL.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">What is SYCL?</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="03_SYCL_basic_code_parallel_for.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">SYCL Basic Code: parallel_for</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sycl-advantages">SYCL Advantages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-sycl-code-1-single-task">Basic SYCL Code #1: single_task</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-sycl-code-2-parallel-for-hands-on">Basic SYCL Code #2: parallel_for Hands-on</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#main-sycl-concepts-takeaways">Main SYCL concepts takeaways</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/02_Why_SYCL/02_SYCL_basic_code_single_task.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      &#169; Copyright 2023, various.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

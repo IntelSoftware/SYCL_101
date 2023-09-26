@@ -1,0 +1,36 @@
+/*changes color of top navbar to Intel blue
+  and the text to white*/
+
+.navbar-light {
+   background: #0071c5 !important;
+   color: #ffffff !important;
+   }
+
+.navbar-light p{
+    color:  #ffffff !important;
+}
+
+.navbar-light .navbar-nav li a.nav-link{
+    color:  #ffffff !important;
+    padding: 0 0.8rem;
+}
+
+.navbar-light .navbar-nav li a.nav-link:before{
+    content: "•";
+}
+
+/*improves look of sidebar which was **bad** */
+
+div.sidebar, aside.sidebar {
+    background-color: #f3f6f6;
+    border-color: #e1e4e5;
+}
+
+.sidebar .sidebar-title {
+    background-color: #e1e4e5;
+    margin-right: -7px;
+    margin-top: -7px;
+    margin-left: -7px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
