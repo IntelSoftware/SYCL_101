@@ -19,7 +19,7 @@ from docutils import nodes
 
 project = 'SYCL 101'
 copyright = '2023, various'
-author = 'various'
+author = 'Urszula Guminska, Roberto Marivela, Benjamin Odom'
 
 
 # -- General configuration ---------------------------------------------------
@@ -42,7 +42,7 @@ extensions = ['myst_parser',
     'sphinx.ext.githubpages',]
     # 'sphinx_new_tab_link',]   # to open links in a new tab
 
-pdf_documents = [('index', u'rst2pdf', u'Sample rst2pdf doc', u'Intel Corporation'),]
+pdf_documents = [('index', u'SYCL_101', u'SYCL 101', u'Intel Corporation'),]
 
 # source_suffix = ['.rst', '.md']
 source_suffix = '.rst'
