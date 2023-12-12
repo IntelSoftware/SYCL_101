@@ -21,6 +21,39 @@ project = 'SYCL 101'
 copyright = '2023, various'
 author = 'Urszula Guminska, Roberto Marivela, Benjamin Odom'
 
+# -- Publishing Meta Data ----------------------------------------------------
+
+ditaxml_default_codeblock_type='cpp'
+ditaxml_make_flat=True
+ditaxml_topic_meta={}
+ditaxml_topic_meta["audience"]="etm-aa2a8ffb0e5b41fe85bf2f5d50a71cf2" # Software Developer
+ditaxml_topic_meta["classification_type"]="Public"
+ditaxml_topic_meta["content_classification"]="Public"
+ditaxml_topic_meta["metadata_classification"]="Public"
+ditaxml_topic_meta["content_type"]="etm-8f11476223194fa68d9e0bad77696e2f" # Tutorial
+ditaxml_topic_meta["document_title"]="SYCL 101"
+ditaxml_topic_meta["description"]="An introduction to modern C++ using C++ 20 examples."
+ditaxml_topic_meta["group_content_id"]="694972" # 694972_694973 for version 2023.0 #requested
+ditaxml_topic_meta["publication_content_id"]="694973"
+ditaxml_topic_meta["keywords"]="None"
+ditaxml_topic_meta["locale"]="en-us"
+ditaxml_topic_meta["menu"]="/content/data/globalelements/US/en/sub-navigation/idz/developer-sub-navigation-breadcrumb"
+ditaxml_topic_meta["menu_parent"]="/content/www/us/en/developer/tools/overview"
+ditaxml_topic_meta["notification_dl"]="infodev.book.publishing.notices@intel.com"
+ditaxml_topic_meta["primary_business_owner"]="Odom, Benjamin J (benjamin.j.odom@intel.com)"
+ditaxml_topic_meta["primary_owner"]="Odom, Benjamin J (benjamin.j.odom@intel.com)"
+ditaxml_topic_meta["primary_tags"]="etm-086ec8c4b4074875b84ba0e35d214cf5" # Product Documentation
+ditaxml_topic_meta["program_identifier"]="idz"
+ditaxml_topic_meta["latest_version"]="true"
+ditaxml_topic_meta["publish_date"]="2023-01-26" #TBD
+ditaxml_topic_meta["revision_date"]="2023-01-01" #TBD
+ditaxml_topic_meta["publication_root_node"]="test"
+ditaxml_topic_meta["publication_name"]="SYCL 101"
+ditaxml_topic_meta["latest_version"]="true"
+ditaxml_prod_info={}
+ditaxml_prod_info["prodname"]=""
+ditaxml_prod_info["version"]="2023.1"
+
 
 # -- General configuration ---------------------------------------------------
 
@@ -65,7 +98,6 @@ smartquotes=False
 
 project_title = 'SYCL 101'
 html_title    = project_title
-
 html_theme = 'pydata_sphinx_theme'
 html_output_encoding = 'ascii'
 # Add any paths that contain custom static files (such as style sheets) here,
